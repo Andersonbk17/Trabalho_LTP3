@@ -33,18 +33,68 @@ public class frmPrincipal extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        MenuNovo = new javax.swing.JMenu();
+        MenuItemUsuario = new javax.swing.JMenuItem();
+        MenuItemCliente = new javax.swing.JMenuItem();
+        MenuItemProduto = new javax.swing.JMenuItem();
+        MenuItemTipoPagamento = new javax.swing.JMenuItem();
+        MenuItemSair = new javax.swing.JMenuItem();
+        MenuUsuarios = new javax.swing.JMenu();
+        MenuItemListarUsuarios = new javax.swing.JMenuItem();
+        MenuVendas = new javax.swing.JMenu();
+        MenuClientes = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Vendas");
         setAlwaysOnTop(true);
         setPreferredSize(new java.awt.Dimension(800, 600));
 
-        jMenu1.setText("File");
+        jMenu1.setText("Sistema");
+
+        MenuNovo.setText("Novo");
+
+        MenuItemUsuario.setText("Usuário");
+        MenuNovo.add(MenuItemUsuario);
+
+        MenuItemCliente.setText("Cliente");
+        MenuNovo.add(MenuItemCliente);
+
+        MenuItemProduto.setText("Produto");
+        MenuNovo.add(MenuItemProduto);
+
+        MenuItemTipoPagamento.setText("Tipo de Pagamento");
+        MenuItemTipoPagamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemTipoPagamentoActionPerformed(evt);
+            }
+        });
+        MenuNovo.add(MenuItemTipoPagamento);
+
+        jMenu1.add(MenuNovo);
+
+        MenuItemSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
+        MenuItemSair.setText("Sair");
+        MenuItemSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemSairActionPerformed(evt);
+            }
+        });
+        jMenu1.add(MenuItemSair);
+
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        MenuUsuarios.setText("Usuários");
+
+        MenuItemListarUsuarios.setText("Listar");
+        MenuUsuarios.add(MenuItemListarUsuarios);
+
+        jMenuBar1.add(MenuUsuarios);
+
+        MenuVendas.setText("Vendas");
+        jMenuBar1.add(MenuVendas);
+
+        MenuClientes.setText("Clientes");
+        jMenuBar1.add(MenuClientes);
 
         setJMenuBar(jMenuBar1);
 
@@ -56,11 +106,21 @@ public class frmPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 295, Short.MAX_VALUE)
+            .addGap(0, 299, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void MenuItemSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemSairActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_MenuItemSairActionPerformed
+
+    private void MenuItemTipoPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemTipoPagamentoActionPerformed
+        frmCadastroFormasPagamento janela = new frmCadastroFormasPagamento();
+        janela.setVisible(true);
+        add(janela);
+    }//GEN-LAST:event_MenuItemTipoPagamentoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -109,9 +169,18 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu MenuClientes;
+    private javax.swing.JMenuItem MenuItemCliente;
+    private javax.swing.JMenuItem MenuItemListarUsuarios;
+    private javax.swing.JMenuItem MenuItemProduto;
+    private javax.swing.JMenuItem MenuItemSair;
+    private javax.swing.JMenuItem MenuItemTipoPagamento;
+    private javax.swing.JMenuItem MenuItemUsuario;
+    private javax.swing.JMenu MenuNovo;
+    private javax.swing.JMenu MenuUsuarios;
+    private javax.swing.JMenu MenuVendas;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
 }

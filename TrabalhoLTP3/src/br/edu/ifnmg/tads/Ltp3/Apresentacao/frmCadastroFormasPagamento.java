@@ -33,6 +33,7 @@ public class frmCadastroFormasPagamento extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
+        setClosable(true);
         setMaximizable(true);
         setResizable(true);
         setTitle("Cadastrar Formas de Pagamento");
@@ -59,7 +60,7 @@ public class frmCadastroFormasPagamento extends javax.swing.JInternalFrame {
                         .addComponent(lblTipoPagamento)
                         .addGap(18, 18, 18)
                         .addComponent(txtTipoPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -74,7 +75,7 @@ public class frmCadastroFormasPagamento extends javax.swing.JInternalFrame {
                     .addComponent(txtTipoPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(64, 64, 64))
         );
@@ -83,7 +84,7 @@ public class frmCadastroFormasPagamento extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       if("".equals(txtTipoPagamento.getText())){
+       if(txtTipoPagamento.getText().isEmpty()){
            JOptionPane.showMessageDialog(rootPane,"Campo Vazio!");
        }
         
