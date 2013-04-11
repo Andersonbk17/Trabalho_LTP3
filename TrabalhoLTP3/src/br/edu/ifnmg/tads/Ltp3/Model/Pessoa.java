@@ -17,7 +17,7 @@ public class Pessoa {
     private int rg;
     private String cpf;
     private Date dataNascimento;
-    //private List<Enderecs> = Enderecos;
+    //private List<Endereco> = new Enderecos;
     //Falta add item etc...
 
     public int getId() {
