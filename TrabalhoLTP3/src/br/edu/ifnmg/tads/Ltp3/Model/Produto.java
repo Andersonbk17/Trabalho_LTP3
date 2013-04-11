@@ -4,6 +4,8 @@
  */
 package br.edu.ifnmg.tads.Ltp3.Model;
 
+import java.util.Objects;
+
 /**
  *
  * @author anderson
@@ -12,12 +14,11 @@ public class Produto {
     private int id;
     private String descricao;
     private String nome;
-    private int valorUnidadeCompra;
-    private int valorUnidadeVenda;
-
-    private Produto(){
+    private double valorUnidadeCompra;
+    private double valorUnidadeVenda;
     
-    }
+    /*----- Construtores ---------------*/
+    private Produto(){}
     
     public Produto(int id, String descricao, String nome, int valorUnidadeCompra, int valorUnidadeVenda) {
         this.id = id;
@@ -26,6 +27,8 @@ public class Produto {
         this.valorUnidadeCompra = valorUnidadeCompra;
         this.valorUnidadeVenda = valorUnidadeVenda;
     }
+    
+    /*-------------------------------------*/
 
     
     
@@ -53,7 +56,7 @@ public class Produto {
         this.nome = nome;
     }
 
-    public int getValorUnidadeCompra() {
+    public double getValorUnidadeCompra() {
         return valorUnidadeCompra;
     }
 
@@ -61,7 +64,7 @@ public class Produto {
         this.valorUnidadeCompra = valorUnidadeCompra;
     }
 
-    public int getValorUnidadeVenda() {
+    public double getValorUnidadeVenda() {
         return valorUnidadeVenda;
     }
 
@@ -72,6 +75,35 @@ public class Produto {
     @Override
     public String toString() {
         return "Produto{" + "nome=" + nome + ", valorUnidadeVenda=" + valorUnidadeVenda + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 53 * hash + this.id;
+        hash = 53 * hash + Objects.hashCode(this.descricao);
+        hash = 53 * hash + Objects.hashCode(this.nome);
+        hash = 53 * hash + (int) (Double.doubleToLongBits(this.valorUnidadeCompra) ^ (Double.doubleToLongBits(this.valorUnidadeCompra) >>> 32));
+        hash = 53 * hash + (int) (Double.doubleToLongBits(this.valorUnidadeVenda) ^ (Double.doubleToLongBits(this.valorUnidadeVenda) >>> 32));
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Produto other = (Produto) obj;
+        if (!Objects.equals(this.descricao, other.descricao)) {
+            return false;
+        }
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        return true;
     }
     
    
