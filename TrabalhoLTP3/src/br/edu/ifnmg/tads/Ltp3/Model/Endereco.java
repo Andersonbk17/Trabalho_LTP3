@@ -4,6 +4,8 @@
  */
 package br.edu.ifnmg.tads.Ltp3.Model;
 
+import java.util.Objects;
+
 /**
  *
  * @author anderson
@@ -12,22 +14,22 @@ public class Endereco {
     private int id;
     private String rua;
     private String bairro;
-    private String cidade;
+    //private String cidade;
     private int numero;
     private int cep;
 
-    public Endereco() {
-    }
+    
+    /*----------- Construtores -------------*/
+    public Endereco() {}
 
-    public Endereco(int id, String rua, String bairro, String cidade, int numero, int cep) {
+    public Endereco(int id, String rua, String bairro, int numero, int cep) {
         this.id = id;
         this.rua = rua;
         this.bairro = bairro;
-        this.cidade = cidade;
         this.numero = numero;
         this.cep = cep;
     }
-
+    /*-------------------------------------*/
     
     
     
@@ -55,14 +57,7 @@ public class Endereco {
         this.bairro = bairro;
     }
 
-    public String getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
-
+    
     public int getNumero() {
         return numero;
     }
@@ -81,7 +76,42 @@ public class Endereco {
 
     @Override
     public String toString() {
-        return "Endereco{" + "rua=" + rua + ", bairro=" + bairro + ", cidade=" + cidade + ", numero=" + numero + '}';
+        return "Endereco{" + "rua=" + rua + ", bairro=" + bairro + ", numero=" + numero + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + this.id;
+        hash = 29 * hash + Objects.hashCode(this.rua);
+        hash = 29 * hash + Objects.hashCode(this.bairro);
+        hash = 29 * hash + this.numero;
+        hash = 29 * hash + this.cep;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Endereco other = (Endereco) obj;
+        if (!Objects.equals(this.rua, other.rua)) {
+            return false;
+        }
+        if (!Objects.equals(this.bairro, other.bairro)) {
+            return false;
+        }
+        if (this.numero != other.numero) {
+            return false;
+        }
+        if (this.cep != other.cep) {
+            return false;
+        }
+        return true;
     }
     
     
