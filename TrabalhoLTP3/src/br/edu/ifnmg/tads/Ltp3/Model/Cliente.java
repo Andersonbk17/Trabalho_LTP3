@@ -11,15 +11,13 @@ package br.edu.ifnmg.tads.Ltp3.Model;
 public class Cliente extends Pessoa{
     private int idCliente;
 
+    /*-----------Contrutores ------------------------*/
     public Cliente(int idCliente) {
         this.idCliente = idCliente;
     }
 
-    
-    public Cliente(){
-    
-    }
-    
+    public Cliente(){}
+    /*-----------------------------------------------*/
     
     
     

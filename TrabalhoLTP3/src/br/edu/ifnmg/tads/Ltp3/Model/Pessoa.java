@@ -3,9 +3,10 @@
  * and open the template in the editor.
  */
 package br.edu.ifnmg.tads.Ltp3.Model;
-import java.awt.List;
+import java.util.List;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.Objects;
 
 /**
  *
@@ -17,9 +18,28 @@ public class Pessoa {
     private int rg;
     private String cpf;
     private Date dataNascimento;
-    //private List<Endereco> = new Enderecos;
+    private List<Endereco> Enderecos;
+    private List<Email> Emails;
+    private List<Telefone> Telefones;
     //Falta add item etc...
 
+    /*-------- Construtores -----------*/
+    public Pessoa(){}
+
+    public Pessoa(int id, String nome, int rg, String cpf, Date dataNascimento, List<Endereco> Enderecos, List<Email> Emails, List<Telefone> Telefones) {
+        this.id = id;
+        this.nome = nome;
+        this.rg = rg;
+        this.cpf = cpf;
+        this.dataNascimento = dataNascimento;
+        this.Enderecos = Enderecos;
+        this.Emails = Emails;
+        this.Telefones = Telefones;
+    }
+    
+    
+    
+    /*-----------------------------------*/
     public int getId() {
         return id;
     }
@@ -59,6 +79,60 @@ public class Pessoa {
     public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
+
+    public List<Endereco> getEnderecos() {
+        return Enderecos;
+    }
+
+    public void setEnderecos(List<Endereco> Enderecos) {
+        this.Enderecos = Enderecos;
+    }
+
+    public List<Email> getEmails() {
+        return Emails;
+    }
+
+    public void setEmails(List<Email> Emails) {
+        this.Emails = Emails;
+    }
+
+    public List<Telefone> getTelefones() {
+        return Telefones;
+    }
+
+    public void setTelefones(List<Telefone> Telefones) {
+        this.Telefones = Telefones;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 67 * hash + this.id;
+        hash = 67 * hash + Objects.hashCode(this.nome);
+        hash = 67 * hash + this.rg;
+        hash = 67 * hash + Objects.hashCode(this.cpf);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Pessoa other = (Pessoa) obj;
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        if (!Objects.equals(this.cpf, other.cpf)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 
     @Override
     public String toString() {
