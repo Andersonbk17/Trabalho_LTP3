@@ -4,6 +4,8 @@
  */
 package br.edu.ifnmg.tads.Ltp3.Model;
 
+import java.util.Objects;
+
 /**
  *
  * @author anderson
@@ -13,6 +15,7 @@ public class UsuarioSistema  extends Pessoa{
     private String usuario;
     private String senha;
     
+    /*--------Construtores ---------*/
     public UsuarioSistema(){
     
     }
@@ -22,6 +25,8 @@ public class UsuarioSistema  extends Pessoa{
         this.usuario = usuario;
         this.senha = senha;
     }
+    
+    /*-------------------------------*/
 
     public int getIdUsuario() {
         return idUsuario;
@@ -45,6 +50,38 @@ public class UsuarioSistema  extends Pessoa{
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 23 * hash + this.idUsuario;
+        hash = 23 * hash + Objects.hashCode(this.usuario);
+        hash = 23 * hash + Objects.hashCode(this.senha);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final UsuarioSistema other = (UsuarioSistema) obj;
+        if (!Objects.equals(this.usuario, other.usuario)) {
+            return false;
+        }
+        if (!Objects.equals(this.senha, other.senha)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "UsuarioSistema{" + "usuario=" + usuario + '}';
     }
     
     
