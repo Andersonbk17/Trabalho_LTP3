@@ -31,8 +31,13 @@ public class Estoque {
         return quantidade;
     }
 
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
+    public void setQuantidade(int quantidade) throws Exception{
+        if(quantidade <0){
+            throw new Exception ("A quantidade não pode ser menor que 0");
+        }else {
+            this.quantidade = quantidade;
+        }
+        
     }
 
     @Override

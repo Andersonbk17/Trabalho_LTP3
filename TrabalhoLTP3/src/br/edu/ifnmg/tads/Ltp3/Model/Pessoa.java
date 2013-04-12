@@ -24,7 +24,10 @@ public class Pessoa {
     //Falta add item etc...
 
     /*-------- Construtores -----------*/
-    public Pessoa(){}
+    public Pessoa(){
+    dataNascimento = new Date();
+    
+    }
 
     public Pessoa(int id, String nome, int rg, String cpf, Date dataNascimento, List<Endereco> Enderecos, List<Email> Emails, List<Telefone> Telefones) {
         this.id = id;
@@ -74,10 +77,17 @@ public class Pessoa {
 
     public Date getDataNascimento() {
         return dataNascimento;
+        
     }
 
-    public void setDataNascimento(Date dataNascimento) {
-        this.dataNascimento = dataNascimento;
+    public void setDataNascimento(Date dataNascimento) throws Exception{
+        Date dataMinima = new Date("1990/01/01");
+        if(!dataNascimento.before(dataMinima)) {
+            this.dataNascimento = dataNascimento;
+        }
+        else {
+            throw new Exception ("A data não pode ser inferior a 01/01/1990");
+        }
     }
 
     public List<Endereco> getEnderecos() {
