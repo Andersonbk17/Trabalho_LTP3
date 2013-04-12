@@ -60,16 +60,23 @@ public class Produto {
         return valorUnidadeCompra;
     }
 
-    public void setValorUnidadeCompra(int valorUnidadeCompra) {
-        this.valorUnidadeCompra = valorUnidadeCompra;
+    public void setValorUnidadeCompra(int valorUnidadeCompra) throws Exception{
+        if(valorUnidadeCompra >0)
+            this.valorUnidadeCompra = valorUnidadeCompra;
+        else
+             throw new Exception ("O valor de Compra deve ser Maior que 0");
     }
 
     public double getValorUnidadeVenda() {
         return valorUnidadeVenda;
     }
 
-    public void setValorUnidadeVenda(int valorUnidadeVenda) {
-        this.valorUnidadeVenda = valorUnidadeVenda;
+    public void setValorUnidadeVenda(int valorUnidadeVenda) throws Exception{
+        if(valorUnidadeVenda >0)
+            this.valorUnidadeVenda = valorUnidadeVenda;
+        else
+            throw new Exception ("O valor de Venda deve ser Maior que 0");
+            
     }
 
     @Override

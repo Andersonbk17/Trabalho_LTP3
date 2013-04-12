@@ -38,8 +38,11 @@ public class ItemVenda {
         return quantidade;
     }
 
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
+    public void setQuantidade(int quantidade) throws  Exception{
+        if(quantidade > 0)
+            this.quantidade = quantidade;
+        else
+            throw new Exception("A quantidade deve ser maior que 0");
     }
 
     public Produto getProduto() {
