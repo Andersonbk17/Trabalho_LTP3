@@ -10,12 +10,12 @@ import javax.swing.JOptionPane;
  *
  * @author anderson
  */
-public class frmCadastroPessoa extends javax.swing.JInternalFrame {
+public class frmCadastroCliente extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form frmCadastroPessoa
+     * Creates new form frmCadastroCliente
      */
-    public frmCadastroPessoa() {
+    public frmCadastroCliente() {
         initComponents();
     }
 
