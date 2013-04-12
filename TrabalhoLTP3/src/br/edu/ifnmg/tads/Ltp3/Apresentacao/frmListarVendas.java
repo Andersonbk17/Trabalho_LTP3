@@ -42,6 +42,7 @@ public class frmListarVendas extends javax.swing.JInternalFrame {
         lblDataDe = new javax.swing.JLabel();
 
         setClosable(true);
+        setMaximizable(true);
         setTitle("Listagem de Vendas");
         setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
@@ -113,7 +114,7 @@ public class frmListarVendas extends javax.swing.JInternalFrame {
                     .addComponent(btnFiltrar)
                     .addComponent(lblNome)
                     .addComponent(lblDataDe))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
