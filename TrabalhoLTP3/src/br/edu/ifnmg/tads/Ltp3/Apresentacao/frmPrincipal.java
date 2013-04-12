@@ -57,6 +57,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         MenuNovo.setText("Novo");
 
         MenuItemUsuario.setText("Usuário");
+        MenuItemUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemUsuarioActionPerformed(evt);
+            }
+        });
         MenuNovo.add(MenuItemUsuario);
 
         MenuItemCliente.setText("Cliente");
@@ -104,6 +109,13 @@ public class frmPrincipal extends javax.swing.JFrame {
         MenuVendas.add(MenuItemNovaVanda);
 
         MenuItemHistorico.setText("Histórico");
+        MenuItemHistorico.setMaximumSize(new java.awt.Dimension(820, 620));
+        MenuItemHistorico.setMinimumSize(new java.awt.Dimension(820, 820));
+        MenuItemHistorico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemHistoricoActionPerformed(evt);
+            }
+        });
         MenuVendas.add(MenuItemHistorico);
 
         MenuSuperior.add(MenuVendas);
@@ -146,6 +158,18 @@ public class frmPrincipal extends javax.swing.JFrame {
        janela.setVisible(true);
        add(janela);
     }//GEN-LAST:event_MenuItemProdutoActionPerformed
+
+    private void MenuItemUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemUsuarioActionPerformed
+        frmCadastroUsuarioSistema janela = new frmCadastroUsuarioSistema();
+        janela.setVisible(true);
+        add(janela);
+    }//GEN-LAST:event_MenuItemUsuarioActionPerformed
+
+    private void MenuItemHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemHistoricoActionPerformed
+        frmListarVendas janela = new frmListarVendas();
+        janela.setVisible(true);
+        add(janela);
+    }//GEN-LAST:event_MenuItemHistoricoActionPerformed
 
     /**
      * @param args the command line arguments

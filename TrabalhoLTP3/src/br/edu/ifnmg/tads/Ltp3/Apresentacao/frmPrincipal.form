@@ -20,6 +20,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Usu&#xe1;rio"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuItemUsuarioActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="MenuItemCliente">
                   <Properties>
@@ -82,7 +85,16 @@
             <MenuItem class="javax.swing.JMenuItem" name="MenuItemHistorico">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Hist&#xf3;rico"/>
+                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[820, 620]"/>
+                </Property>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[820, 820]"/>
+                </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuItemHistoricoActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
