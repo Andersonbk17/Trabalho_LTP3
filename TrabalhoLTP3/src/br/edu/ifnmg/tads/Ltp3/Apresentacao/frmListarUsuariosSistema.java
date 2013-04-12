@@ -15,6 +15,11 @@ public class frmListarUsuariosSistema extends javax.swing.JInternalFrame {
      */
     public frmListarUsuariosSistema() {
         initComponents();
+        lblDataDe.setVisible(false);
+        lblNome.setVisible(false);
+        btnFiltrar.setVisible(false);
+        txtFiltro.setVisible(false);
+        
     }
 
     /**
@@ -55,7 +60,7 @@ public class frmListarUsuariosSistema extends javax.swing.JInternalFrame {
 
         lblFiltro.setText("Filtro:");
 
-        cbxFiltro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione", "Nome", "Data", "Idade" }));
+        cbxFiltro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione", "Nome", "Cpf", "Idade" }));
         cbxFiltro.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbxFiltroItemStateChanged(evt);
@@ -96,7 +101,7 @@ public class frmListarUsuariosSistema extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(54, Short.MAX_VALUE)
+                .addContainerGap(57, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -122,28 +127,27 @@ public class frmListarUsuariosSistema extends javax.swing.JInternalFrame {
             btnFiltrar.setVisible(false);
             lblDataDe.setVisible(false);
 
-        }else if(cbxFiltro.getSelectedItem().equals("Cliente")){
+        }else if(cbxFiltro.getSelectedItem().equals("Nome")){
+            lblNome.setText("Nome:");
             lblNome.setVisible(true);
             txtFiltro.setVisible(true);
             btnFiltrar.setVisible(true);
             lblDataDe.setVisible(false);
 
-        }else if(cbxFiltro.getSelectedItem().equals("Vendedor")){
+        }else if(cbxFiltro.getSelectedItem().equals("Idade")){
+            lblNome.setText("Idade:");
             lblNome.setVisible(true);
             txtFiltro.setVisible(true);
             btnFiltrar.setVisible(true);
             lblDataDe.setVisible(false);
-
-        }else if(cbxFiltro.getSelectedItem().equals("Valor")){
+        }else if(cbxFiltro.getSelectedItem().equals("CPF:")){
+            lblNome.setText("CPF:");
+            lblNome.setVisible(true);
             txtFiltro.setVisible(true);
             btnFiltrar.setVisible(true);
             lblDataDe.setVisible(false);
-
-        }else if(cbxFiltro.getSelectedItem().equals("Data")){
-            lblDataDe.setVisible(true);
-            btnFiltrar.setVisible(true);
-
         }
+        
     }//GEN-LAST:event_cbxFiltroItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

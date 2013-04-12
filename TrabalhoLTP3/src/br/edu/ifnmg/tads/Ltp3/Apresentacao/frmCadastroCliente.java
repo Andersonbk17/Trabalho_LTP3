@@ -37,7 +37,7 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
         lblData = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         txtCpf = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
+        txtRg = new javax.swing.JTextField();
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jPanel2 = new javax.swing.JPanel();
         lblRua = new javax.swing.JLabel();
@@ -106,7 +106,7 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                             .addComponent(lblRg)
                             .addGap(18, 18, 18)
-                            .addComponent(jTextField1))
+                            .addComponent(txtRg))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                             .addComponent(jLabel1)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -131,7 +131,7 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
                 .addGap(59, 59, 59)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblRg)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtRg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(43, 43, 43)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblData)
@@ -274,6 +274,11 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
         jTabbedPane1.addTab("Telefone", jPanel3);
 
         btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -318,9 +323,25 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         if(JOptionPane.showConfirmDialog(rootPane, "Você tem certeza que deseja cancelar?")== 0){
-            dispose();
+            this.dispose();
         }
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        if(JOptionPane.showConfirmDialog(rootPane,"Deseja Salvar os dados?") == 0){
+            if(txtNome.getText().isEmpty()){
+                JOptionPane.showMessageDialog(rootPane, "O campo nome não pode ser vazio");
+            }else if (txtCpf.getText().isEmpty()){
+                JOptionPane.showMessageDialog(rootPane, "O campo cpf não pode ser vazio");
+            }else if(txtRg.getText().isEmpty()){
+                JOptionPane.showMessageDialog(rootPane, "O campo Rg não pode ser vazio");
+            }else{
+                //salva os dados
+            
+            }
+            
+        }
+    }//GEN-LAST:event_btnSalvarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
@@ -337,7 +358,6 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblBairro;
     private javax.swing.JLabel lblCep;
     private javax.swing.JLabel lblCidade;
@@ -354,6 +374,7 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtDdd;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNumero;
+    private javax.swing.JTextField txtRg;
     private javax.swing.JTextField txtRua;
     // End of variables declaration//GEN-END:variables
 }

@@ -35,8 +35,8 @@ public class frmCadastroProduto extends javax.swing.JInternalFrame {
         TxtAreaDescricao = new javax.swing.JTextArea();
         lblValorUnitario = new javax.swing.JLabel();
         lblValorCompra = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnSalvar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         txtfValorCompra = new javax.swing.JFormattedTextField();
         txtfValorUnitario = new javax.swing.JFormattedTextField();
 
@@ -58,14 +58,19 @@ public class frmCadastroProduto extends javax.swing.JInternalFrame {
 
         lblValorCompra.setText("Valor de Compra:");
 
-        jButton1.setText("Salvar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSalvarActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Cancelar");
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         txtfValorCompra.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("###0.00"))));
 
@@ -98,9 +103,9 @@ public class frmCadastroProduto extends javax.swing.JInternalFrame {
                                 .addComponent(txtfValorCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(170, 170, 170)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(85, 85, 85)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(165, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -118,35 +123,43 @@ public class frmCadastroProduto extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblValorCompra)
                     .addComponent(txtfValorCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblDescricao)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btnSalvar)
+                    .addComponent(btnCancelar))
                 .addGap(21, 21, 21))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(txtNome.getText().isEmpty()){
-            JOptionPane.showMessageDialog(rootPane, "O campo nome não pode ser Vazio !");
-        }else if(txtNome.getText().length() < 3 || txtNome.getText().length() > 255){
-            JOptionPane.showMessageDialog(rootPane,"Informe um nome maior 3 caracteres e mennor que 255 caracteres !");
-        }else if(Double.parseDouble(txtfValorCompra.getText()) <=0){
-            JOptionPane.showMessageDialog(rootPane, "O valor No campo Valor de Compra Não pode ser Menor ou igual a zero !");
-                    
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        if(JOptionPane.showConfirmDialog(rootPane, "Você tem certeza que deseja Salvar ?")== 0){
+            if(txtNome.getText().isEmpty()){
+                JOptionPane.showMessageDialog(rootPane, "O campo nome não pode ser Vazio !");
+            }else if(txtNome.getText().length() < 3 || txtNome.getText().length() > 255){
+                JOptionPane.showMessageDialog(rootPane,"Informe um nome maior 3 caracteres e mennor que 255 caracteres !");
+            }else if(Double.parseDouble(txtfValorCompra.getText()) <=0){
+                JOptionPane.showMessageDialog(rootPane, "O valor No campo Valor de Compra Não pode ser Menor ou igual a zero !");
+
+            }
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        if(JOptionPane.showConfirmDialog(rootPane, "Você tem certeza que deseja cancelar?")== 0){
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea TxtAreaDescricao;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnSalvar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblDescricao;
     private javax.swing.JLabel lblNome;

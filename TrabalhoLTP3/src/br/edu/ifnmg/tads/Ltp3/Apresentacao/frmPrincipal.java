@@ -46,6 +46,8 @@ public class frmPrincipal extends javax.swing.JFrame {
         MenuItemHistorico = new javax.swing.JMenuItem();
         MenuClientes = new javax.swing.JMenu();
         MenuItemListarClientes = new javax.swing.JMenuItem();
+        MenuTiposPagamento = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Vendas");
@@ -65,6 +67,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         MenuNovo.add(MenuItemUsuario);
 
         MenuItemCliente.setText("Cliente");
+        MenuItemCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemClienteActionPerformed(evt);
+            }
+        });
         MenuNovo.add(MenuItemCliente);
 
         MenuItemProduto.setText("Produto");
@@ -132,6 +139,13 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         MenuSuperior.add(MenuClientes);
 
+        MenuTiposPagamento.setText("Tipos de Pagamento");
+
+        jMenuItem1.setText("Listar");
+        MenuTiposPagamento.add(jMenuItem1);
+
+        MenuSuperior.add(MenuTiposPagamento);
+
         setJMenuBar(MenuSuperior);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -181,6 +195,12 @@ public class frmPrincipal extends javax.swing.JFrame {
         janela.setVisible(true);
         add(janela);
     }//GEN-LAST:event_MenuItemListarUsuariosActionPerformed
+
+    private void MenuItemClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemClienteActionPerformed
+        frmCadastroCliente janela = new frmCadastroCliente();
+        janela.setVisible(true);
+        add(janela);
+    }//GEN-LAST:event_MenuItemClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -241,9 +261,11 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem MenuItemUsuario;
     private javax.swing.JMenu MenuNovo;
     private javax.swing.JMenuBar MenuSuperior;
+    private javax.swing.JMenu MenuTiposPagamento;
     private javax.swing.JMenu MenuUsuarios;
     private javax.swing.JMenu MenuVendas;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuItem jMenuItem1;
     // End of variables declaration//GEN-END:variables
 }
