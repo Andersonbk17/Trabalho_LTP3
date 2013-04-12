@@ -99,6 +99,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         MenuUsuarios.setText("Usuários");
 
         MenuItemListarUsuarios.setText("Listar");
+        MenuItemListarUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemListarUsuariosActionPerformed(evt);
+            }
+        });
         MenuUsuarios.add(MenuItemListarUsuarios);
 
         MenuSuperior.add(MenuUsuarios);
@@ -170,6 +175,12 @@ public class frmPrincipal extends javax.swing.JFrame {
         janela.setVisible(true);
         add(janela);
     }//GEN-LAST:event_MenuItemHistoricoActionPerformed
+
+    private void MenuItemListarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemListarUsuariosActionPerformed
+        frmListarUsuariosSistema janela = new frmListarUsuariosSistema();
+        janela.setVisible(true);
+        add(janela);
+    }//GEN-LAST:event_MenuItemListarUsuariosActionPerformed
 
     /**
      * @param args the command line arguments
