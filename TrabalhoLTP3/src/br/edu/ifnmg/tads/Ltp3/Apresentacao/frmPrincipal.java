@@ -118,6 +118,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         MenuVendas.setText("Vendas");
 
         MenuItemNovaVanda.setText("Nova");
+        MenuItemNovaVanda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemNovaVandaActionPerformed(evt);
+            }
+        });
         MenuVendas.add(MenuItemNovaVanda);
 
         MenuItemHistorico.setText("Histórico");
@@ -142,6 +147,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         MenuTiposPagamento.setText("Tipos de Pagamento");
 
         jMenuItem1.setText("Listar");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         MenuTiposPagamento.add(jMenuItem1);
 
         MenuSuperior.add(MenuTiposPagamento);
@@ -201,6 +211,18 @@ public class frmPrincipal extends javax.swing.JFrame {
         janela.setVisible(true);
         add(janela);
     }//GEN-LAST:event_MenuItemClienteActionPerformed
+
+    private void MenuItemNovaVandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemNovaVandaActionPerformed
+        frmVenda janela = new frmVenda();
+        janela.setVisible(true);
+        add(janela);
+    }//GEN-LAST:event_MenuItemNovaVandaActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        frmListarTipoPagamento janela = new frmListarTipoPagamento();
+        janela.setVisible(true);
+        add(janela);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
