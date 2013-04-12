@@ -140,6 +140,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         MenuClientes.setText("Clientes");
 
         MenuItemListarClientes.setText("Listar");
+        MenuItemListarClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemListarClientesActionPerformed(evt);
+            }
+        });
         MenuClientes.add(MenuItemListarClientes);
 
         MenuSuperior.add(MenuClientes);
@@ -162,7 +167,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 437, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,6 +228,12 @@ public class frmPrincipal extends javax.swing.JFrame {
         janela.setVisible(true);
         add(janela);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void MenuItemListarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemListarClientesActionPerformed
+        frmListarClientes janela = new frmListarClientes();
+        janela.setVisible(true);
+        add(janela);
+    }//GEN-LAST:event_MenuItemListarClientesActionPerformed
 
     /**
      * @param args the command line arguments
