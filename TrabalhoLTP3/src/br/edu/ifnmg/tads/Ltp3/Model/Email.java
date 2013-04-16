@@ -29,8 +29,11 @@ public class Email {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int id) throws ErroValidacaoException{
+        if (this.id < 0)
+            throw new ErroValidacaoException("O id não pode ser menor que 0 !");
+        else
+            this.id = id;
     }
 
     public String getEndereco() {

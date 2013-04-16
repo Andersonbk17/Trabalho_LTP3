@@ -30,19 +30,22 @@ public class ItemVenda {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int id) throws ErroValidacaoException{
+        if (this.id < 0)
+            throw new ErroValidacaoException("O id não pode ser menor que 0 !");
+        else
+            this.id = id;
     }
 
     public int getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(int quantidade) throws  Exception{
-        if(quantidade > 0)
-            this.quantidade = quantidade;
+    public void setQuantidade(int quantidade) throws  ErroValidacaoException{
+        if(quantidade < 0)
+            throw new ErroValidacaoException("A quantidade deve ser maior que 0");
         else
-            throw new Exception("A quantidade deve ser maior que 0");
+            this.quantidade = quantidade;
     }
 
     public Produto getProduto() {

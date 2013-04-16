@@ -4,7 +4,7 @@
  */
 package br.edu.ifnmg.tads.Ltp3.Apresentacao;
 
-import com.birosoft.liquid.LiquidLookAndFeel;
+//import com.birosoft.liquid.LiquidLookAndFeel;
 import javax.swing.UIManager;
 
 
@@ -39,6 +39,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         MenuItemProduto = new javax.swing.JMenuItem();
         MenuItemTipoPagamento = new javax.swing.JMenuItem();
         MenuItemSair = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
         MenuUsuarios = new javax.swing.JMenu();
         MenuItemListarUsuarios = new javax.swing.JMenuItem();
         MenuVendas = new javax.swing.JMenu();
@@ -100,6 +101,7 @@ public class frmPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu1.add(MenuItemSair);
+        jMenu1.add(jSeparator1);
 
         MenuSuperior.add(jMenu1);
 
@@ -171,7 +173,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 311, Short.MAX_VALUE)
+            .addGap(0, 315, Short.MAX_VALUE)
         );
 
         pack();
@@ -300,5 +302,6 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }

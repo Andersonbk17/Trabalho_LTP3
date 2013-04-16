@@ -37,8 +37,11 @@ public class Endereco {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int id) throws ErroValidacaoException{
+        if (this.id < 0)
+            throw new ErroValidacaoException("O id não pode ser menor que 0 !");
+        else
+            this.id = id;
     }
 
     public String getRua() {
@@ -62,8 +65,11 @@ public class Endereco {
         return numero;
     }
 
-    public void setNumero(int numero) {
-        this.numero = numero;
+    public void setNumero(int numero) throws ErroValidacaoException{
+        if (this.numero < 0)
+            throw new ErroValidacaoException("O id não pode ser menor que 0 !");
+        else
+            this.id = id;
     }
 
     public int getCep() {

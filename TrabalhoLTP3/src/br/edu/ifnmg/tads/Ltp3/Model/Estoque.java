@@ -23,17 +23,20 @@ public class Estoque {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int id) throws ErroValidacaoException{
+        if (this.id < 0)
+            throw new ErroValidacaoException("O id não pode ser menor que 0 !");
+        else
+            this.id = id;
     }
 
     public int getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(int quantidade) throws Exception{
-        if(quantidade <0){
-            throw new Exception ("A quantidade não pode ser menor que 0");
+    public void setQuantidade(int quantidade) throws ErroValidacaoException{
+        if(quantidade < 0){
+            throw new ErroValidacaoException("A quantidade não pode ser menor que 0");
         }else {
             this.quantidade = quantidade;
         }

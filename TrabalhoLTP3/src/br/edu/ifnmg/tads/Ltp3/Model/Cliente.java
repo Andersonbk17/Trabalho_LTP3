@@ -18,6 +18,17 @@ public class Cliente extends Pessoa{
 
     public Cliente(){}
     /*-----------------------------------------------*/
+
+    public int getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(int idCliente) throws ErroValidacaoException  {
+        if(this.idCliente < 0 )
+               throw new ErroValidacaoException("O id não pode ser menor que 0 !");
+        else
+            this.idCliente = idCliente;
+    }
     
     
     

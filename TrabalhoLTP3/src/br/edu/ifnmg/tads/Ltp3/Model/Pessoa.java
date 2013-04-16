@@ -47,16 +47,22 @@ public class Pessoa {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+   public void setId(int id) throws ErroValidacaoException  {
+        if(this.id < 0 )
+               throw new ErroValidacaoException("O id não pode ser menor que 0 !");
+        else
+            this.id = id;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNome(String nome) throws ErroValidacaoException{
+        if(nome.length() < 3 || nome.length() > 255)
+            throw new ErroValidacaoException("O nome deve ser maior que 3 caracteres e menor que 255 caracteres !");
+        else
+            this.nome = nome;
     }
 
     public int getRg() {
