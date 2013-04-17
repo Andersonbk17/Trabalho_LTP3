@@ -36,8 +36,11 @@ public class Produto {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int id) throws ErroValidacaoException {
+        if(id <0)
+            throw new ErroValidacaoException("O id não pode ser menor que 0!");
+        else
+            this.id = id;
     }
 
     public String getDescricao() {
@@ -52,30 +55,33 @@ public class Produto {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNome(String nome) throws ErroValidacaoException{
+        if(nome.length()<3 || nome.length()<255)
+            throw new ErroValidacaoException("O nome não deve ser menor que 3 caracteres e maior que 255 caracteres !");
+        else
+            this.nome = nome;
     }
 
     public double getValorUnidadeCompra() {
         return valorUnidadeCompra;
     }
 
-    public void setValorUnidadeCompra(int valorUnidadeCompra) throws Exception{
+    public void setValorUnidadeCompra(int valorUnidadeCompra) throws ErroValidacaoException{
         if(valorUnidadeCompra >0)
             this.valorUnidadeCompra = valorUnidadeCompra;
         else
-             throw new Exception ("O valor de Compra deve ser Maior que 0");
+             throw new ErroValidacaoException("O valor de Compra deve ser Maior que 0 !");
     }
 
     public double getValorUnidadeVenda() {
         return valorUnidadeVenda;
     }
 
-    public void setValorUnidadeVenda(int valorUnidadeVenda) throws Exception{
+    public void setValorUnidadeVenda(int valorUnidadeVenda) throws ErroValidacaoException{
         if(valorUnidadeVenda >0)
             this.valorUnidadeVenda = valorUnidadeVenda;
         else
-            throw new Exception ("O valor de Venda deve ser Maior que 0");
+            throw new ErroValidacaoException("O valor de Venda deve ser Maior que 0 !");
             
     }
 

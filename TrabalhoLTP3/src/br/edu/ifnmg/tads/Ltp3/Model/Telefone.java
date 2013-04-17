@@ -28,8 +28,11 @@ public class Telefone {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int id) throws ErroValidacaoException {
+        if(id >0)
+            this.id = id;
+        else
+            throw new ErroValidacaoException("O id não pode ser menor que 0 !");
     }
 
     public int getDdd() {

@@ -24,7 +24,7 @@ public class Estoque {
     }
 
     public void setId(int id) throws ErroValidacaoException{
-        if (this.id < 0)
+        if (id < 0)
             throw new ErroValidacaoException("O id não pode ser menor que 0 !");
         else
             this.id = id;
