@@ -5,7 +5,6 @@
 package br.edu.ifnmg.tads.Ltp3.Apresentacao;
 
 //import com.birosoft.liquid.LiquidLookAndFeel;
-import javax.swing.UIManager;
 
 
 /**
@@ -48,7 +47,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         MenuClientes = new javax.swing.JMenu();
         MenuItemListarClientes = new javax.swing.JMenuItem();
         MenuTiposPagamento = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        temListar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Vendas");
@@ -59,6 +58,7 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         MenuNovo.setText("Novo");
 
+        MenuItemUsuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_MASK));
         MenuItemUsuario.setText("Usuário");
         MenuItemUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,6 +67,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         MenuNovo.add(MenuItemUsuario);
 
+        MenuItemCliente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
         MenuItemCliente.setText("Cliente");
         MenuItemCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,6 +76,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         MenuNovo.add(MenuItemCliente);
 
+        MenuItemProduto.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
         MenuItemProduto.setText("Produto");
         MenuItemProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,13 +155,13 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         MenuTiposPagamento.setText("Tipos de Pagamento");
 
-        jMenuItem1.setText("Listar");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        temListar.setText("Listar");
+        temListar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                temListarActionPerformed(evt);
             }
         });
-        MenuTiposPagamento.add(jMenuItem1);
+        MenuTiposPagamento.add(temListar);
 
         MenuSuperior.add(MenuTiposPagamento);
 
@@ -173,7 +175,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 327, Short.MAX_VALUE)
+            .addGap(0, 331, Short.MAX_VALUE)
         );
 
         pack();
@@ -225,11 +227,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         add(janela);
     }//GEN-LAST:event_MenuItemNovaVandaActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void temListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_temListarActionPerformed
         frmListarTipoPagamento janela = new frmListarTipoPagamento();
         janela.setVisible(true);
         add(janela);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_temListarActionPerformed
 
     private void MenuItemListarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemListarClientesActionPerformed
         frmListarClientes janela = new frmListarClientes();
@@ -237,52 +239,6 @@ public class frmPrincipal extends javax.swing.JFrame {
         add(janela);
     }//GEN-LAST:event_MenuItemListarClientesActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        
-           System.setProperty(
-          "Quaqua.tabLayoutPolicy","wrap"
-         );
-         
-        
-        
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                                 
-                }
-                
-        /*        UIManager.setLookAndFeel("com.birosoft.liquid.LiquidLookAndFeel");
-                LiquidLookAndFeel.setLiquidDecorations(true, "liquid");
-                * 
-        * */
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new frmPrincipal().setVisible(true);
-            }
-        });
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu MenuClientes;
     private javax.swing.JMenuItem MenuItemCliente;
@@ -301,7 +257,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu MenuVendas;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JMenuItem temListar;
     // End of variables declaration//GEN-END:variables
 }
