@@ -32,12 +32,32 @@ public class ProdutoDAO {
                 comando.setDouble(3, obj.getValorUnidadeCompra());
                 comando.setDouble(4,obj.getValorUnidadeVenda());
                 
-                // falta inserir o estoque            
+                comando.executeUpdate();
+                
+                comando = bd.getConexao()
+                        .prepareStatement("INSERT INTO estoques (id,quantidade) VALUES (?,?)");
+                comando.setInt(1,obj.getEstoque().getId());
+                comando.setInt(2, obj.getEstoque().getQuantidade());
+                
+                comando.executeUpdate();
+                           
+                return true;
             }else{
             
                 PreparedStatement comando = bd.getConexao()
-                        .prepareStatement("UPDATE");
+                        .prepareStatement("UPDATE produtos SET nome = ?,descricao = ?,valorUnidadeCompra = ?,valorUnidadeVenda =? WHERE id =?");
+                comando.setString(1, obj.getNome());
+                comando.setString(2, obj.getDescricao());
+                comando.setDouble(3, obj.getValorUnidadeCompra());
+                comando.setDouble(4, obj.getValorUnidadeVenda());
+                comando.setInt(5, obj.getId());
+                
+                comando.executeUpdate();
             
+                comando = bd.getConexao()
+                        .prepareStatement("UPDATE estoques SET quantidade = ? WHERE id = ?");
+                comando.setInt(1, obj.getEstoque().getQuantidade());
+                comando.setInt(2, obj.getEstoque().getId());
             
             }
         
