@@ -4,6 +4,7 @@
  */
 package br.edu.ifnmg.tads.Ltp3.DataAccess;
 
+import br.edu.ifnmg.tads.Ltp3.Model.ErroValidacaoException;
 import br.edu.ifnmg.tads.Ltp3.Model.Produto;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -58,21 +59,23 @@ public class ProdutoDAO {
                         .prepareStatement("UPDATE estoques SET quantidade = ? WHERE id = ?");
                 comando.setInt(1, obj.getEstoque().getQuantidade());
                 comando.setInt(2, obj.getEstoque().getId());
+                
+                return true;
             
             }
         
         
-        }catch(SQLException ex){}
+        }catch(SQLException ex){
+            new ErroValidacaoException(ex.getMessage());
+            return false;
         
-        
-        
-        
-        
-        
-        return false;
+        }
+     
+    }
     
+    public boolean Abrir(){
     
-    
+    return true;
     }
     
 }

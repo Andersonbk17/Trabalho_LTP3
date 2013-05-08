@@ -4,6 +4,8 @@
  */
 package br.edu.ifnmg.tads.Ltp3.Apresentacao;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author anderson
@@ -197,7 +199,10 @@ public class frmVenda extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        dispose();
+        if(JOptionPane.showConfirmDialog(rootPane, "Você tem certeza que deseja cancelar a compra ?","",JOptionPane.OK_CANCEL_OPTION) == 0){
+            this.dispose();
+        }
+        
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void cbxClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxClienteActionPerformed
