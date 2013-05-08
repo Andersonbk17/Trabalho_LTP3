@@ -48,7 +48,7 @@ CREATE TABLE enderecos(
 CREATE TABLE Pessoas(
 	id int primary key auto_increment,
 	nome varchar(100) not null,
-	cpf int not null,
+	cpf varchar(100) not null,
 	rg varchar(100) not null,
 	data_nascimento Date 
 

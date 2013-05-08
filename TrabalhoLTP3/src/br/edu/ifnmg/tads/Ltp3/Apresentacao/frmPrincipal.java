@@ -46,8 +46,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         MenuItemHistorico = new javax.swing.JMenuItem();
         MenuClientes = new javax.swing.JMenu();
         MenuItemListarClientes = new javax.swing.JMenuItem();
-        MenuTiposPagamento = new javax.swing.JMenu();
-        temListar = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Vendas");
@@ -141,9 +140,9 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         MenuSuperior.add(MenuVendas);
 
-        MenuClientes.setText("Clientes");
+        MenuClientes.setText("Listagem");
 
-        MenuItemListarClientes.setText("Listar");
+        MenuItemListarClientes.setText("Tipos de Pagamento");
         MenuItemListarClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MenuItemListarClientesActionPerformed(evt);
@@ -151,19 +150,10 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         MenuClientes.add(MenuItemListarClientes);
 
+        jMenuItem1.setText("Usuários");
+        MenuClientes.add(jMenuItem1);
+
         MenuSuperior.add(MenuClientes);
-
-        MenuTiposPagamento.setText("Tipos de Pagamento");
-
-        temListar.setText("Listar");
-        temListar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                temListarActionPerformed(evt);
-            }
-        });
-        MenuTiposPagamento.add(temListar);
-
-        MenuSuperior.add(MenuTiposPagamento);
 
         setJMenuBar(MenuSuperior);
 
@@ -175,7 +165,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 331, Short.MAX_VALUE)
+            .addGap(0, 339, Short.MAX_VALUE)
         );
 
         pack();
@@ -227,12 +217,6 @@ public class frmPrincipal extends javax.swing.JFrame {
         add(janela);
     }//GEN-LAST:event_MenuItemNovaVandaActionPerformed
 
-    private void temListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_temListarActionPerformed
-        frmListarTipoPagamento janela = new frmListarTipoPagamento();
-        janela.setVisible(true);
-        add(janela);
-    }//GEN-LAST:event_temListarActionPerformed
-
     private void MenuItemListarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemListarClientesActionPerformed
         frmListarClientes janela = new frmListarClientes();
         janela.setVisible(true);
@@ -252,12 +236,11 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem MenuItemUsuario;
     private javax.swing.JMenu MenuNovo;
     private javax.swing.JMenuBar MenuSuperior;
-    private javax.swing.JMenu MenuTiposPagamento;
     private javax.swing.JMenu MenuUsuarios;
     private javax.swing.JMenu MenuVendas;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JMenuItem temListar;
     // End of variables declaration//GEN-END:variables
 }
