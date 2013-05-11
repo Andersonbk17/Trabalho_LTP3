@@ -50,7 +50,6 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Vendas");
-        setAlwaysOnTop(true);
         setPreferredSize(new java.awt.Dimension(800, 600));
 
         jMenu1.setText("Sistema");
@@ -165,7 +164,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 339, Short.MAX_VALUE)
+            .addGap(0, 347, Short.MAX_VALUE)
         );
 
         pack();

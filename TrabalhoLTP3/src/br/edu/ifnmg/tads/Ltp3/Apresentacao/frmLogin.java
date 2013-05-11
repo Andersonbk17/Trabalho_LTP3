@@ -4,6 +4,10 @@
  */
 package br.edu.ifnmg.tads.Ltp3.Apresentacao;
 
+import br.edu.ifnmg.tads.Ltp3.DataAccess.LoginDAO;
+import br.edu.ifnmg.tads.Ltp3.Model.ErroValidacaoException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -117,9 +121,19 @@ public class frmLogin extends javax.swing.JDialog {
         else if(pswSenha.getText().isEmpty()){
             JOptionPane.showMessageDialog(rootPane,"Campo Senha Vazio !");
         }else{
-            frmPrincipal janela = new frmPrincipal();
-            janela.setVisible(true);
-            this.dispose();
+            
+            LoginDAO login = new LoginDAO();
+            try {
+                if(login.autenticar(txtUsuario.getText(), pswSenha.getText()) == 1){
+                    frmPrincipal janela = new frmPrincipal();
+                    janela.setVisible(true);
+                    this.dispose();
+            
+                }
+            } catch (ErroValidacaoException ex) {
+                Logger.getLogger(frmLogin.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             
         
         

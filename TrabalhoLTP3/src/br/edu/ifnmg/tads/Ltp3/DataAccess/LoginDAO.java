@@ -23,15 +23,15 @@ public class LoginDAO {
     public int autenticar(String usuario,String senha) throws ErroValidacaoException{
         try{
             PreparedStatement comando = conexao
-                    .getConexao().prepareStatement("SELECT id FROM usuarios WHERE usuario = ? AND senha = ?");
+                    .getConexao().prepareStatement("SELECT id FROM usuarios_sistema WHERE usuario = ? AND senha = ?");
             comando.setString(1, usuario);
             comando.setString(2, senha);
             ResultSet rs = comando.executeQuery();
             
-            if(rs == null){
+            if(!rs.last()){
                 throw new ErroValidacaoException("Usuário não encontrado !");
             }else{
-                return rs.getRow(); //erro verificar
+                return rs.getInt("id"); //erro verificar
             }
         
         }catch(SQLException ex){
