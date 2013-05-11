@@ -124,9 +124,11 @@ public class frmLogin extends javax.swing.JDialog {
             
             LoginDAO login = new LoginDAO();
             try {
-                if(login.autenticar(txtUsuario.getText(), pswSenha.getText()) == 1){
-                    frmPrincipal janela = new frmPrincipal();
+                int idUsuario = login.autenticar(txtUsuario.getText(), pswSenha.getText()) ;
+                if(idUsuario != 0){
+                    frmPrincipal janela = new frmPrincipal(idUsuario);
                     janela.setVisible(true);
+                   // JOptionPane.showMessageDialog(rootPane,idUsuario);
                     this.dispose();
             
                 }

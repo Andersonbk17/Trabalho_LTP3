@@ -6,6 +6,14 @@ package br.edu.ifnmg.tads.Ltp3.Apresentacao;
 
 //import com.birosoft.liquid.LiquidLookAndFeel;
 
+import br.edu.ifnmg.tads.Ltp3.Model.UsuarioSistema;
+import java.beans.PropertyVetoException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+
 
 /**
  *
@@ -16,8 +24,12 @@ public class frmPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form frmPrincipal
      */
-    public frmPrincipal() {
+    public frmPrincipal(int idUsuario) {
         initComponents();
+         usuarioAtual = new UsuarioSistema();
+         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+         
+         //Implementar a busca de usuario
     }
 
     /**
@@ -39,6 +51,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         MenuItemTipoPagamento = new javax.swing.JMenuItem();
         MenuItemSair = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        MenuItemFechar = new javax.swing.JMenuItem();
         MenuUsuarios = new javax.swing.JMenu();
         MenuItemListarUsuarios = new javax.swing.JMenuItem();
         MenuVendas = new javax.swing.JMenu();
@@ -93,7 +106,7 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         jMenu1.add(MenuNovo);
 
-        MenuItemSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
+        MenuItemSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         MenuItemSair.setText("Sair");
         MenuItemSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,6 +115,14 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(MenuItemSair);
         jMenu1.add(jSeparator1);
+
+        MenuItemFechar.setText("Fechar");
+        MenuItemFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemFecharActionPerformed(evt);
+            }
+        });
+        jMenu1.add(MenuItemFechar);
 
         MenuSuperior.add(jMenu1);
 
@@ -164,7 +185,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 347, Short.MAX_VALUE)
+            .addGap(0, 363, Short.MAX_VALUE)
         );
 
         pack();
@@ -172,6 +193,8 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     private void MenuItemSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemSairActionPerformed
         this.dispose();
+        frmLogin janela = new frmLogin(this, rootPaneCheckingEnabled);
+        janela.setVisible(true);
     }//GEN-LAST:event_MenuItemSairActionPerformed
 
     private void MenuItemTipoPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemTipoPagamentoActionPerformed
@@ -213,6 +236,11 @@ public class frmPrincipal extends javax.swing.JFrame {
     private void MenuItemNovaVandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemNovaVandaActionPerformed
         frmVenda janela = new frmVenda();
         janela.setVisible(true);
+        try {
+            janela.setMaximum(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         add(janela);
     }//GEN-LAST:event_MenuItemNovaVandaActionPerformed
 
@@ -222,9 +250,16 @@ public class frmPrincipal extends javax.swing.JFrame {
         add(janela);
     }//GEN-LAST:event_MenuItemListarClientesActionPerformed
 
+    private void MenuItemFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemFecharActionPerformed
+        if(JOptionPane.showConfirmDialog(rootPane, "Você tem certeza que deseja fechar","",JOptionPane.OK_CANCEL_OPTION) == 0){
+            this.dispose();
+        }
+    }//GEN-LAST:event_MenuItemFecharActionPerformed
+    private UsuarioSistema usuarioAtual;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu MenuClientes;
     private javax.swing.JMenuItem MenuItemCliente;
+    private javax.swing.JMenuItem MenuItemFechar;
     private javax.swing.JMenuItem MenuItemHistorico;
     private javax.swing.JMenuItem MenuItemListarClientes;
     private javax.swing.JMenuItem MenuItemListarUsuarios;
