@@ -4,6 +4,12 @@
  */
 package br.edu.ifnmg.tads.Ltp3.Apresentacao;
 
+import br.edu.ifnmg.tads.Ltp3.DataAccess.ProdutoDAO;
+import br.edu.ifnmg.tads.Ltp3.Model.ErroValidacaoException;
+import br.edu.ifnmg.tads.Ltp3.Model.Estoque;
+import br.edu.ifnmg.tads.Ltp3.Model.Produto;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -37,8 +43,10 @@ public class frmCadastroProduto extends javax.swing.JInternalFrame {
         lblValorCompra = new javax.swing.JLabel();
         btnSalvar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        txtfValorCompra = new javax.swing.JFormattedTextField();
-        txtfValorUnitario = new javax.swing.JFormattedTextField();
+        txtQuantidade = new javax.swing.JTextField();
+        txtValorUnitario = new javax.swing.JTextField();
+        txtValorCompra = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
         setMaximizable(true);
@@ -72,9 +80,7 @@ public class frmCadastroProduto extends javax.swing.JInternalFrame {
             }
         });
 
-        txtfValorCompra.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("###0.00"))));
-
-        txtfValorUnitario.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("###0.00"))));
+        jLabel1.setText("Quantidade em estoque:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -95,12 +101,18 @@ public class frmCadastroProduto extends javax.swing.JInternalFrame {
                                 .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblValorUnitario)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtfValorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(txtValorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblValorCompra)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblValorCompra)
+                                    .addComponent(jLabel1))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtfValorCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtValorCompra)
+                                        .addGap(23, 23, 23))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(170, 170, 170)
                         .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -118,12 +130,16 @@ public class frmCadastroProduto extends javax.swing.JInternalFrame {
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblValorUnitario)
-                    .addComponent(txtfValorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtValorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblValorCompra)
-                    .addComponent(txtfValorCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
+                    .addComponent(txtValorCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblDescricao)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -143,9 +159,38 @@ public class frmCadastroProduto extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(rootPane, "O campo nome não pode ser Vazio !");
             }else if(txtNome.getText().length() < 3 || txtNome.getText().length() > 255){
                 JOptionPane.showMessageDialog(rootPane,"Informe um nome maior 3 caracteres e mennor que 255 caracteres !");
-            }else if(Double.parseDouble(txtfValorCompra.getText()) <=0){
+            }else if(Double.parseDouble(txtValorCompra.getText()) <=0){
                 JOptionPane.showMessageDialog(rootPane, "O valor No campo Valor de Compra Não pode ser Menor ou igual a zero !");
 
+            }else{
+                Produto novo = new Produto();
+                Estoque novoEstoque = new Estoque();
+                             
+                novo.setEstoque(novoEstoque);
+                novo.setDescricao(TxtAreaDescricao.getText());
+                try {
+                    novo.setNome(txtNome.getText());
+                    novo.setValorUnidadeCompra(Double.parseDouble(txtValorCompra.getText()));
+                    novo.setValorUnidadeVenda(Double.parseDouble(txtValorUnitario.getText()));
+                    novoEstoque.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
+                    
+                } catch (ErroValidacaoException ex) {
+                    Logger.getLogger(frmCadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                ProdutoDAO dao = new ProdutoDAO();
+                if(dao.Salvar(novo)){
+                    JOptionPane.showMessageDialog(rootPane, "salvo");
+                    TxtAreaDescricao.setText("");
+                    txtNome.setText("");
+                    txtQuantidade.setText("");
+                    txtValorCompra.setText("");
+                    txtValorUnitario.setText("");
+                    
+                }else{
+                    JOptionPane.showMessageDialog(rootPane, " não salvo");
+                }
+               
             }
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
@@ -160,13 +205,15 @@ public class frmCadastroProduto extends javax.swing.JInternalFrame {
     private javax.swing.JTextArea TxtAreaDescricao;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblDescricao;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblValorCompra;
     private javax.swing.JLabel lblValorUnitario;
     private javax.swing.JTextField txtNome;
-    private javax.swing.JFormattedTextField txtfValorCompra;
-    private javax.swing.JFormattedTextField txtfValorUnitario;
+    private javax.swing.JTextField txtQuantidade;
+    private javax.swing.JTextField txtValorCompra;
+    private javax.swing.JTextField txtValorUnitario;
     // End of variables declaration//GEN-END:variables
 }

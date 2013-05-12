@@ -4,6 +4,10 @@
  */
 package br.edu.ifnmg.tads.Ltp3.Model;
 
+import br.edu.ifnmg.tads.Ltp3.DataAccess.ProdutoDAO;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  *
  * @author anderson
@@ -11,12 +15,11 @@ package br.edu.ifnmg.tads.Ltp3.Model;
 public class NewClass {
     public static void main (String [] args) throws ErroValidacaoException {
         
-        Cliente aa = new Cliente();
+        ProdutoDAO dao = new ProdutoDAO();
+        List<Produto> produtos = new LinkedList<>();
         
-        //aa.setIdCliente(-1);
-        System.out.print(aa.getId());
-        aa.setId(-12);
-        
+        produtos = dao.listarTodos();
+        System.out.print(produtos);
     
     }
 }

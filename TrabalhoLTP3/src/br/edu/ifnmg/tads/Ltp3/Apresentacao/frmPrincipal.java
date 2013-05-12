@@ -60,6 +60,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         MenuClientes = new javax.swing.JMenu();
         MenuItemListarClientes = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
+        MenuItemListagemProdutos = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Vendas");
@@ -173,6 +174,14 @@ public class frmPrincipal extends javax.swing.JFrame {
         jMenuItem1.setText("Usuários");
         MenuClientes.add(jMenuItem1);
 
+        MenuItemListagemProdutos.setText("Produtos");
+        MenuItemListagemProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemListagemProdutosActionPerformed(evt);
+            }
+        });
+        MenuClientes.add(MenuItemListagemProdutos);
+
         MenuSuperior.add(MenuClientes);
 
         setJMenuBar(MenuSuperior);
@@ -185,7 +194,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 363, Short.MAX_VALUE)
+            .addGap(0, 371, Short.MAX_VALUE)
         );
 
         pack();
@@ -252,15 +261,22 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     private void MenuItemFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemFecharActionPerformed
         if(JOptionPane.showConfirmDialog(rootPane, "Você tem certeza que deseja fechar","",JOptionPane.OK_CANCEL_OPTION) == 0){
-            this.dispose();
+            System.exit(0);
         }
     }//GEN-LAST:event_MenuItemFecharActionPerformed
+
+    private void MenuItemListagemProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemListagemProdutosActionPerformed
+      frmListarProduto janela = new frmListarProduto();
+      janela.setVisible(true);
+      add(janela);
+    }//GEN-LAST:event_MenuItemListagemProdutosActionPerformed
     private UsuarioSistema usuarioAtual;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu MenuClientes;
     private javax.swing.JMenuItem MenuItemCliente;
     private javax.swing.JMenuItem MenuItemFechar;
     private javax.swing.JMenuItem MenuItemHistorico;
+    private javax.swing.JMenuItem MenuItemListagemProdutos;
     private javax.swing.JMenuItem MenuItemListarClientes;
     private javax.swing.JMenuItem MenuItemListarUsuarios;
     private javax.swing.JMenuItem MenuItemNovaVanda;

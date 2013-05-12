@@ -19,7 +19,7 @@ public class Produto {
     private Estoque estoque;
     
     /*----- Construtores ---------------*/
-    private Produto(){
+    public Produto(){
         this.descricao = "";
         this.estoque = new Estoque();
         this.id = 0;
@@ -70,7 +70,7 @@ public class Produto {
     }
 
     public void setNome(String nome) throws ErroValidacaoException{
-        if(nome.length()<3 || nome.length()<255) {
+        if(nome.length()<3 || nome.length()>255) {
             throw new ErroValidacaoException("O nome não deve ser menor que 3 caracteres e maior que 255 caracteres !");
         }
         else {
@@ -82,7 +82,7 @@ public class Produto {
         return valorUnidadeCompra;
     }
 
-    public void setValorUnidadeCompra(int valorUnidadeCompra) throws ErroValidacaoException{
+    public void setValorUnidadeCompra(double valorUnidadeCompra) throws ErroValidacaoException{
         if(valorUnidadeCompra >0) {
             this.valorUnidadeCompra = valorUnidadeCompra;
         }
@@ -95,7 +95,7 @@ public class Produto {
         return valorUnidadeVenda;
     }
 
-    public void setValorUnidadeVenda(int valorUnidadeVenda) throws ErroValidacaoException{
+    public void setValorUnidadeVenda(double valorUnidadeVenda) throws ErroValidacaoException{
         if(valorUnidadeVenda >0) {
             this.valorUnidadeVenda = valorUnidadeVenda;
         }

@@ -4,17 +4,59 @@
  */
 package br.edu.ifnmg.tads.Ltp3.Apresentacao;
 
+import br.edu.ifnmg.tads.Ltp3.DataAccess.ProdutoDAO;
+import br.edu.ifnmg.tads.Ltp3.Model.Produto;
+import java.util.List;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author anderson
  */
 public class frmListarProduto extends javax.swing.JInternalFrame {
-
+    ProdutoDAO dao;
     /**
      * Creates new form frmListarProduto
      */
     public frmListarProduto() {
         initComponents();
+        
+        preencheTabela(carregaDadosDoBanco());
+    }
+    
+    private List<Produto> carregaDadosDoBanco(){
+        dao = new ProdutoDAO();
+        List<Produto> produtos = dao.listarTodos();
+        return produtos;
+    
+    }
+   
+    private void preencheTabela(List<Produto> lista){
+        DefaultTableModel modelo = new DefaultTableModel();
+        
+        modelo.addColumn("id");
+        modelo.addColumn("Nome");
+        modelo.addColumn("descricao");
+        modelo.addColumn("Valor de Venda");
+        modelo.addColumn("Valor de Compra");
+        modelo.addColumn("Estoque");
+        
+        
+        for(Produto p : lista){
+            Vector valores = new Vector();
+            valores.add(0,p.getId());
+            valores.add(1,p.getNome());
+            valores.add(2,p.getDescricao());
+            valores.add(3,p.getValorUnidadeVenda());
+            valores.add(4,p.getValorUnidadeCompra());
+            valores.add(5,p.getEstoque().getQuantidade());
+            modelo.addRow(valores);
+        }
+        
+        tblProdutos.setModel(modelo);
+        tblProdutos.repaint();
+        
     }
 
     /**
@@ -28,6 +70,7 @@ public class frmListarProduto extends javax.swing.JInternalFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProdutos = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setClosable(true);
         setMaximizable(true);
@@ -37,16 +80,23 @@ public class frmListarProduto extends javax.swing.JInternalFrame {
 
         tblProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "ID", "Nome", "Descrição", "Valor Compra", "Valor Venda"
+
             }
         ));
         jScrollPane1.setViewportView(tblProdutos);
+
+        jButton1.setText("Sair");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -56,18 +106,30 @@ public class frmListarProduto extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 747, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(31, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(286, 286, 286))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(76, Short.MAX_VALUE)
+                .addContainerGap(79, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addGap(24, 24, 24))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblProdutos;
     // End of variables declaration//GEN-END:variables
