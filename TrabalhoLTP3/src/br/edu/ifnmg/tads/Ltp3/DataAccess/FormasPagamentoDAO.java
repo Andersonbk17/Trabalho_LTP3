@@ -64,6 +64,7 @@ public class FormasPagamentoDAO {
             comando.setInt(1, id);
             
             ResultSet rs = comando.executeQuery();
+            //comando.getConnection().commit();//verificar
             rs.first();
              
              fp.setId(id);
@@ -83,9 +84,11 @@ public class FormasPagamentoDAO {
                     .prepareStatement("DELETE FROM tipo_pagamento WHERE id = ?");
             comando.setInt(1, obj.getId());
             if(comando.executeUpdate() == 1) {
+                comando.getConnection().commit();
                 return true;
             }
             else {
+                comando.getConnection().rollback();
                 return false;
             }
         }catch(SQLException ex){

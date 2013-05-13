@@ -21,7 +21,10 @@ public class EnderecoDAO {
     
     public boolean Salvar(Endereco obj){
         try{
-            PreparedStatement comando = banco.getConexao().prepareStatement("INSERT INTO enderecos (nome)");
+            if(obj.getId() == 0){
+                PreparedStatement comando = banco.getConexao()
+                        .prepareStatement("INSERT INTO enderecos (rua,cep,bairro,numero,id_pessoa,id_cidade,id_estado)");
+            }
         }catch(SQLException ex){
         
         }

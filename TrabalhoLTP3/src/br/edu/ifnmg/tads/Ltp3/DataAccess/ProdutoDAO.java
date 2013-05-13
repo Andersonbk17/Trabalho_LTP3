@@ -9,9 +9,13 @@ import br.edu.ifnmg.tads.Ltp3.Model.Estoque;
 import br.edu.ifnmg.tads.Ltp3.Model.Produto;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLClientInfoException;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -62,7 +66,7 @@ public class ProdutoDAO {
             }else{
             
                 PreparedStatement comando = bd.getConexao()
-                        .prepareStatement("UPDATE produtos SET nome = ?,descricao = ?,valor_uni_Compra = ?,valor_Uni_Venda =? WHERE id =?");
+                        .prepareStatement("UPDATE produtos SET nome = ?,descricao = ?,valor_uni_Compra = ?,valor_uni_Venda =? WHERE id =?");
                 comando.setString(1, obj.getNome());
                 comando.setString(2, obj.getDescricao());
                 comando.setDouble(3, obj.getValorUnidadeCompra());
@@ -71,10 +75,13 @@ public class ProdutoDAO {
                 
                 comando.executeUpdate();
             
-                comando = bd.getConexao()
+                PreparedStatement comando2 = bd.getConexao()
                         .prepareStatement("UPDATE estoques SET quantidade = ? WHERE id = ?");
-                comando.setInt(1, obj.getEstoque().getQuantidade());
-                comando.setInt(2, obj.getEstoque().getId());
+                comando2.setInt(1, obj.getEstoque().getQuantidade());
+                comando2.setInt(2, obj.getEstoque().getId());
+                
+                comando.getConnection().commit();
+                comando2.getConnection().commit();
                 
                 return true;
             
@@ -100,7 +107,7 @@ public class ProdutoDAO {
             
             
             PreparedStatement comando = bd.getConexao()
-                    .prepareStatement("SELECT p.id,nome,descricao,valor_Uni_Venda,valor_Uni_Compra,quantidade  FROM produtos p INNER JOIN estoques e on e.id = p.id");
+                    .prepareStatement("SELECT p.id,nome,descricao,valor_uni_Venda,valor_Uni_Compra,quantidade  FROM produtos p INNER JOIN estoques e on e.id = p.id");
             ResultSet consulta = comando.executeQuery();
             
             while(consulta.next()){
@@ -113,7 +120,7 @@ public class ProdutoDAO {
                     novo.setId(consulta.getInt("id"));
                     novo.setNome(consulta.getString("nome"));
                     novo.setValorUnidadeCompra(consulta.getDouble("valor_uni_Compra"));
-                    novo.setValorUnidadeVenda(consulta.getDouble("valor_Uni_Venda"));
+                    novo.setValorUnidadeVenda(consulta.getDouble("valor_uni_Venda"));
 
                     novoE.setId(consulta.getInt("id"));
                     novoE.setQuantidade(consulta.getInt("quantidade"));
@@ -138,70 +145,95 @@ public class ProdutoDAO {
     
     }
     
+    
+    public List<Produto> buscar(Produto filtro){
+        try{
+            String sql = "select p.id, p.nome, p.valor_uni_Compra, "
+                    + "p.valor_uni_Venda, p.descricao, es.id as quantidade from "
+                    + "produtos p INNER JOIN estoques es on es.id = p.id";
+            String where = "";
+            
+            if(!filtro.getNome().isEmpty()){
+                where = "nome like'%"+filtro.getNome()+"%'";
+            }
+            
+            // Se tiver mais algum valor de compra
+            if(filtro.getValorUnidadeCompra() >0 ){
+                if(where.length() > 0){
+                    where = where + " AND ";
+                }
+                where = where +" valor_uni_Compra = "+filtro.getValorUnidadeCompra();
+            
+            }
+            
+            // Se tiver mais algum valor de venda
+            if(filtro.getValorUnidadeVenda() >0 ){
+                if(where.length() > 0){
+                    where = where + " AND ";
+                }
+                where = where +" valor_uni_Venda = "+filtro.getValorUnidadeVenda();
+            
+            }
+            
+            //Se tiver algum id
+            if(filtro.getId() > 0 ){
+                if(where.length() > 0){
+                    where = where + " AND ";
+                }
+                where = where +" id = "+filtro.getId();
+            
+            }
+            
+            //Se tiver alguma descrição
+            if(!filtro.getDescricao().isEmpty() ){
+                if(where.length() > 0){
+                    where = where + " AND ";
+                }
+                where = where +" descricao = "+filtro.getDescricao();
+            
+            }
+            
+            if(!where.isEmpty()){
+                sql = sql + " WHERE " + where;
+            }
+            
+            Statement comando = bd.getConexao().createStatement();
+            
+            ResultSet consulta = comando.executeQuery(sql);
+            
+            List<Produto> lista = new LinkedList<>();
+            
+            //Adiciona produtos a lista
+            while(consulta.next()){
+                Produto novo = new Produto();
+                Estoque estoque = new Estoque();
+                try {
+                    novo.setId(consulta.getInt("p.id"));
+                    novo.setValorUnidadeCompra(consulta.getDouble("p.valor_uni_Compra"));
+                    novo.setValorUnidadeVenda(consulta.getDouble("p.valor_uni_Venda"));
+                    novo.setNome(consulta.getString("p.nome"));
+                    novo.setDescricao(consulta.getString("p.descricao"));
+                    estoque.setId(consulta.getInt("es.id"));
+                    estoque.setQuantidade(consulta.getInt("es.quantidade"));
+                    
+                } catch (ErroValidacaoException ex) {
+                    Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                lista.add(novo);
+            
+            }
+            
+            return lista;
+        
+        
+        }catch(SQLException ex){
+            ex.printStackTrace();
+            return null;
+        }
+        
+    
+    }
+    
 }
 
-
-
-/*
- 
- * salvar
- * 
- * for (Itemveda iv: itens){
- *  if(iv.getAtivo() == true){
- *      if(iv.getid() == 0){
- *          insert ...
- * }else{
- *          update
- * 
- * }else{
- *          delete
- * 
- * }
- * }
- * }
- 
- * 
- * abrir
- * 
- * 
- * preparedStatemat cmd = con.prepareStatement("select * from itensVendas where venda = ?");
- * cmd.setInt(1,id);
- * ResultSet res = cmd.executeQuery();
- * List<IntemVenda> its = new LinkedList<ItenVenda>();
- * while(res.next()){
- *  itemVenda tmp = ...
- * 
- * its.add(tmp);
- * 
- * }
- 
- *venda.setItens(its);
- 
- 
- 
- */
-
-
-//inserir com cliente
-
-/*
- 
- resultset resultado = comando.execulteQuery();
- * resultado.next();
- * venda tmp = new venda();
- * tmp.setId(resultado.getId('id'));
- * 
- * 
- * clientedao cli = new clientedao();
- * tmp.setcliente(cli.abrir(resultado.getInt("cliente")));
- * 
- * 
- * 
- * 
- * preparedStatement cmd = con.preapreStatemant(insert into venda(cliente) values(?....?))
- * cmd.setInt(obj.getVenda().getId());
- 
- 
- 
- 
- */

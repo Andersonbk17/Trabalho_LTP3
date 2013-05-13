@@ -14,34 +14,44 @@ public class Endereco {
     private int id;
     private String rua;
     private String bairro;
-    //private String cidade;
+    private Cidade cidade;
+    private Estado estado;
     private int numero;
-    private int cep;
+    private String cep;
 
     
     /*----------- Construtores -------------*/
-    public Endereco() {}
+    public Endereco() {
+        this.id = 0;
+        this.rua = "";
+        this.cep = "";
+        this.cidade = new Cidade();
+        this.estado = new Estado();
+        this.numero = 0;
+        this.bairro = "";
+        
+    }
 
-    public Endereco(int id, String rua, String bairro, int numero, int cep) {
+    public Endereco(int id, String rua, String bairro, Cidade cidade, Estado estado, int numero, String cep) {
         this.id = id;
         this.rua = rua;
         this.bairro = bairro;
+        this.cidade = cidade;
+        this.estado = estado;
         this.numero = numero;
         this.cep = cep;
     }
+
+
+    
     /*-------------------------------------*/
-    
-    
-    
+
     public int getId() {
         return id;
     }
 
-    public void setId(int id) throws ErroValidacaoException{
-        if (id < 0)
-            throw new ErroValidacaoException("O id não pode ser menor que 0 !");
-        else
-            this.id = id;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getRua() {
@@ -60,39 +70,48 @@ public class Endereco {
         this.bairro = bairro;
     }
 
-    
+    public Cidade getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(Cidade cidade) {
+        this.cidade = cidade;
+    }
+
+    public Estado getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
+
     public int getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) throws ErroValidacaoException{
-        if (this.numero < 0)
-            throw new ErroValidacaoException("O id não pode ser menor que 0 !");
-        else
-            this.id = id;
+    public void setNumero(int numero) {
+        this.numero = numero;
     }
 
-    public int getCep() {
+    public String getCep() {
         return cep;
     }
 
-    public void setCep(int cep) {
+    public void setCep(String cep) {
         this.cep = cep;
-    }
-
-    @Override
-    public String toString() {
-        return "Endereco{" + "rua=" + rua + ", bairro=" + bairro + ", numero=" + numero + '}';
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 29 * hash + this.id;
-        hash = 29 * hash + Objects.hashCode(this.rua);
-        hash = 29 * hash + Objects.hashCode(this.bairro);
-        hash = 29 * hash + this.numero;
-        hash = 29 * hash + this.cep;
+        hash = 23 * hash + this.id;
+        hash = 23 * hash + Objects.hashCode(this.rua);
+        hash = 23 * hash + Objects.hashCode(this.bairro);
+        hash = 23 * hash + Objects.hashCode(this.cidade);
+        hash = 23 * hash + Objects.hashCode(this.estado);
+        hash = 23 * hash + this.numero;
+        hash = 23 * hash + Objects.hashCode(this.cep);
         return hash;
     }
 
@@ -111,14 +130,29 @@ public class Endereco {
         if (!Objects.equals(this.bairro, other.bairro)) {
             return false;
         }
+        if (!Objects.equals(this.cidade, other.cidade)) {
+            return false;
+        }
+        if (!Objects.equals(this.estado, other.estado)) {
+            return false;
+        }
         if (this.numero != other.numero) {
             return false;
         }
-        if (this.cep != other.cep) {
+        if (!Objects.equals(this.cep, other.cep)) {
             return false;
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Endereco{" + "rua=" + rua + ", bairro=" + bairro + ", cidade=" + cidade + ", estado=" + estado + ", numero=" + numero + '}';
+    }
+    
+    
+    
+    
     
     
     

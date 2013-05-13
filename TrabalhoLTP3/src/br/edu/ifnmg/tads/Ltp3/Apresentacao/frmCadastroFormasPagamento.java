@@ -193,7 +193,7 @@ public class frmCadastroFormasPagamento extends javax.swing.JInternalFrame {
                     .addComponent(btnSalvar)
                     .addComponent(btnCancelar)
                     .addComponent(btnSair))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();

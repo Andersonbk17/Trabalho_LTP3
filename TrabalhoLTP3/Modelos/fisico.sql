@@ -33,14 +33,36 @@ CREATE TABLE telefones(
 	foreign key (id_pessoa)references pessoas(id)
 )Enginne=InnoDB;
 
+CREATE TABLE `tb_cidades` (
+  `id` int(4) unsigned zerofill NOT NULL auto_increment,
+  `estado` int(2) unsigned zerofill NOT NULL default '00',
+  `uf` varchar(4) NOT NULL default '',
+  `nome` varchar(50) NOT NULL default '',
+  UNIQUE KEY `id` (`id`),
+  KEY `id_2` (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=9715 DEFAULT CHARSET=latin1 AUTO_INCREMENT=9715 ;
+
+CREATE TABLE `tb_estados` (
+  `id` int(2) unsigned zerofill NOT NULL auto_increment,
+  `uf` varchar(10) NOT NULL default '',
+  `nome` varchar(20) NOT NULL default '',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
+
+
+
 CREATE TABLE enderecos(
-	id int primary key auto_increment,
-	rua varchar(100)
-	cep int,
+	id_endereco int primary key auto_increment,
+	rua varchar(100),
+	cep varchar(100),
 	bairro varchar(100),
-	numero int,
+	numero varchar(30),
 	id_pessoa int,
-	foreign key (id_pessoa)references pessoas(id)
+	id_cidade int,
+	id_estado int,
+	foreign key (id_pessoa)references pessoas(id),
+	foreign key (id_cidade)references tb_cidades(id),
+	foreign key (id_estado)references tb_estados(id)
 
 
 )Engine=InnoDB;
