@@ -13,13 +13,13 @@ import java.util.Objects;
 public class Cidade {
     private int id;
     private String nome;
-   // private String uf;
+    private String uf;
     private Estado estado;
     
     public Cidade(){
         this.id = 0;
         this.nome = "";
-       // this.uf = "";
+       this.uf = "";
         this.estado = new Estado();
     
     }
@@ -27,7 +27,7 @@ public class Cidade {
     public Cidade(int id, String nome, String uf, Estado estado) {
         this.id = id;
         this.nome = nome;
-        //this.uf = uf;
+        this.uf = uf;
         this.estado = estado;
     }
 
@@ -52,6 +52,16 @@ public class Cidade {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    public String getUf() {
+        return uf;
+    }
+
+    public void setUf(String uf) {
+        this.uf = uf;
+    }
+    
+    
 
     @Override
     public int hashCode() {

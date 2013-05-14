@@ -4,14 +4,13 @@
  */
 package br.edu.ifnmg.tads.Ltp3.DataAccess;
 
+import br.edu.ifnmg.tads.Ltp3.Model.Email;
 import br.edu.ifnmg.tads.Ltp3.Model.Endereco;
 import br.edu.ifnmg.tads.Ltp3.Model.Pessoa;
 import br.edu.ifnmg.tads.Ltp3.Model.Telefone;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,7 +26,7 @@ public class PessoaDAO {
     }
     
     public int Salvar(Pessoa obj){
-        PreparedStatement comando;
+        PreparedStatement comando = null;
         int id = 0;
         try{
             if(obj.getId() == 0){
@@ -66,14 +65,16 @@ public class PessoaDAO {
             return id;
            }catch(SQLException ex){
                 ex.printStackTrace();
+                
                 return 0;
             }
         
     }
     
-    public boolean Abrir(int id) throws Exception{
+    public Pessoa Abrir(int id) throws Exception{
+        Pessoa pessoa = null;
         try{
-            Pessoa pessoa = new Pessoa();
+            
             PreparedStatement comando = banco.getConexao()
                     .prepareStatement("SELECT * FROM pessoas WHERE id = ?");
             comando.setInt(1, id);
@@ -82,6 +83,7 @@ public class PessoaDAO {
             comando.getConnection().commit();
             
             if(consulta.first()){
+                pessoa = new Pessoa();
                 pessoa.setCpf(consulta.getString("cpf"));
                 pessoa.setDataNascimento(consulta.getDate("data_nascimento"));
                 pessoa.setId(id);
@@ -111,25 +113,77 @@ public class PessoaDAO {
                 //Preencher Enderecos
                 PreparedStatement comando3 = banco.getConexao()
                         .prepareStatement("SELECT * from enderecos WHERE id_pessoa = ?");
-                comando2.setInt(1, id);
+                comando3.setInt(1, id);
                 
-                ResultSet consulta3 = comando2.executeQuery();
-                comando2.getConnection().commit();
+                ResultSet consulta3 = comando3.executeQuery();
+                comando3.getConnection().commit();
                 
                 List<Endereco> listaEnderecos = new LinkedList<>();
+                while(consulta3.next()){
+                    Endereco endereco = new Endereco();
+                    endereco.setBairro(consulta3.getString("bairro"));
+                    endereco.setCep(consulta3.getString("cep"));
+                    endereco.setCidade(consulta3.getString("cidade"));
+                    endereco.setEstado(consulta3.getString("estado"));
+                    endereco.setId(consulta3.getInt("id"));
+                    endereco.setNumero(Integer.parseInt(consulta3.getString("numero")));
+                    endereco.setRua(consulta3.getString("rua"));
+                    listaEnderecos.add(endereco);
+                    
+                    
+                }
+                
+                pessoa.setEnderecos(listaEnderecos);
+                
+                //Preenche emails
+                PreparedStatement comando4 = banco.getConexao()
+                        .prepareStatement("SELECT * FROM emails WHERE id_pessoa");
+                comando4.setInt(1, id);
+                
+                ResultSet consulta4 = comando4.executeQuery();
+                comando4.getConnection().commit();
+                List<Email> listaEmails = new LinkedList<>();
+                while(consulta4.next()){
+                    Email temp = new Email();
+                    temp.setEndereco(consulta4.getString("endereco"));
+                    temp.setId(consulta4.getInt("id"));
+                    listaEmails.add(temp);
+                    
+                }
+                pessoa.setEmails(listaEmails);
+                
                 
             }
             
-            
+            return pessoa;    
         
         
         }catch(SQLException ex){
-        
+            ex.printStackTrace();
             return null;
         }
     
     
     
     }
+    
+    public boolean Apagar(Pessoa obj){
+        try{
+            PreparedStatement comando = banco.getConexao()
+                    .prepareStatement("DELETE FROM pessoas WHERE id = ?");
+            comando.setInt(1, obj.getId());
+            comando.executeUpdate();
+            comando.getConnection().commit();
+            return true;
+            
+        }catch(SQLException ex){
+            ex.printStackTrace();
+            return false;
+        }
+    
+    
+    }
+    
+    
     
 }

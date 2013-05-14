@@ -14,8 +14,11 @@ public class Endereco {
     private int id;
     private String rua;
     private String bairro;
-    private Cidade cidade;
+    /*private Cidade cidade;
     private Estado estado;
+    * */
+    private String cidade;
+    private String estado;
     private int numero;
     private String cep;
 
@@ -25,19 +28,19 @@ public class Endereco {
         this.id = 0;
         this.rua = "";
         this.cep = "";
-        this.cidade = new Cidade();
-        this.estado = new Estado();
+        this.cidade = "";
+        this.estado = "";
         this.numero = 0;
         this.bairro = "";
         
     }
 
-    public Endereco(int id, String rua, String bairro, Cidade cidade, Estado estado, int numero, String cep) {
+    public Endereco(int id, String rua, String bairro, String cidade, String estado, int numero, String cep) {
         this.id = id;
         this.rua = rua;
         this.bairro = bairro;
-        this.cidade = cidade;
-        this.estado = estado;
+        this.cidade = "";
+        this.estado = "";
         this.numero = numero;
         this.cep = cep;
     }
@@ -70,7 +73,7 @@ public class Endereco {
         this.bairro = bairro;
     }
 
-    public Cidade getCidade() {
+    /*public Cidade getCidade() {
         return cidade;
     }
 
@@ -85,6 +88,25 @@ public class Endereco {
     public void setEstado(Estado estado) {
         this.estado = estado;
     }
+    * */
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+    
+    
 
     public int getNumero() {
         return numero;
@@ -101,7 +123,7 @@ public class Endereco {
     public void setCep(String cep) {
         this.cep = cep;
     }
-
+/*
     @Override
     public int hashCode() {
         int hash = 7;
@@ -150,6 +172,48 @@ public class Endereco {
         return "Endereco{" + "rua=" + rua + ", bairro=" + bairro + ", cidade=" + cidade + ", estado=" + estado + ", numero=" + numero + '}';
     }
     
+    
+  */
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + this.id;
+        hash = 29 * hash + Objects.hashCode(this.rua);
+        hash = 29 * hash + Objects.hashCode(this.bairro);
+        hash = 29 * hash + Objects.hashCode(this.cidade);
+        hash = 29 * hash + Objects.hashCode(this.estado);
+        hash = 29 * hash + this.numero;
+        hash = 29 * hash + Objects.hashCode(this.cep);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Endereco other = (Endereco) obj;
+        if (!Objects.equals(this.rua, other.rua)) {
+            return false;
+        }
+        if (!Objects.equals(this.bairro, other.bairro)) {
+            return false;
+        }
+        if (!Objects.equals(this.cidade, other.cidade)) {
+            return false;
+        }
+        if (!Objects.equals(this.estado, other.estado)) {
+            return false;
+        }
+        if (this.numero != other.numero) {
+            return false;
+        }
+        return true;
+    }
     
     
     
