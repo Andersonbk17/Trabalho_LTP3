@@ -52,6 +52,7 @@ public class frmCadastroFormasPagamento extends javax.swing.JInternalFrame {
         
         }
         tblListagem.setModel(modelo);
+        tblListagem.repaint();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -207,20 +208,26 @@ public class frmCadastroFormasPagamento extends javax.swing.JInternalFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
        if(JOptionPane.showConfirmDialog(rootPane, "Você tem certeza que deseja salvar ?","",JOptionPane.OK_CANCEL_OPTION) == 0){
-          
+
+           FormasPagamento nova = new FormasPagamento();
+           nova.setNome(txtTipoPagamento.getText());
+           dao.Salvar(nova);
+           preenceTabela(listaLocal);
            
            JOptionPane.showMessageDialog(rootPane,"linha= "+ tblListagem.getEditingRow());
+           
+           
            
          //  modelo.getValueAt(tblListagem.getEditingRow(), 1);
           JOptionPane.showMessageDialog(rootPane, "valor= "+modelo.getValueAt(tblListagem.getEditingRow(), 1));
           int qtd = 0;
-          for(FormasPagamento nova : this.listaLocal){
+          /*for(FormasPagamento nova : this.listaLocal){
                if(dao.Salvar(nova)){
                    qtd++;
                }
            }
            
-           JOptionPane.showMessageDialog(rootPane, "Foram salvos/Alterados "+qtd+" Itens");
+           JOptionPane.showMessageDialog(rootPane, "Foram salvos/Alterados "+qtd+" Itens");*/
        }
        
         
@@ -242,7 +249,7 @@ public class frmCadastroFormasPagamento extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void tblListagemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblListagemMouseClicked
-      
+        JOptionPane.showMessageDialog(rootPane, tblListagem.getSelectedRow());
       
     }//GEN-LAST:event_tblListagemMouseClicked
 

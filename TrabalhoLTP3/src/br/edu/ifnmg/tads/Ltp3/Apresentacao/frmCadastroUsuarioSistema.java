@@ -7,7 +7,6 @@ package br.edu.ifnmg.tads.Ltp3.Apresentacao;
 import br.edu.ifnmg.tads.Ltp3.Model.Endereco;
 import br.edu.ifnmg.tads.Ltp3.Model.Telefone;
 import br.edu.ifnmg.tads.Ltp3.Model.UsuarioSistema;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
@@ -134,7 +133,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                             .addComponent(lblCpf)
                             .addGap(18, 18, 18)
                             .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(228, Short.MAX_VALUE))
+                .addContainerGap(205, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,7 +156,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblData)
                     .addComponent(txtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addContainerGap(123, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Dados Gerais", jPanel1);
@@ -233,7 +232,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnAdicionarEndereco)
                             .addComponent(btnRemoverEndereco))
-                        .addGap(0, 42, Short.MAX_VALUE))
+                        .addGap(0, 17, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblRua)
@@ -273,7 +272,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                         .addComponent(btnAdicionarEndereco)
                         .addGap(18, 18, 18)
                         .addComponent(btnRemoverEndereco)))
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Endereço", jPanel2);
@@ -320,7 +319,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                         .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(69, 69, 69)
                         .addComponent(btnAdicionar)))
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -334,7 +333,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                     .addComponent(btnAdicionar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Telefone", jPanel3);
@@ -360,7 +359,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                     .addComponent(txtUsuario)
                     .addComponent(txtSenha)
                     .addComponent(txtSenhaNovamente, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE))
-                .addContainerGap(346, Short.MAX_VALUE))
+                .addContainerGap(316, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -377,7 +376,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtSenhaNovamente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(230, Short.MAX_VALUE))
+                .addContainerGap(226, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Autenticação", jPanel4);
@@ -402,14 +401,14 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(143, 143, 143)
                 .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(65, 65, 65)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(473, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -420,7 +419,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
                     .addComponent(btnCancelar))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
@@ -437,10 +436,19 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        UsuarioSistema usuario = new UsuarioSistema();
-        usuario.setCpf(txtCpf.getText());
-        //usuario.setDataNascimento(txtDataNascimento.getText());
-        //usuario.setEmails();
+        if(JOptionPane.showConfirmDialog(rootPane, "Você tem certeza que deseja Salvar ?","",JOptionPane.OK_CANCEL_OPTION) == 0){
+            if(validaCampos()){
+                UsuarioSistema usuario = new UsuarioSistema();
+                usuario.setCpf(txtCpf.getText());
+                //usuario.setDataNascimento(txtDataNascimento.getText());
+            }else{
+                JOptionPane.showMessageDialog(rootPane,"Todos os Campos devem ser preenchidos");
+            }
+        }
+        
+        
+       
+        
         
     }//GEN-LAST:event_btnSalvarActionPerformed
 
@@ -509,6 +517,23 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
         tblEnderecos.setModel(modeloTabelaEndereco);
     }//GEN-LAST:event_btnAdicionarEnderecoActionPerformed
 
+    private boolean validaCampos(){
+        boolean valida = true;
+        if(txtBairro.getText().isEmpty() || txtCep.getText().isEmpty() || txtCidade.getText().isEmpty() 
+            || txtCpf.getText().isEmpty() || txtDataNascimento.getText().isEmpty() || 
+            txtEstado.getText().isEmpty() || txtNome.getText().isEmpty() || txtUsuario.getText().isEmpty()){
+            
+            if(!txtSenha.getText().equals(txtSenhaNovamente.getText())){
+                valida = false;
+            }
+        
+        }else {
+            valida = true;
+        }
+        
+        return valida;
+    
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnAdicionarEndereco;

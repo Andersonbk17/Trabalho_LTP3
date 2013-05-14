@@ -4,7 +4,6 @@
  */
 package br.edu.ifnmg.tads.Ltp3.Apresentacao;
 
-//import com.birosoft.liquid.LiquidLookAndFeel;
 
 import br.edu.ifnmg.tads.Ltp3.Model.UsuarioSistema;
 import java.beans.PropertyVetoException;
@@ -60,6 +59,8 @@ public class frmPrincipal extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         MenuItemListagemProdutos = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Vendas");
@@ -179,6 +180,18 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         MenuSuperior.add(MenuClientes);
 
+        jMenu2.setText("Ajuda");
+
+        jMenuItem3.setText("Sobre");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem3);
+
+        MenuSuperior.add(jMenu2);
+
         setJMenuBar(MenuSuperior);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -189,7 +202,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 383, Short.MAX_VALUE)
+            .addGap(0, 391, Short.MAX_VALUE)
         );
 
         pack();
@@ -255,9 +268,9 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_MenuItemFecharActionPerformed
 
     private void MenuItemListagemProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemListagemProdutosActionPerformed
-     /* frmListarProduto janela = new frmListarProduto();
+     frmListarProduto janela = new frmListarProduto();
       janela.setVisible(true);
-      add(janela);*/
+      add(janela);
     }//GEN-LAST:event_MenuItemListagemProdutosActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -265,6 +278,10 @@ public class frmPrincipal extends javax.swing.JFrame {
        janela.setVisible(true);
        add(janela);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+      JOptionPane.showMessageDialog(rootPane, "Sistema de venda 888");
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
     private UsuarioSistema usuarioAtual;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu MenuClientes;
@@ -283,8 +300,10 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu MenuVendas;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }
