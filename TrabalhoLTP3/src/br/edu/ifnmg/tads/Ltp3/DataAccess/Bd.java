@@ -22,7 +22,8 @@ public class Bd {
         try{
             Class.forName("com.mysql.jdbc.Driver");
             conexao = DriverManager
-                    .getConnection("jdbc:mysql://localhost:3306/trabalho","root","170737");
+                    .getConnection("jdbc:mysql://localhost:3306/trabalho","root","aluno");
+            //.getConnection("jdbc:mysql://localhost:3306/trabalho","root","170737");
             conexao.setAutoCommit(false);//mudar se der erro
         
         } catch (ClassNotFoundException | SQLException ex) {

@@ -207,8 +207,13 @@ public class frmCadastroFormasPagamento extends javax.swing.JInternalFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
        if(JOptionPane.showConfirmDialog(rootPane, "Você tem certeza que deseja salvar ?","",JOptionPane.OK_CANCEL_OPTION) == 0){
+          
            
-           int qtd = 0;
+           JOptionPane.showMessageDialog(rootPane,"linha= "+ tblListagem.getEditingRow());
+           
+         //  modelo.getValueAt(tblListagem.getEditingRow(), 1);
+          JOptionPane.showMessageDialog(rootPane, "valor= "+modelo.getValueAt(tblListagem.getEditingRow(), 1));
+          int qtd = 0;
           for(FormasPagamento nova : this.listaLocal){
                if(dao.Salvar(nova)){
                    qtd++;

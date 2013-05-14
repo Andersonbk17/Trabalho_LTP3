@@ -31,7 +31,7 @@ CREATE TABLE telefones(
 	numero int,
 	id_pessoa int,
 	foreign key (id_pessoa)references pessoas(id)
-)Enginne=InnoDB;
+)Engine=InnoDB;
 
 CREATE TABLE `tb_cidades` (
   `id` int(4) unsigned zerofill NOT NULL auto_increment,
@@ -65,7 +65,7 @@ CREATE TABLE enderecos(
 
 )Engine=InnoDB;
 
-CREATE TABLE Pessoas(
+CREATE TABLE pessoas(
 	id int primary key auto_increment,
 	nome varchar(100) not null,
 	cpf varchar(100) not null,
@@ -102,7 +102,7 @@ CREATE TABLE vendas(
 	horario datetime not null,
 	id_usuario int not null,
 	id_cliente int not null,
-	id_tipo_pagamento not null,
+	id_tipo_pagamento int not null,
 	foreign key (id_usuario) references usuarios_sistema(id),
 	foreign key (id_cliente) references clientes(id),
 	foreign key (id_tipo_pagamento) references tipo_pagamento(id)
