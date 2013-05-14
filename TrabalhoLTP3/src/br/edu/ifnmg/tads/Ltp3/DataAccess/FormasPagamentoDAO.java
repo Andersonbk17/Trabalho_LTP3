@@ -27,7 +27,7 @@ public class FormasPagamentoDAO {
     public boolean Salvar(FormasPagamento obj){
         PreparedStatement comando;
         try{
-            if(obj.getId() == 0 || obj.isAlterado()){
+            if(obj.getId() == 0){
                 comando = banco.getConexao()
                         .prepareStatement("INSERT INTO tipo_pagamento (nome) VALUES (?)");
                 comando.setString(1, obj.getNome());

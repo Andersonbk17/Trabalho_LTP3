@@ -8,7 +8,7 @@ package br.edu.ifnmg.tads.Ltp3.Apresentacao;
  *
  * @author anderson
  */
-public class frmListarClientes extends javax.swing.JInternalFrame {
+public class  frmListarClientes extends frmPadrao{
 
     /**
      * Creates new form frmListarClientes
