@@ -14,7 +14,11 @@ public class Telefone {
     private int numero;
     
     /*-------- Construtores ----*/
-    public Telefone(){}
+    public Telefone(){
+        this.id = 0;
+        this.ddd = 0;
+        this.numero = 0;
+    }
     
     public Telefone(int id, int ddd, int numero) {
         this.id = id;

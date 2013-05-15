@@ -52,7 +52,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        DadosGerais = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         btnNome = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -80,6 +80,13 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
         tblEnderecos = new javax.swing.JTable();
         btnAdicionarEndereco = new javax.swing.JButton();
         btnRemoverEndereco = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        lblEndereco = new javax.swing.JLabel();
+        txtEnderecoEmail = new javax.swing.JTextField();
+        btnAdicionarEmail = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblEmails = new javax.swing.JTable();
+        btnRemoverEmail = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         lblNumero = new javax.swing.JLabel();
         lblDdd = new javax.swing.JLabel();
@@ -88,6 +95,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
         btnAdicionar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTelefones = new javax.swing.JTable();
+        btnRemoverTelefone = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -97,6 +105,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
         txtSenhaNovamente = new javax.swing.JPasswordField();
         btnSalvar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setClosable(true);
         setMaximizable(true);
@@ -150,7 +159,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                             .addComponent(lblCpf)
                             .addGap(18, 18, 18)
                             .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(122, Short.MAX_VALUE))
+                .addContainerGap(226, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,7 +185,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                 .addContainerGap(126, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Dados Gerais", jPanel1);
+        DadosGerais.addTab("Dados Gerais", jPanel1);
 
         lblRua.setText("Rua: ");
 
@@ -203,6 +212,11 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
 
             }
         ));
+        tblEnderecos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblEnderecosMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblEnderecos);
 
         btnAdicionarEndereco.setText("Adicionar");
@@ -213,6 +227,11 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
         });
 
         btnRemoverEndereco.setText("Remover");
+        btnRemoverEndereco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverEnderecoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -249,7 +268,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnAdicionarEndereco)
                             .addComponent(btnRemoverEndereco))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 40, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblRua)
@@ -292,7 +311,70 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                 .addContainerGap(78, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Endereço", jPanel2);
+        DadosGerais.addTab("Endereço", jPanel2);
+
+        lblEndereco.setText("Endereço:");
+
+        btnAdicionarEmail.setText("Adicionar");
+        btnAdicionarEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionarEmailActionPerformed(evt);
+            }
+        });
+
+        tblEmails.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane3.setViewportView(tblEmails);
+
+        btnRemoverEmail.setText("Remover");
+        btnRemoverEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverEmailActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 701, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(lblEndereco)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtEnderecoEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52)
+                        .addComponent(btnAdicionarEmail)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnRemoverEmail)))
+                .addContainerGap(89, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblEndereco)
+                    .addComponent(txtEnderecoEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAdicionarEmail)
+                    .addComponent(btnRemoverEmail))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(52, Short.MAX_VALUE))
+        );
+
+        DadosGerais.addTab("Emails", jPanel5);
 
         lblNumero.setText("Numero:");
 
@@ -318,6 +400,8 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tblTelefones);
 
+        btnRemoverTelefone.setText("Remover");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -335,8 +419,10 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(69, 69, 69)
-                        .addComponent(btnAdicionar)))
-                .addContainerGap(14, Short.MAX_VALUE))
+                        .addComponent(btnAdicionar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnRemoverTelefone)))
+                .addContainerGap(118, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -347,13 +433,14 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                     .addComponent(txtDdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNumero)
                     .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAdicionar))
+                    .addComponent(btnAdicionar)
+                    .addComponent(btnRemoverTelefone))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(57, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Telefone", jPanel3);
+        DadosGerais.addTab("Telefone", jPanel3);
 
         jLabel3.setText("Usuário:");
 
@@ -376,7 +463,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                     .addComponent(txtUsuario)
                     .addComponent(txtSenha)
                     .addComponent(txtSenhaNovamente, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE))
-                .addContainerGap(240, Short.MAX_VALUE))
+                .addContainerGap(344, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -396,7 +483,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                 .addContainerGap(230, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Autenticação", jPanel4);
+        DadosGerais.addTab("Autenticação", jPanel4);
 
         btnSalvar.setText("Salvar");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -412,30 +499,35 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton1.setText("Sair");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(DadosGerais, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(143, 143, 143)
                 .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(65, 65, 65)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(397, Short.MAX_VALUE))
+                .addGap(86, 86, 86)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(DadosGerais, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
-                    .addComponent(btnCancelar))
+                    .addComponent(btnCancelar)
+                    .addComponent(jButton1))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
@@ -465,8 +557,8 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                     usuario.setRg(txtRg.getText());
                     usuario.setUsuario(txtUsuario.getText());
                     usuario.setSenha(txtSenha.getText());
-                    usuario.setEnderecos(listaEnderecos);
-                    usuario.setTelefones(listaTelefone);
+                    usuario.setEnderecos(this.listaEnderecos);
+                    usuario.setTelefones(this.listaTelefone);
                     UsuarioSistemaDAO dao = new UsuarioSistemaDAO();
                     
                     
@@ -478,6 +570,10 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                         
                         JOptionPane.showMessageDialog(rootPane, "Usuário Adicionado com Sucesso!");
                         limpaCampos();
+                        this.listaEnderecos.clear();
+                        this.listaTelefone.clear();
+                        tblEnderecos.repaint();
+                        tblTelefones.repaint();
                     }else{
                             JOptionPane.showMessageDialog(rootPane, "Erro ao Adicionar Usuário!");
                     }
@@ -502,38 +598,21 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_btnSalvarActionPerformed
 
-    
-    
-    
-    List<Telefone> listaTelefone = new LinkedList<>();
-    DefaultTableModel modeloTabelaTelefone; 
+   
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
         Telefone temp = new Telefone();
-        temp.setDdd(Integer.parseInt(txtDdd.getText()));
-        temp.setNumero(Integer.parseInt(txtNumero.getText()));
-        listaTelefone.add(temp);
-        
-        this.modeloTabelaTelefone = new DefaultTableModel();
-        modeloTabelaTelefone.addColumn("DDD");
-        modeloTabelaTelefone.addColumn("Numero");
-        
-        
-        for(Telefone t : listaTelefone){
-            Vector v = new Vector();
-            v.add(0,t.getDdd());
-            v.add(1,t.getNumero());
-            
-            modeloTabelaTelefone.addRow(v);
-        
+        try{
+            temp.setDdd(Integer.parseInt(txtDdd.getText()));
+            temp.setNumero(Integer.parseInt(txtNumero.getText()));
+           
+        }catch(NumberFormatException ex){
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
         }
-        tblTelefones.setModel(modeloTabelaTelefone);
-        tblTelefones.repaint();
-        txtDdd.setText("");
-        txtNumero.setText("");
+        
+        this.listaTelefone.add(temp);
+        carregaTabelaTelefones(this.listaTelefone);
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
-    List<Endereco> listaEnderecos = new LinkedList<>();
-    DefaultTableModel modeloTabelaEndereco; 
     
     private void btnAdicionarEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarEnderecoActionPerformed
         Endereco temp = new Endereco();
@@ -542,44 +621,54 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
         temp.setCep(txtCep.getText());
         temp.setCidade(txtCidade.getText());
         temp.setEstado(txtEstado.getText());
-        temp.setNumero(Integer.parseInt(txtNumeroEndereco.getText()));
+        try{
+            temp.setNumero(Integer.parseInt(txtNumeroEndereco.getText()));// ADICIONAR EXCESSAO
+        }catch(NumberFormatException ex){
+            JOptionPane.showMessageDialog(rootPane, "O campo número só pode receber valores numericos");
+        }
         temp.setRua(txtRua.getText());
         
         listaEnderecos.add(temp);
         
-        modeloTabelaEndereco = new DefaultTableModel();
-        modeloTabelaEndereco.addColumn("Rua");
-        modeloTabelaEndereco.addColumn("Bairro");
-        modeloTabelaEndereco.addColumn("Cep");
-        modeloTabelaEndereco.addColumn("Número");
-        modeloTabelaEndereco.addColumn("Cidade");
-        modeloTabelaEndereco.addColumn("Estado");
-        
-        for(Endereco e : listaEnderecos){
-            Vector v = new Vector();
-            v.add(0,e.getRua());
-            v.add(1,e.getBairro());
-            v.add(2,e.getCep());
-            v.add(3,e.getNumero());
-            v.add(4,e.getCidade());
-            v.add(5,e.getEstado());
-            
-            modeloTabelaEndereco.addRow(v);
-        
-        }
-        tblEnderecos.setModel(modeloTabelaEndereco);
+        carregaTabelaEnderecos(this.listaEnderecos);
     }//GEN-LAST:event_btnAdicionarEnderecoActionPerformed
+
+    private void tblEnderecosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEnderecosMouseClicked
+       Object valor = tblEnderecos.getValueAt(tblEnderecos.getSelectedRow(), 1);
+       
+       this.enderecoDeletado = (Endereco) valor;//conferisr
+       JOptionPane.showMessageDialog(rootPane, "");
+    }//GEN-LAST:event_tblEnderecosMouseClicked
+
+    private void btnRemoverEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRemoverEmailActionPerformed
+
+    private void btnRemoverEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverEnderecoActionPerformed
+        if(JOptionPane.showConfirmDialog(rootPane, "Você tem certeza que deseja"
+                + " Remover o item ? ","",JOptionPane.OK_CANCEL_OPTION) == 0){
+            listaEnderecos.remove(this.enderecoDeletado);
+        }
+        
+    }//GEN-LAST:event_btnRemoverEnderecoActionPerformed
+
+    private void btnAdicionarEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarEmailActionPerformed
+        Email tmp = new Email();
+        tmp.setEndereco(txtEnderecoEmail.getText());
+        this.listaEmail.add(tmp);
+        carregaTabelaEmails(this.listaEmail);
+        
+    }//GEN-LAST:event_btnAdicionarEmailActionPerformed
 
     private boolean validaCampos(){
         boolean valida = true;
         if(txtBairro.getText().isEmpty() || txtCep.getText().isEmpty() || txtCidade.getText().isEmpty() 
             || txtCpf.getText().isEmpty() || txtDataNascimento.getText().isEmpty() || 
-            txtEstado.getText().isEmpty() || txtNome.getText().isEmpty() || txtUsuario.getText().isEmpty()){
+            txtEstado.getText().isEmpty() || txtNome.getText().isEmpty() || txtUsuario.getText().isEmpty() 
+            && !txtSenha.getText().equals(txtSenhaNovamente.getText())){
             
-            if(!txtSenha.getText().equals(txtSenhaNovamente.getText())){
                 valida = false;
-            }
-        
+            
         }else {
             valida = true;
         }
@@ -607,13 +696,89 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
     
     }
     
+    private void carregaTabelaTelefones(List<Telefone> lista){
+        this.modeloTabelaTelefone = new DefaultTableModel();
+        this.modeloTabelaTelefone.addColumn("DDD");
+        this.modeloTabelaTelefone.addColumn("Numero");
+        
+        
+        for(Telefone t : lista){
+            Vector v = new Vector();
+            v.add(0,t.getDdd());
+            v.add(1,t.getNumero());
+            
+            this.modeloTabelaTelefone.addRow(v);
+        
+        }
+        this.tblTelefones.setModel(modeloTabelaTelefone);
+        this.tblTelefones.repaint();
+    
+    }
+    
+    private void carregaTabelaEnderecos(List<Endereco> lista){
+        this.modeloTabelaEndereco = new DefaultTableModel();
+        this.modeloTabelaEndereco.addColumn("Rua");
+        this.modeloTabelaEndereco.addColumn("Bairro");
+        this.modeloTabelaEndereco.addColumn("Cep");
+        this.modeloTabelaEndereco.addColumn("Número");
+        this.modeloTabelaEndereco.addColumn("Cidade");
+        this.modeloTabelaEndereco.addColumn("Estado");
+        
+        for(Endereco e : lista){
+            Vector v = new Vector();
+            v.add(0,e.getRua());
+            v.add(1,e.getBairro());
+            v.add(2,e.getCep());
+            v.add(3,e.getNumero());
+            v.add(4,e.getCidade());
+            v.add(5,e.getEstado());
+            
+            modeloTabelaEndereco.addRow(v);
+        
+        }
+        this.tblEnderecos.setModel(modeloTabelaEndereco);
+        this.tblEnderecos.repaint();
+        
+    
+    }
+    
+    
+    private void carregaTabelaEmails(List<Email> listaEmails){
+        this.modeloTabelaEmail = new DefaultTableModel();
+        modeloTabelaEmail.addColumn("Endereco");
+        
+       
+        
+        for(Email e : listaEmail){
+             Vector v = new Vector();
+            v.add(0,e.getEndereco());
+            modeloTabelaEmail.addRow(v);
+        }
+        
+        tblEmails.setModel(modeloTabelaEmail);
+        tblEmails.repaint();
+    }
+    
+    
+    Endereco enderecoDeletado;
+    List<Endereco> listaEnderecos = new LinkedList<>();
+    List<Telefone> listaTelefone = new LinkedList<>();
+    List<Email> listaEmail = new LinkedList<>();
+    DefaultTableModel modeloTabelaEmail;
+    DefaultTableModel modeloTabelaTelefone; 
+    DefaultTableModel modeloTabelaEndereco; 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTabbedPane DadosGerais;
     private javax.swing.JButton btnAdicionar;
+    private javax.swing.JButton btnAdicionarEmail;
     private javax.swing.JButton btnAdicionarEndereco;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JLabel btnNome;
+    private javax.swing.JButton btnRemoverEmail;
     private javax.swing.JButton btnRemoverEndereco;
+    private javax.swing.JButton btnRemoverTelefone;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -622,20 +787,23 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblBairro;
     private javax.swing.JLabel lblCep;
     private javax.swing.JLabel lblCidade;
     private javax.swing.JLabel lblCpf;
     private javax.swing.JLabel lblData;
     private javax.swing.JLabel lblDdd;
+    private javax.swing.JLabel lblEndereco;
     private javax.swing.JLabel lblEstado;
     private javax.swing.JLabel lblNumero;
     private javax.swing.JLabel lblRg;
     private javax.swing.JLabel lblRua;
     private javax.swing.JLabel lblnumero;
+    private javax.swing.JTable tblEmails;
     private javax.swing.JTable tblEnderecos;
     private javax.swing.JTable tblTelefones;
     private javax.swing.JTextField txtBairro;
@@ -644,6 +812,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtCpf;
     private javax.swing.JFormattedTextField txtDataNascimento;
     private javax.swing.JTextField txtDdd;
+    private javax.swing.JTextField txtEnderecoEmail;
     private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNumero;

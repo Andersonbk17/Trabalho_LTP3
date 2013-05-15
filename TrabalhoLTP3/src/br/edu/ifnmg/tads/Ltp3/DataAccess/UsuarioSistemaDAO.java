@@ -25,17 +25,17 @@ public class UsuarioSistemaDAO {
         try{
             
             PessoaDAO dao = new PessoaDAO();
-            Pessoa temp = new Pessoa();
+            Pessoa tempPessoa = new Pessoa();
             
-            temp.setCpf(obj.getCpf());
-            temp.setDataNascimento(obj.getDataNascimento());
-            temp.setEmails(obj.getEmails());
-            temp.setEnderecos(obj.getEnderecos());
-            temp.setNome(obj.getNome());
-            temp.setRg(obj.getRg());
-            temp.setTelefones(obj.getTelefones());
+            tempPessoa.setCpf(obj.getCpf());
+            tempPessoa.setDataNascimento(obj.getDataNascimento());
+            tempPessoa.setEmails(obj.getEmails());
+            tempPessoa.setEnderecos(obj.getEnderecos());
+            tempPessoa.setNome(obj.getNome());
+            tempPessoa.setRg(obj.getRg());
+            tempPessoa.setTelefones(obj.getTelefones());
             
-            int id = dao.Salvar(temp);
+            int id = dao.Salvar(tempPessoa);
             
             PreparedStatement comando = banco.getConexao()
                     .prepareStatement("INSERT INTO usuarios_sistema (usuario,senha, id_pessoa) VALUES(?,?,?)");

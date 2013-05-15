@@ -44,7 +44,7 @@ public class PessoaDAO {
                 ResultSet consulta = comando2.executeQuery();
                 consulta.first();
                 id = consulta.getInt("MAX(id)");
-                
+                comando.getConnection().commit(); //verificar
                 //Inserindo os enderecos
                 
                 if(!obj.getEnderecos().isEmpty()){
@@ -83,7 +83,7 @@ public class PessoaDAO {
                 
                 
                 
-                comando.getConnection().commit();
+                //comando.getConnection().commit();
                 comando2.getConnection().commit();
                 
             
