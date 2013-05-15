@@ -204,11 +204,11 @@ public class PessoaDAO {
     
     }
     
-    public boolean Apagar(Pessoa obj){
+    public boolean Apagar(int id){
         try{
             PreparedStatement comando = banco.getConexao()
                     .prepareStatement("DELETE FROM pessoas WHERE id = ?");
-            comando.setInt(1, obj.getId());
+            comando.setInt(1, id);
             comando.executeUpdate();
             comando.getConnection().commit();
             return true;

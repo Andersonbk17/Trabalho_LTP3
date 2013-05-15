@@ -10,6 +10,7 @@ import br.edu.ifnmg.tads.Ltp3.Model.UsuarioSistema;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -55,6 +56,37 @@ public class UsuarioSistemaDAO {
     
     }
     
+    
+    public boolean Apagar(int id){
+        try{
+           EmailDAO emailDAO = new EmailDAO();
+           TelefoneDAO telefoneDAO= new TelefoneDAO();
+           EnderecoDAO enderecoDAO = new EnderecoDAO();
+           PessoaDAO pessoaDAO = new PessoaDAO();
+           
+           emailDAO.ApagarTodosQuandoExcluiPessoa(id);
+           telefoneDAO.ApagarTodosQuandoExcluiPessoa(id);
+           enderecoDAO.ApagarTodosQuandoExcluiPessoa(id);
+           pessoaDAO.Apagar(id);
+           
+           PreparedStatement comando = banco
+                   .getConexao().prepareStatement("DELETE FROM usuarios_sistema WHERE id = ?");
+           comando.setInt(1, id);
+           comando.execute();
+           comando.getConnection().commit();
+           
+           return true;
+        
+        }catch(SQLException ex){
+            ex.printStackTrace();
+            return false;
+        }
+    
+    }
+    
+    
+    
+    
     public List<UsuarioSistema> listarTodos() throws ErroValidacaoException, Exception{
         try{
             PreparedStatement comando = banco.getConexao()
@@ -86,6 +118,88 @@ public class UsuarioSistemaDAO {
             ex.printStackTrace();
             return null;
         }
+    
+    }
+    
+    
+    public List<UsuarioSistema> Buscar(UsuarioSistema filtro) throws ErroValidacaoException, Exception{
+        try{
+            String sql = "select p.id as idpessoa,nome,cpf,rg,"
+                    + "data_nascimento,u.id as idusuario, usuario from pessoas "
+                    + "p inner join usuarios_sistema u on u.id_pessoa = p.id";
+            String where = "";
+            
+            if(!filtro.getNome().isEmpty()){
+                where = "nome like'%"+filtro.getNome()+"%'";
+            
+            }
+            
+            //se tiver um cpf
+            if(!filtro.getCpf().isEmpty()){
+                if(where.length() > 0){
+                    where = where + " AND ";
+                }
+                where = where + " cpf = "+filtro.getCpf();
+            
+            }
+            //se tiver RG
+            if(!filtro.getRg().isEmpty()){
+                if(where.length() > 0){
+                    where = where + " AND ";
+                }
+                where = where + " rg = "+filtro.getRg();
+            }
+            
+            //se tiver Usuário USER
+            
+            if(!filtro.getUsuario().isEmpty()){
+                if(where.length() > 0){
+                     where = where + " AND ";
+                }
+                where = where + " usuario = "+filtro.getUsuario();
+            }
+            
+            // sentiver o id Usuario
+            if(filtro.getIdUsuario() != 0){
+                if(where.length() > 0){
+                     where = where + " AND ";
+                }
+                where = where + " idusuario = "+filtro.getIdUsuario();
+            
+            }
+            
+            Statement comando = banco.getConexao().createStatement();
+            ResultSet consulta = comando.executeQuery(sql);
+            comando.getConnection().commit();
+            
+            List<UsuarioSistema> lista = null;
+            if(consulta.first()){
+                lista = new LinkedList<>();
+                while(consulta.next()){
+                    UsuarioSistema tmp = new UsuarioSistema();
+                    
+                tmp.setCpf(consulta.getString("cpf"));
+                tmp.setDataNascimento(consulta.getDate("data_nascimento"));
+                tmp.setNome(consulta.getString("nome"));
+                tmp.setId(consulta.getInt("idpessoa"));
+                tmp.setIdUsuario(consulta.getInt("idusuario"));
+                tmp.setRg(consulta.getString("rg"));
+                tmp.setUsuario(consulta.getString("usuario"));
+                
+                lista.add(tmp);
+                    
+                
+                }
+                
+            }
+            return lista;
+        
+        
+        }catch(SQLException ex){
+            ex.printStackTrace();
+            return null;
+        }
+    
     
     }
     

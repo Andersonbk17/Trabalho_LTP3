@@ -218,6 +218,7 @@ public class ProdutoDAO {
                     
                 } catch (ErroValidacaoException ex) {
                     Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+                    ex.printStackTrace();
                 }
                 
                 lista.add(novo);
