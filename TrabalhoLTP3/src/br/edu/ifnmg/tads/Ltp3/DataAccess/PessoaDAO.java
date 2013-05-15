@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
+import java.sql.Date;
 
 /**
  *
@@ -35,16 +36,52 @@ public class PessoaDAO {
                 comando.setString(1, obj.getNome());
                 comando.setString(2, obj.getRg());
                 comando.setString(3, obj.getCpf());
-                //Date data = new Date();
-                //comando.setDate(4, ); 
-                
-                //falta a data
-                
+                Date dataBd = new Date(obj.getDataNascimento().getTime());
+                comando.setDate(4, dataBd);
+                              
                 comando.executeUpdate();
                 PreparedStatement comando2 = banco.getConexao().prepareStatement("SELECT MAX(id) FROM pessoas");
                 ResultSet consulta = comando2.executeQuery();
                 consulta.first();
                 id = consulta.getInt("MAX(id)");
+                
+                //Inserindo os enderecos
+                
+                if(!obj.getEnderecos().isEmpty()){
+                    List<Endereco> listaEnderecos = obj.getEnderecos();
+                    EnderecoDAO daoEndereco = new EnderecoDAO();
+
+                    for(Endereco e : listaEnderecos){
+                        daoEndereco.Salvar(e, id);
+
+                    }
+                }
+                
+                // Inserindo os telefones
+                
+                if(!obj.getTelefones().isEmpty()){
+                    List<Telefone> listaTelefone = obj.getTelefones();
+                    TelefoneDAO daoTelefone = new TelefoneDAO();
+                    
+                    for(Telefone t : listaTelefone){
+                        daoTelefone.Salvar(t,id);
+                    }
+                
+                
+                }
+                
+                //Inserindo os Emails
+                
+                if(!obj.getEmails().isEmpty()){
+                    List<Email> listaEmails = obj.getEmails();
+                    EmailDAO daoEmail = new EmailDAO();
+                    
+                    for(Email e : listaEmails){
+                        daoEmail.Salvar(e, id);
+                    }
+                }
+                
+                
                 
                 comando.getConnection().commit();
                 comando2.getConnection().commit();
@@ -89,7 +126,7 @@ public class PessoaDAO {
                 pessoa.setId(id);
                 pessoa.setNome(consulta.getString("nome"));
                 pessoa.setRg(consulta.getString("rg"));
-                
+                //asd conferr a data
                 
                 //Preencher telefones
                 PreparedStatement comando2 = banco.getConexao()

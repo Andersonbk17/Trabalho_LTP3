@@ -7,6 +7,9 @@ package br.edu.ifnmg.tads.Ltp3.Apresentacao;
 import br.edu.ifnmg.tads.Ltp3.DataAccess.ClienteDAO;
 import br.edu.ifnmg.tads.Ltp3.Model.Cliente;
 import br.edu.ifnmg.tads.Ltp3.Model.ErroValidacaoException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -20,6 +23,14 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
     /**
      * Creates new form frmCadastroCliente
      */
+    
+    public Date DataFormatada(String dataDesformatada) throws ParseException{
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");  
+        
+        Date dataForm = format.parse(dataDesformatada);
+        
+        return dataForm; 
+    }
     public frmCadastroCliente() {
         initComponents();
     }
@@ -305,7 +316,7 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
                 .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(65, 65, 65)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(397, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

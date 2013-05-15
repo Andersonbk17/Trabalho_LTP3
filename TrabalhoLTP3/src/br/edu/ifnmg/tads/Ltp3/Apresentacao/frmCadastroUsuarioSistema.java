@@ -4,9 +4,18 @@
  */
 package br.edu.ifnmg.tads.Ltp3.Apresentacao;
 
+import br.edu.ifnmg.tads.Ltp3.DataAccess.EmailDAO;
+import br.edu.ifnmg.tads.Ltp3.DataAccess.EnderecoDAO;
+import br.edu.ifnmg.tads.Ltp3.DataAccess.TelefoneDAO;
+import br.edu.ifnmg.tads.Ltp3.DataAccess.UsuarioSistemaDAO;
+import br.edu.ifnmg.tads.Ltp3.Model.Email;
 import br.edu.ifnmg.tads.Ltp3.Model.Endereco;
+import br.edu.ifnmg.tads.Ltp3.Model.ErroValidacaoException;
 import br.edu.ifnmg.tads.Ltp3.Model.Telefone;
 import br.edu.ifnmg.tads.Ltp3.Model.UsuarioSistema;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
@@ -22,6 +31,14 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
     /**
      * Creates new form frmCadastroCliente
      */
+    public Date dataFormatada(String dataDesformatada) throws ParseException{
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");  
+        
+        Date dataForm = format.parse(dataDesformatada);
+        
+        return dataForm; 
+    }
+    
     public frmCadastroUsuarioSistema() {
         initComponents();
     }
@@ -44,7 +61,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
         lblData = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         txtCpf = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
+        txtRg = new javax.swing.JTextField();
         txtDataNascimento = new javax.swing.JFormattedTextField();
         jPanel2 = new javax.swing.JPanel();
         lblRua = new javax.swing.JLabel();
@@ -126,14 +143,14 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                             .addComponent(lblRg)
                             .addGap(18, 18, 18)
-                            .addComponent(jTextField1))
+                            .addComponent(txtRg))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                             .addComponent(jLabel1)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(lblCpf)
                             .addGap(18, 18, 18)
                             .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(205, Short.MAX_VALUE))
+                .addContainerGap(122, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,12 +168,12 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                 .addGap(59, 59, 59)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblRg)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtRg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(43, 43, 43)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblData)
                     .addComponent(txtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addContainerGap(126, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Dados Gerais", jPanel1);
@@ -232,7 +249,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnAdicionarEndereco)
                             .addComponent(btnRemoverEndereco))
-                        .addGap(0, 17, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblRua)
@@ -272,7 +289,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                         .addComponent(btnAdicionarEndereco)
                         .addGap(18, 18, 18)
                         .addComponent(btnRemoverEndereco)))
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Endereço", jPanel2);
@@ -319,7 +336,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                         .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(69, 69, 69)
                         .addComponent(btnAdicionar)))
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -333,7 +350,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                     .addComponent(btnAdicionar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Telefone", jPanel3);
@@ -359,7 +376,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                     .addComponent(txtUsuario)
                     .addComponent(txtSenha)
                     .addComponent(txtSenhaNovamente, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE))
-                .addContainerGap(316, Short.MAX_VALUE))
+                .addContainerGap(240, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -376,7 +393,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtSenhaNovamente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(226, Short.MAX_VALUE))
+                .addContainerGap(230, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Autenticação", jPanel4);
@@ -408,7 +425,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                 .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(65, 65, 65)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(473, Short.MAX_VALUE))
+                .addContainerGap(397, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -419,7 +436,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
                     .addComponent(btnCancelar))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
@@ -438,9 +455,42 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         if(JOptionPane.showConfirmDialog(rootPane, "Você tem certeza que deseja Salvar ?","",JOptionPane.OK_CANCEL_OPTION) == 0){
             if(validaCampos()){
-                UsuarioSistema usuario = new UsuarioSistema();
-                usuario.setCpf(txtCpf.getText());
-                //usuario.setDataNascimento(txtDataNascimento.getText());
+                
+                try{
+                    UsuarioSistema usuario = new UsuarioSistema();
+                    
+                    usuario.setCpf(txtCpf.getText());
+                    usuario.setNome(txtNome.getText());
+                    usuario.setDataNascimento(dataFormatada(txtDataNascimento.getText()));
+                    usuario.setRg(txtRg.getText());
+                    usuario.setUsuario(txtUsuario.getText());
+                    usuario.setSenha(txtSenha.getText());
+                    usuario.setEnderecos(listaEnderecos);
+                    usuario.setTelefones(listaTelefone);
+                    UsuarioSistemaDAO dao = new UsuarioSistemaDAO();
+                    
+                    
+                    if(dao.Salvar(usuario)){
+                        
+                        
+                        
+                        
+                        
+                        JOptionPane.showMessageDialog(rootPane, "Usuário Adicionado com Sucesso!");
+                        limpaCampos();
+                    }else{
+                            JOptionPane.showMessageDialog(rootPane, "Erro ao Adicionar Usuário!");
+                    }
+                    
+                    
+                }catch(ErroValidacaoException ex ){
+                    
+                    JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+                    ex.printStackTrace();
+                }catch(Exception ex){
+                    JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+                    ex.printStackTrace();
+                }
             }else{
                 JOptionPane.showMessageDialog(rootPane,"Todos os Campos devem ser preenchidos");
             }
@@ -452,6 +502,9 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_btnSalvarActionPerformed
 
+    
+    
+    
     List<Telefone> listaTelefone = new LinkedList<>();
     DefaultTableModel modeloTabelaTelefone; 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
@@ -534,6 +587,26 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
         return valida;
     
     }
+    
+    private void limpaCampos(){
+        this.txtBairro.setText("");
+        this.txtCep.setText("");
+        this.txtCidade.setText("");
+        this.txtCpf.setText("");
+        this.txtDataNascimento.setText("");
+        this.txtDdd.setText("");
+        this.txtEstado.setText("");
+        this.txtNome.setText("");
+        this.txtNumero.setText("");
+        this.txtNumeroEndereco.setText("");
+        this.txtRg.setText("");
+        this.txtRua.setText("");
+        this.txtSenha.setText("");
+        this.txtSenhaNovamente.setText("");
+        this.txtUsuario.setText("");
+    
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnAdicionarEndereco;
@@ -552,7 +625,6 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblBairro;
     private javax.swing.JLabel lblCep;
     private javax.swing.JLabel lblCidade;
@@ -576,6 +648,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNumero;
     private javax.swing.JTextField txtNumeroEndereco;
+    private javax.swing.JTextField txtRg;
     private javax.swing.JTextField txtRua;
     private javax.swing.JPasswordField txtSenha;
     private javax.swing.JPasswordField txtSenhaNovamente;

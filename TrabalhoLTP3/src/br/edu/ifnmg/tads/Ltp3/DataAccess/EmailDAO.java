@@ -4,10 +4,132 @@
  */
 package br.edu.ifnmg.tads.Ltp3.DataAccess;
 
+import br.edu.ifnmg.tads.Ltp3.Model.Email;
+import br.edu.ifnmg.tads.Ltp3.Model.ErroValidacaoException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  *
  * @author aluno
  */
 public class EmailDAO {
+    private Bd banco;
+    
+    public EmailDAO(){
+        banco = new Bd();
+    }
+    
+    public boolean Salvar(Email obj, int idPessoa){
+        try{
+            PreparedStatement comando = banco.getConexao()
+                    .prepareStatement("INSERT INTO emails (endereco,id_pessoa) VALUES (?,?)");
+            comando.setString(1, obj.getEndereco());
+            comando.setInt(2, idPessoa);
+            comando.executeUpdate();
+            comando.getConnection().commit();
+            
+            return true;
+        }catch(SQLException ex){
+            ex.printStackTrace();
+            return false;
+        }
+    }
+    
+    /**
+     *
+     * @param id
+     * @return
+     */
+    public Email Abrir(int id){
+        try{
+            PreparedStatement comando = banco.getConexao()
+                    .prepareStatement("SELECT * FROM emails WHERE id = ?");
+            comando.setInt(1, id);
+            ResultSet consulta = comando.executeQuery();
+            comando.getConnection().commit();
+            Email tmp = null;
+            if(consulta.first()){
+                tmp = new Email();
+                tmp.setEndereco(consulta.getString("endereco"));
+                tmp.setId(consulta.getInt("id"));
+                
+                
+            }
+            return tmp;
+            
+        }catch(SQLException ex){
+            ex.printStackTrace();
+            return null;
+        }catch(ErroValidacaoException ex){
+            ex.printStackTrace();
+            return null;
+        }
+     
+    
+    }
+    
+    public boolean Apagar(Email obj){
+        try{
+            PreparedStatement comando = banco.getConexao()
+                    .prepareStatement("DELETE FROM emails WHERE id = ?");
+            comando.setInt(1, obj.getId());
+            comando.executeUpdate();
+            comando.getConnection().commit();
+            return true;
+                    
+        }catch(SQLException ex){
+            ex.printStackTrace();
+            return false;
+        }
+    
+    }
+    
+    
+    public List<Email> listarTodos(){
+        try{
+            PreparedStatement comando = banco.getConexao()
+                    .prepareStatement("SELECT * FROM emails");
+            ResultSet consulta = comando.executeQuery();
+            
+            List<Email> listaEmails = new LinkedList<>();
+            while(consulta.next()){
+                Email tmp = new Email();
+                
+                tmp.setEndereco(consulta.getString("endereco"));
+                tmp.setId(consulta.getInt("id"));
+                listaEmails.add(tmp);
+            }
+            return listaEmails;
+            
+        }catch(SQLException ex){
+            ex.printStackTrace();
+            return null;
+        }catch(ErroValidacaoException ex){
+            ex.printStackTrace();
+            return null;
+        }
+    
+    }
+    
+    public boolean ApagarTodosQuandoExcluiPessoa(int idPessoa){
+        try{
+            PreparedStatement comando = banco.getConexao()
+                    .prepareStatement("DELETE FROM emails WHERE id_pessoa= ?");
+            comando.setInt(1, idPessoa);
+            comando.executeUpdate();
+            comando.getConnection().commit();
+            return true;
+        }catch(SQLException ex){
+            ex.printStackTrace();
+            return false;
+        }
+    
+    }
+    
+    
     
 }
