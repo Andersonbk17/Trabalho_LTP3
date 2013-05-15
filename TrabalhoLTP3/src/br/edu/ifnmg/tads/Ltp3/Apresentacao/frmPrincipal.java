@@ -55,7 +55,6 @@ public class frmPrincipal extends javax.swing.JFrame {
         MenuItemNovaVanda = new javax.swing.JMenuItem();
         MenuItemHistorico = new javax.swing.JMenuItem();
         MenuClientes = new javax.swing.JMenu();
-        MenuItemListarClientes = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         MenuItemListagemProdutos = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -151,15 +150,12 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         MenuClientes.setText("Listagem");
 
-        MenuItemListarClientes.setText("Usuarios");
-        MenuItemListarClientes.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem1.setText("Usuários");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenuItemListarClientesActionPerformed(evt);
+                jMenuItem1ActionPerformed(evt);
             }
         });
-        MenuClientes.add(MenuItemListarClientes);
-
-        jMenuItem1.setText("Usuários");
         MenuClientes.add(jMenuItem1);
 
         MenuItemListagemProdutos.setText("Produtos");
@@ -202,7 +198,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 391, Short.MAX_VALUE)
+            .addGap(0, 407, Short.MAX_VALUE)
         );
 
         pack();
@@ -255,12 +251,6 @@ public class frmPrincipal extends javax.swing.JFrame {
         add(janela);
     }//GEN-LAST:event_MenuItemNovaVandaActionPerformed
 
-    private void MenuItemListarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemListarClientesActionPerformed
-        frmListarClientes janela = new frmListarClientes();
-        janela.setVisible(true);
-        add(janela);
-    }//GEN-LAST:event_MenuItemListarClientesActionPerformed
-
     private void MenuItemFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemFecharActionPerformed
         if(JOptionPane.showConfirmDialog(rootPane, "Você tem certeza que deseja fechar","",JOptionPane.OK_CANCEL_OPTION) == 0){
             System.exit(0);
@@ -282,6 +272,12 @@ public class frmPrincipal extends javax.swing.JFrame {
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
       JOptionPane.showMessageDialog(rootPane, "Sistema de venda 888");
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+       frmListarUsuariosSistema janela = new frmListarUsuariosSistema();
+       janela.setVisible(true);
+       add(janela);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
     private UsuarioSistema usuarioAtual;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu MenuClientes;
@@ -289,7 +285,6 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem MenuItemFechar;
     private javax.swing.JMenuItem MenuItemHistorico;
     private javax.swing.JMenuItem MenuItemListagemProdutos;
-    private javax.swing.JMenuItem MenuItemListarClientes;
     private javax.swing.JMenuItem MenuItemNovaVanda;
     private javax.swing.JMenuItem MenuItemProduto;
     private javax.swing.JMenuItem MenuItemSair;

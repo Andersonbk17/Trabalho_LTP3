@@ -4,9 +4,6 @@
  */
 package br.edu.ifnmg.tads.Ltp3.Apresentacao;
 
-import br.edu.ifnmg.tads.Ltp3.DataAccess.EmailDAO;
-import br.edu.ifnmg.tads.Ltp3.DataAccess.EnderecoDAO;
-import br.edu.ifnmg.tads.Ltp3.DataAccess.TelefoneDAO;
 import br.edu.ifnmg.tads.Ltp3.DataAccess.UsuarioSistemaDAO;
 import br.edu.ifnmg.tads.Ltp3.Model.Email;
 import br.edu.ifnmg.tads.Ltp3.Model.Endereco;
@@ -31,7 +28,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
     /**
      * Creates new form frmCadastroCliente
      */
-    public Date dataFormatada(String dataDesformatada) throws ParseException{
+    private Date dataFormatada(String dataDesformatada) throws ParseException{
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");  
         
         Date dataForm = format.parse(dataDesformatada);
@@ -159,7 +156,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                             .addComponent(lblCpf)
                             .addGap(18, 18, 18)
                             .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(226, Short.MAX_VALUE))
+                .addContainerGap(122, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -268,7 +265,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnAdicionarEndereco)
                             .addComponent(btnRemoverEndereco))
-                        .addGap(0, 40, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblRua)
@@ -358,7 +355,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                         .addComponent(btnAdicionarEmail)
                         .addGap(18, 18, 18)
                         .addComponent(btnRemoverEmail)))
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -422,7 +419,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                         .addComponent(btnAdicionar)
                         .addGap(18, 18, 18)
                         .addComponent(btnRemoverTelefone)))
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -463,7 +460,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                     .addComponent(txtUsuario)
                     .addComponent(txtSenha)
                     .addComponent(txtSenhaNovamente, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE))
-                .addContainerGap(344, Short.MAX_VALUE))
+                .addContainerGap(240, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -516,7 +513,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(86, 86, 86)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(233, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -547,9 +544,9 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         if(JOptionPane.showConfirmDialog(rootPane, "Você tem certeza que deseja Salvar ?","",JOptionPane.OK_CANCEL_OPTION) == 0){
             if(validaCampos()){
-                
+                UsuarioSistema usuario = null;
                 try{
-                    UsuarioSistema usuario = new UsuarioSistema();
+                    usuario = new UsuarioSistema();
                     
                     usuario.setCpf(txtCpf.getText());
                     usuario.setNome(txtNome.getText());
@@ -559,41 +556,44 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                     usuario.setSenha(txtSenha.getText());
                     usuario.setEnderecos(this.listaEnderecos);
                     usuario.setTelefones(this.listaTelefone);
-                    UsuarioSistemaDAO dao = new UsuarioSistemaDAO();
                     
                     
-                    if(dao.Salvar(usuario)){
-                        
-                        
-                        
-                        
-                        
-                        JOptionPane.showMessageDialog(rootPane, "Usuário Adicionado com Sucesso!");
-                        limpaCampos();
-                        this.listaEnderecos.clear();
-                        this.listaTelefone.clear();
-                        tblEnderecos.repaint();
-                        tblTelefones.repaint();
-                    }else{
-                            JOptionPane.showMessageDialog(rootPane, "Erro ao Adicionar Usuário!");
+                    }catch(ErroValidacaoException ex ){
+                        JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+                        ex.printStackTrace();
+                    }catch(Exception ex){
+                        JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+                        ex.printStackTrace();
+                    }
+                    if(usuario != null){
+                        UsuarioSistemaDAO dao = new UsuarioSistemaDAO();
+                        try{
+                            if(dao.Salvar(usuario)){
+                                JOptionPane.showMessageDialog(rootPane, "Usuário Adicionado com Sucesso!");
+                                limpaCampos();
+                                this.listaEnderecos.clear();
+                                this.listaTelefone.clear();
+                                this.listaEmail.clear();
+                                tblEnderecos.repaint();
+                                tblTelefones.repaint();
+                                tblEmails.repaint();
+                                
+                            }
+                        }catch(ErroValidacaoException ex){
+                            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+                        }catch(Exception ex){
+                            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+                        }
                     }
                     
-                    
-                }catch(ErroValidacaoException ex ){
-                    
-                    JOptionPane.showMessageDialog(rootPane, ex.getMessage());
-                    ex.printStackTrace();
-                }catch(Exception ex){
-                    JOptionPane.showMessageDialog(rootPane, ex.getMessage());
-                    ex.printStackTrace();
-                }
+                
             }else{
                 JOptionPane.showMessageDialog(rootPane,"Todos os Campos devem ser preenchidos");
             }
+        
+        
+        
         }
-        
-        
-       
         
         
     }//GEN-LAST:event_btnSalvarActionPerformed

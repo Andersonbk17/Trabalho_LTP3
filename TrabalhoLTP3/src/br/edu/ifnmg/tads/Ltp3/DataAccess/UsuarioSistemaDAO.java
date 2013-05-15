@@ -8,7 +8,10 @@ import br.edu.ifnmg.tads.Ltp3.Model.ErroValidacaoException;
 import br.edu.ifnmg.tads.Ltp3.Model.Pessoa;
 import br.edu.ifnmg.tads.Ltp3.Model.UsuarioSistema;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  *
@@ -48,6 +51,40 @@ public class UsuarioSistemaDAO {
         }catch(SQLException ex ){
             ex.printStackTrace();
             return false;
+        }
+    
+    }
+    
+    public List<UsuarioSistema> listarTodos() throws ErroValidacaoException, Exception{
+        try{
+            PreparedStatement comando = banco.getConexao()
+                    .prepareStatement("select p.id as idpessoa,nome,cpf,rg,"
+                    + "data_nascimento,u.id as idusuario, usuario from pessoas "
+                    + "p inner join usuarios_sistema u on u.id_pessoa = p.id");
+            ResultSet consulta = comando.executeQuery();
+            comando.getConnection().commit();
+            List<UsuarioSistema> Lista = new LinkedList<>();
+            
+            while(consulta.next()){
+                UsuarioSistema tmp = new UsuarioSistema();
+                tmp.setCpf(consulta.getString("cpf"));
+                tmp.setDataNascimento(consulta.getDate("data_nascimento"));
+                tmp.setNome(consulta.getString("nome"));
+                tmp.setId(consulta.getInt("idpessoa"));
+                tmp.setIdUsuario(consulta.getInt("idusuario"));
+                tmp.setRg(consulta.getString("rg"));
+                tmp.setUsuario(consulta.getString("usuario"));
+                
+                Lista.add(tmp);
+                
+            
+            }
+            return Lista;
+                    
+        
+        }catch(SQLException ex){
+            ex.printStackTrace();
+            return null;
         }
     
     }

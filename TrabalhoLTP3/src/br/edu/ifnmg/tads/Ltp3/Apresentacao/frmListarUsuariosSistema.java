@@ -4,6 +4,15 @@
  */
 package br.edu.ifnmg.tads.Ltp3.Apresentacao;
 
+import br.edu.ifnmg.tads.Ltp3.DataAccess.UsuarioSistemaDAO;
+import br.edu.ifnmg.tads.Ltp3.Model.ErroValidacaoException;
+import br.edu.ifnmg.tads.Ltp3.Model.UsuarioSistema;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author anderson
@@ -19,6 +28,7 @@ public class frmListarUsuariosSistema extends javax.swing.JInternalFrame {
         lblNome.setVisible(false);
         btnFiltrar.setVisible(false);
         txtFiltro.setVisible(false);
+        preencheTabela(carregaDadosDoBanco());
         
     }
 
@@ -47,13 +57,13 @@ public class frmListarUsuariosSistema extends javax.swing.JInternalFrame {
 
         tblUsuariosSistema.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "ID", "Nome", "Cpf", "Data Nascimento"
+
             }
         ));
         jScrollPane1.setViewportView(tblUsuariosSistema);
@@ -82,8 +92,8 @@ public class frmListarUsuariosSistema extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 751, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 14, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 813, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblFiltro)
                         .addGap(31, 31, 31)
@@ -94,15 +104,15 @@ public class frmListarUsuariosSistema extends javax.swing.JInternalFrame {
                         .addComponent(lblNome)
                         .addGap(34, 34, 34)
                         .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE)
                         .addComponent(btnFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(57, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(52, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblFiltro)
@@ -149,7 +159,57 @@ public class frmListarUsuariosSistema extends javax.swing.JInternalFrame {
         }
         
     }//GEN-LAST:event_cbxFiltroItemStateChanged
-
+    
+    private  List <UsuarioSistema> carregaDadosDoBanco(){
+        this.dao = new UsuarioSistemaDAO();
+        try{
+            List<UsuarioSistema> lista = dao.listarTodos();
+            System.out.print(lista);
+            return lista;
+        }catch(ErroValidacaoException ex){
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+            return null;
+        }catch(Exception ex){
+             JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+             return null;
+        }
+        
+    
+    }
+    
+    private void preencheTabela(List<UsuarioSistema> lista){
+        this.modelo = new DefaultTableModel();
+        modelo.addColumn("Id");
+        modelo.addColumn("Nome");
+        modelo.addColumn("Cpf");
+        modelo.addColumn("Rg");
+        modelo.addColumn("Data de Nascimento");
+        modelo.addColumn("Usuario");
+        /*modelo.addColumn("Endereços");
+        modelo.addColumn("Telefones");
+        modelo.addColumn("Emails");
+        */
+        for(UsuarioSistema u : lista){
+            Vector v = new Vector();
+            v.add(0,u.getId());
+            v.add(1,u.getNome());
+            v.add(2,u.getCpf());
+            v.add(3,u.getRg());
+            v.add(4,u.getDataNascimento());
+            v.add(5,u.getUsuario());
+            modelo.addRow(v);
+            
+        }
+        this.tblUsuariosSistema.setModel(modelo);
+        tblUsuariosSistema.repaint();
+        
+        
+    }
+    
+    
+    List<UsuarioSistema> listaDeUsuarios;
+    UsuarioSistemaDAO dao;
+    DefaultTableModel modelo;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFiltrar;
     private javax.swing.JComboBox cbxFiltro;

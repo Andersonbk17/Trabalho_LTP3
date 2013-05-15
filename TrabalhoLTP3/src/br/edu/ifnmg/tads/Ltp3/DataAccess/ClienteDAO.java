@@ -6,6 +6,7 @@ package br.edu.ifnmg.tads.Ltp3.DataAccess;
 
 import br.edu.ifnmg.tads.Ltp3.Model.Cliente;
 import br.edu.ifnmg.tads.Ltp3.Model.ErroValidacaoException;
+import br.edu.ifnmg.tads.Ltp3.Model.Pessoa;
 import java.awt.Component;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -22,25 +23,29 @@ public class ClienteDAO {
         this.conexao = new Bd();
    }
     
-   public boolean Salvar(Cliente obj){
+   public boolean Salvar(Cliente obj)throws ErroValidacaoException, Exception{
        try{
            if(obj.getIdCliente() == 0){
                
+               PessoaDAO dao = new PessoaDAO();
+               Pessoa tmp = new Pessoa();
+               
+               tmp.setCpf(obj.getCpf());
+               tmp.setDataNascimento(obj.getDataNascimento());
+               tmp.setEmails(obj.getEmails());
+               tmp.setEnderecos(obj.getEnderecos());
+               tmp.setNome(obj.getNome());
+               tmp.setRg(obj.getRg());
+               tmp.setTelefones(obj.getTelefones());
+               
+               int idPessoa = dao.Salvar(tmp);
+               
                PreparedStatement comando = conexao.getConexao()
-                       .prepareStatement("INSERT INTO pessoas (nome,cpf,rg,data_nascimento) VALUES(?,?,?,?)");
-               comando.setString(1, obj.getNome());
-               comando.setString(2, obj.getCpf());
-               comando.setString(3, obj.getRg());
-               comando.setDate(4, new java.sql.Date(obj.getDataNascimento().getTime()));
-               
-               comando.executeUpdate();
-               
-               
-               comando = conexao.getConexao()
                        .prepareStatement("INSERT INTO clientes (id_pessoa) VALUES(?)");
-               comando.setInt(1, obj.getId());
+               comando.setInt(1, idPessoa);
                
                comando.executeUpdate();
+               comando.getConnection().commit();
                
            
            }
