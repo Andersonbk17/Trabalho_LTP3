@@ -12,12 +12,14 @@ public class Telefone {
     private int id;
     private int ddd;
     private int numero;
+    private short ativo;
     
     /*-------- Construtores ----*/
     public Telefone(){
         this.id = 0;
         this.ddd = 0;
         this.numero = 0;
+        this.ativo = 1;
     }
     
     public Telefone(int id, int ddd, int numero) {
@@ -33,10 +35,12 @@ public class Telefone {
     }
 
     public void setId(int id) throws ErroValidacaoException {
-        if(id >0)
+        if(id >0) {
             this.id = id;
-        else
+        }
+        else {
             throw new ErroValidacaoException("O id não pode ser menor que 0 !");
+        }
     }
 
     public int getDdd() {
@@ -55,12 +59,21 @@ public class Telefone {
         this.numero = numero;
     }
 
+    public short getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(short ativo) {
+        this.ativo = ativo;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 97 * hash + this.id;
-        hash = 97 * hash + this.ddd;
-        hash = 97 * hash + this.numero;
+        int hash = 5;
+        hash = 67 * hash + this.id;
+        hash = 67 * hash + this.ddd;
+        hash = 67 * hash + this.numero;
+        hash = 67 * hash + this.ativo;
         return hash;
     }
 
@@ -79,16 +92,16 @@ public class Telefone {
         if (this.numero != other.numero) {
             return false;
         }
+        if (this.ativo != other.ativo) {
+            return false;
+        }
         return true;
     }
 
+    
     @Override
     public String toString() {
         return "Telefone{" + "ddd=" + ddd + ", numero=" + numero + '}';
     }
 
-    
-    
-    
-    
 }

@@ -14,9 +14,7 @@ public class Endereco {
     private int id;
     private String rua;
     private String bairro;
-    /*private Cidade cidade;
-    private Estado estado;
-    * */
+    private short ativo;
     private String cidade;
     private String estado;
     private int numero;
@@ -32,6 +30,7 @@ public class Endereco {
         this.estado = "";
         this.numero = 0;
         this.bairro = "";
+        this.ativo = 0;
         
     }
 
@@ -73,22 +72,15 @@ public class Endereco {
         this.bairro = bairro;
     }
 
-    /*public Cidade getCidade() {
-        return cidade;
+    public short getAtivo() {
+        return ativo;
     }
 
-    public void setCidade(Cidade cidade) {
-        this.cidade = cidade;
+    public void setAtivo(short ativo) {
+        this.ativo = ativo;
     }
 
-    public Estado getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Estado estado) {
-        this.estado = estado;
-    }
-    * */
+    
 
     public String getCidade() {
         return cidade;
@@ -123,17 +115,18 @@ public class Endereco {
     public void setCep(String cep) {
         this.cep = cep;
     }
-/*
+
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 23 * hash + this.id;
-        hash = 23 * hash + Objects.hashCode(this.rua);
-        hash = 23 * hash + Objects.hashCode(this.bairro);
-        hash = 23 * hash + Objects.hashCode(this.cidade);
-        hash = 23 * hash + Objects.hashCode(this.estado);
-        hash = 23 * hash + this.numero;
-        hash = 23 * hash + Objects.hashCode(this.cep);
+        hash = 79 * hash + this.id;
+        hash = 79 * hash + Objects.hashCode(this.rua);
+        hash = 79 * hash + Objects.hashCode(this.bairro);
+        hash = 79 * hash + this.ativo;
+        hash = 79 * hash + Objects.hashCode(this.cidade);
+        hash = 79 * hash + Objects.hashCode(this.estado);
+        hash = 79 * hash + this.numero;
+        hash = 79 * hash + Objects.hashCode(this.cep);
         return hash;
     }
 
@@ -152,6 +145,9 @@ public class Endereco {
         if (!Objects.equals(this.bairro, other.bairro)) {
             return false;
         }
+        if (this.ativo != other.ativo) {
+            return false;
+        }
         if (!Objects.equals(this.cidade, other.cidade)) {
             return false;
         }
@@ -159,9 +155,6 @@ public class Endereco {
             return false;
         }
         if (this.numero != other.numero) {
-            return false;
-        }
-        if (!Objects.equals(this.cep, other.cep)) {
             return false;
         }
         return true;
@@ -169,55 +162,8 @@ public class Endereco {
 
     @Override
     public String toString() {
-        return "Endereco{" + "rua=" + rua + ", bairro=" + bairro + ", cidade=" + cidade + ", estado=" + estado + ", numero=" + numero + '}';
-    }
-    
-    
-  */
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + this.id;
-        hash = 29 * hash + Objects.hashCode(this.rua);
-        hash = 29 * hash + Objects.hashCode(this.bairro);
-        hash = 29 * hash + Objects.hashCode(this.cidade);
-        hash = 29 * hash + Objects.hashCode(this.estado);
-        hash = 29 * hash + this.numero;
-        hash = 29 * hash + Objects.hashCode(this.cep);
-        return hash;
+        return "rua=" + rua + ", bairro=" + bairro + ", cidade=" + cidade + ", estado=" 
+                + estado + ", numero=" + numero + ", cep=" + cep ;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Endereco other = (Endereco) obj;
-        if (!Objects.equals(this.rua, other.rua)) {
-            return false;
-        }
-        if (!Objects.equals(this.bairro, other.bairro)) {
-            return false;
-        }
-        if (!Objects.equals(this.cidade, other.cidade)) {
-            return false;
-        }
-        if (!Objects.equals(this.estado, other.estado)) {
-            return false;
-        }
-        if (this.numero != other.numero) {
-            return false;
-        }
-        return true;
-    }
-    
-    
-    
-    
-    
-    
 }

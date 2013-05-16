@@ -19,6 +19,7 @@ public class Venda {
     private Cliente cliente;
     private UsuarioSistema usuario;
     private FormasPagamento formaPagamento;
+    private short ativo;
     
     
     /*----- Construtor ----------*/
@@ -28,6 +29,7 @@ public class Venda {
         itens =  new LinkedList<>();
         horario = new Date();
         formaPagamento = new FormasPagamento();
+        this.ativo = 1;
         
         
     
@@ -103,17 +105,26 @@ public class Venda {
     public void setFormaPagamento(FormasPagamento formaPagamento) {
         this.formaPagamento = formaPagamento;
     }
-    
+
+    public short getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(short ativo) {
+        this.ativo = ativo;
+    }
 
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 97 * hash + this.id;
-        hash = 97 * hash + (int) (Double.doubleToLongBits(this.valor) ^ (Double.doubleToLongBits(this.valor) >>> 32));
-        hash = 97 * hash + Objects.hashCode(this.itens);
-        hash = 97 * hash + Objects.hashCode(this.horario);
-        hash = 97 * hash + Objects.hashCode(this.cliente);
-        hash = 97 * hash + Objects.hashCode(this.usuario);
+        hash = 17 * hash + this.id;
+        hash = 17 * hash + (int) (Double.doubleToLongBits(this.valor) ^ (Double.doubleToLongBits(this.valor) >>> 32));
+        hash = 17 * hash + Objects.hashCode(this.itens);
+        hash = 17 * hash + Objects.hashCode(this.horario);
+        hash = 17 * hash + Objects.hashCode(this.cliente);
+        hash = 17 * hash + Objects.hashCode(this.usuario);
+        hash = 17 * hash + Objects.hashCode(this.formaPagamento);
+        hash = 17 * hash + this.ativo;
         return hash;
     }
 
@@ -126,12 +137,6 @@ public class Venda {
             return false;
         }
         final Venda other = (Venda) obj;
-        if (Double.doubleToLongBits(this.valor) != Double.doubleToLongBits(other.valor)) {
-            return false;
-        }
-        if (!Objects.equals(this.itens, other.itens)) {
-            return false;
-        }
         if (!Objects.equals(this.horario, other.horario)) {
             return false;
         }
@@ -141,8 +146,16 @@ public class Venda {
         if (!Objects.equals(this.usuario, other.usuario)) {
             return false;
         }
+        if (!Objects.equals(this.formaPagamento, other.formaPagamento)) {
+            return false;
+        }
+        if (this.ativo != other.ativo) {
+            return false;
+        }
         return true;
     }
+    
+
     
     
     public void addItemVenda(ItemVenda i){

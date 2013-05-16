@@ -14,6 +14,7 @@ public class ItemVenda {
     private int id;
     private int quantidade;
     private Produto produto;
+    private short ativo;
     
     /*-------------Construtores--------------------*/
     
@@ -21,6 +22,7 @@ public class ItemVenda {
         id = 0;
         quantidade = 0;
         produto = new Produto();
+        this.ativo = 1;
     }
     
      public ItemVenda(int id, int quantidade, Produto produto) {
@@ -35,10 +37,12 @@ public class ItemVenda {
     }
 
     public void setId(int id) throws ErroValidacaoException{
-        if (id < 0)
+        if (id < 0) {
             throw new ErroValidacaoException("O id não pode ser menor que 0 !");
-        else
+        }
+        else {
             this.id = id;
+        }
     }
 
     public int getQuantidade() {
@@ -46,10 +50,12 @@ public class ItemVenda {
     }
 
     public void setQuantidade(int quantidade) throws  ErroValidacaoException{
-        if(quantidade < 0)
+        if(quantidade < 0) {
             throw new ErroValidacaoException("A quantidade deve ser maior que 0");
-        else
+        }
+        else {
             this.quantidade = quantidade;
+        }
     }
 
     public Produto getProduto() {
@@ -65,12 +71,21 @@ public class ItemVenda {
         return  produto.toString();
     }
 
+    public short getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(short ativo) {
+        this.ativo = ativo;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 41 * hash + this.id;
-        hash = 41 * hash + this.quantidade;
-        hash = 41 * hash + Objects.hashCode(this.produto);
+        hash = 37 * hash + this.id;
+        hash = 37 * hash + this.quantidade;
+        hash = 37 * hash + Objects.hashCode(this.produto);
+        hash = 37 * hash + this.ativo;
         return hash;
     }
 
@@ -83,20 +98,16 @@ public class ItemVenda {
             return false;
         }
         final ItemVenda other = (ItemVenda) obj;
-        if (this.id != other.id) {
-            return false;
-        }
         if (this.quantidade != other.quantidade) {
             return false;
         }
         if (!Objects.equals(this.produto, other.produto)) {
             return false;
         }
+        if (this.ativo != other.ativo) {
+            return false;
+        }
         return true;
     }
-
-   
-    
-    
     
 }

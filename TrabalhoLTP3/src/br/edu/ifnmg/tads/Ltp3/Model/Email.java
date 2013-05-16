@@ -13,9 +13,14 @@ import java.util.Objects;
 public class Email {
     private int id;
     private String endereco;
+    private short ativo;
     
     /*--------- Construtores ---------*/
-    public Email(){}
+    public Email(){
+        this.ativo = 1;
+        this.endereco = "";
+        this.id = 0;
+    }
 
     public Email(int id, String endereco) {
         this.id = id;
@@ -30,10 +35,12 @@ public class Email {
     }
 
     public void setId(int id) throws ErroValidacaoException{
-        if (id < 0)
+        if (id < 0) {
             throw new ErroValidacaoException("O id não pode ser menor que 0 !");
-        else
+        }
+        else {
             this.id = id;
+        }
     }
 
     public String getEndereco() {
@@ -44,6 +51,15 @@ public class Email {
         this.endereco = endereco;
     }
 
+    public short getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(short ativo) {
+        this.ativo = ativo;
+    }
+
+    
     @Override
     public String toString() {
         return "Email{" + "endereco=" + endereco + '}';

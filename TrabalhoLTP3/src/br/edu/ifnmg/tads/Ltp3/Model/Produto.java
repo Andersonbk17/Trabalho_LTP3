@@ -17,6 +17,7 @@ public class Produto {
     private double valorUnidadeCompra;
     private double valorUnidadeVenda;
     private Estoque estoque;
+    private short ativo;
     
     /*----- Construtores ---------------*/
     public Produto(){
@@ -26,6 +27,7 @@ public class Produto {
         this.nome = "";
         this.valorUnidadeCompra = 0;
         this.valorUnidadeVenda = 0;
+        this.ativo = 1;
     
     }
 
@@ -113,15 +115,24 @@ public class Produto {
         this.estoque = estoque;
     }
 
+    public short getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(short ativo) {
+        this.ativo = ativo;
+    }
+
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 29 * hash + this.id;
-        hash = 29 * hash + Objects.hashCode(this.descricao);
-        hash = 29 * hash + Objects.hashCode(this.nome);
-        hash = 29 * hash + (int) (Double.doubleToLongBits(this.valorUnidadeCompra) ^ (Double.doubleToLongBits(this.valorUnidadeCompra) >>> 32));
-        hash = 29 * hash + (int) (Double.doubleToLongBits(this.valorUnidadeVenda) ^ (Double.doubleToLongBits(this.valorUnidadeVenda) >>> 32));
-        hash = 29 * hash + Objects.hashCode(this.estoque);
+        hash = 37 * hash + this.id;
+        hash = 37 * hash + Objects.hashCode(this.descricao);
+        hash = 37 * hash + Objects.hashCode(this.nome);
+        hash = 37 * hash + (int) (Double.doubleToLongBits(this.valorUnidadeCompra) ^ (Double.doubleToLongBits(this.valorUnidadeCompra) >>> 32));
+        hash = 37 * hash + (int) (Double.doubleToLongBits(this.valorUnidadeVenda) ^ (Double.doubleToLongBits(this.valorUnidadeVenda) >>> 32));
+        hash = 37 * hash + Objects.hashCode(this.estoque);
+        hash = 37 * hash + this.ativo;
         return hash;
     }
 
@@ -146,9 +157,13 @@ public class Produto {
         if (Double.doubleToLongBits(this.valorUnidadeVenda) != Double.doubleToLongBits(other.valorUnidadeVenda)) {
             return false;
         }
+        if (this.ativo != other.ativo) {
+            return false;
+        }
         return true;
     }
 
+    
     @Override
     public String toString() {
         return this.nome ;

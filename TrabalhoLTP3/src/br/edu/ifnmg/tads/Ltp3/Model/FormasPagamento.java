@@ -14,11 +14,13 @@ public class FormasPagamento {
     private int id;
     private String nome;
     private boolean alterado;
+    private short ativo;
     
     public FormasPagamento(){
         this.id = 0;
         this.nome = "";
         this.alterado = true;
+        this.ativo = 1;
     }
 
     public FormasPagamento(int id, String nome) {
@@ -53,14 +55,22 @@ public class FormasPagamento {
     public void setAlterado(boolean alterado) {
         this.alterado = alterado;
     }
-    
-    
+
+    public short getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(short ativo) {
+        this.ativo = ativo;
+    }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + this.id;
-        hash = 97 * hash + Objects.hashCode(this.nome);
+        int hash = 5;
+        hash = 53 * hash + this.id;
+        hash = 53 * hash + Objects.hashCode(this.nome);
+        hash = 53 * hash + (this.alterado ? 1 : 0);
+        hash = 53 * hash + this.ativo;
         return hash;
     }
 
@@ -73,11 +83,19 @@ public class FormasPagamento {
             return false;
         }
         final FormasPagamento other = (FormasPagamento) obj;
+        if (this.id != other.id) {
+            return false;
+        }
         if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        if (this.ativo != other.ativo) {
             return false;
         }
         return true;
     }
+    
+    
 
     @Override
     public String toString() {

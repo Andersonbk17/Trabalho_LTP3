@@ -14,10 +14,14 @@ public class UsuarioSistema  extends Pessoa{
     private int idUsuario;
     private String usuario;
     private String senha;
+    private short ativo;
     
     /*--------Construtores ---------*/
     public UsuarioSistema(){
-    
+        this.idUsuario = 0;
+        this.usuario = "";
+        this.senha = "";
+        this.ativo = 1;
     }
 
     public UsuarioSistema(int idUsuario, String usuario, String senha) {
@@ -54,10 +58,11 @@ public class UsuarioSistema  extends Pessoa{
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 23 * hash + this.idUsuario;
-        hash = 23 * hash + Objects.hashCode(this.usuario);
-        hash = 23 * hash + Objects.hashCode(this.senha);
+        int hash = 7;
+        hash = 59 * hash + this.idUsuario;
+        hash = 59 * hash + Objects.hashCode(this.usuario);
+        hash = 59 * hash + Objects.hashCode(this.senha);
+        hash = 59 * hash + this.ativo;
         return hash;
     }
 
@@ -70,21 +75,22 @@ public class UsuarioSistema  extends Pessoa{
             return false;
         }
         final UsuarioSistema other = (UsuarioSistema) obj;
+        if (this.idUsuario != other.idUsuario) {
+            return false;
+        }
         if (!Objects.equals(this.usuario, other.usuario)) {
             return false;
         }
-        if (!Objects.equals(this.senha, other.senha)) {
+        if (this.ativo != other.ativo) {
             return false;
         }
         return true;
     }
 
+   
     @Override
     public String toString() {
-        return "UsuarioSistema{" + "usuario=" + usuario + '}';
+        return  usuario ;
     }
-    
-    
-    
-    
+   
 }

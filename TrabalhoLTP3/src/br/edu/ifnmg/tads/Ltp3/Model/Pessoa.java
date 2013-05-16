@@ -21,6 +21,7 @@ public class Pessoa {
     private List<Endereco> Enderecos;
     private List<Email> Emails;
     private List<Telefone> Telefones;
+    private short ativo;
     
 
     /*-------- Construtores -----------*/
@@ -33,6 +34,7 @@ public class Pessoa {
         this.Emails = new LinkedList<>();
         this.Enderecos = new LinkedList<>();
         this.Telefones = new LinkedList<>();
+        this.ativo = 1;
         
     
     
@@ -174,17 +176,26 @@ public class Pessoa {
     
     }
 
+    public short getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(short ativo) {
+        this.ativo = ativo;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 67 * hash + this.id;
-        hash = 67 * hash + Objects.hashCode(this.nome);
-        hash = 67 * hash + Objects.hashCode(this.rg);
-        hash = 67 * hash + Objects.hashCode(this.cpf);
-        hash = 67 * hash + Objects.hashCode(this.dataNascimento);
-        hash = 67 * hash + Objects.hashCode(this.Enderecos);
-        hash = 67 * hash + Objects.hashCode(this.Emails);
-        hash = 67 * hash + Objects.hashCode(this.Telefones);
+        hash = 11 * hash + this.id;
+        hash = 11 * hash + Objects.hashCode(this.nome);
+        hash = 11 * hash + Objects.hashCode(this.rg);
+        hash = 11 * hash + Objects.hashCode(this.cpf);
+        hash = 11 * hash + Objects.hashCode(this.dataNascimento);
+        hash = 11 * hash + Objects.hashCode(this.Enderecos);
+        hash = 11 * hash + Objects.hashCode(this.Emails);
+        hash = 11 * hash + Objects.hashCode(this.Telefones);
+        hash = 11 * hash + this.ativo;
         return hash;
     }
 
@@ -206,18 +217,16 @@ public class Pessoa {
         if (!Objects.equals(this.cpf, other.cpf)) {
             return false;
         }
-        if (!Objects.equals(this.dataNascimento, other.dataNascimento)) {
+        if (this.ativo != other.ativo) {
             return false;
         }
         return true;
     }
 
+   
     @Override
     public String toString() {
         return this.nome ;
     }
-
-   
-
-    
+ 
 }
