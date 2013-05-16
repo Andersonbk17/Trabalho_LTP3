@@ -98,7 +98,7 @@ public class ProdutoDAO {
     public Produto Abrir(int id) throws ErroValidacaoException, Exception{
         try{
             PreparedStatement comando = bd.getConexao()
-                    .prepareStatement("SELECT p.id,nome,descricao,"
+                    .prepareStatement("SELECT p.id as produto,nome,descricao,"
                     + "valor_uni_Venda,valor_Uni_Compra,quantidade  FROM "
                     + "produtos p INNER JOIN estoques e on e.id = p.id WHERE id = ?");
             comando.setInt(1, id);
@@ -110,7 +110,7 @@ public class ProdutoDAO {
                 tmp = new Produto();
                 Estoque tmpE = new Estoque();
                 tmp.setDescricao(consulta.getString("descicao"));
-                tmp.setId(consulta.getInt("id"));
+                tmp.setId(consulta.getInt("produto"));
                 tmp.setNome(consulta.getString("nome"));
                 tmp.setValorUnidadeCompra(consulta.getDouble("valor_uni_Compra"));
                 tmp.setValorUnidadeVenda(consulta.getDouble("valor_uni_Venda"));

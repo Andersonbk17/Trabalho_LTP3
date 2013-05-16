@@ -4,7 +4,15 @@
  */
 package br.edu.ifnmg.tads.Ltp3.Apresentacao;
 
+import br.edu.ifnmg.tads.Ltp3.DataAccess.VendaDAO;
+import br.edu.ifnmg.tads.Ltp3.Model.ErroValidacaoException;
+import br.edu.ifnmg.tads.Ltp3.Model.ItemVenda;
+import br.edu.ifnmg.tads.Ltp3.Model.Produto;
+import br.edu.ifnmg.tads.Ltp3.Model.Venda;
+import java.util.List;
+import java.util.Vector;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,6 +29,7 @@ public class frmListarVendas extends javax.swing.JInternalFrame {
         txtFiltro.setVisible(false);
         btnFiltrar.setVisible(false);
         lblDataDe.setVisible(false);
+        preencheTabela(carregaDadosDoBanco());
     }
 
     /**
@@ -49,13 +58,13 @@ public class frmListarVendas extends javax.swing.JInternalFrame {
 
         tblListagem.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "ID", "Horário", "Cliente", "Vendedor", "Valor"
+
             }
         ));
         jScrollPane1.setViewportView(tblListagem);
@@ -82,7 +91,7 @@ public class frmListarVendas extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addComponent(lblFiltro)
@@ -94,11 +103,11 @@ public class frmListarVendas extends javax.swing.JInternalFrame {
                         .addComponent(lblNome)
                         .addGap(34, 34, 34)
                         .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(41, 41, 41)
                         .addComponent(btnFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 757, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 731, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(64, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -114,7 +123,7 @@ public class frmListarVendas extends javax.swing.JInternalFrame {
                     .addComponent(btnFiltrar)
                     .addComponent(lblNome)
                     .addComponent(lblDataDe))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         pack();
@@ -157,8 +166,63 @@ public class frmListarVendas extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_cbxFiltroItemStateChanged
 
+    private void preencheTabela(List<Venda> lista){
+        this.modelo = new DefaultTableModel();
+        modelo.addColumn("Id");
+        modelo.addColumn("Cliente");
+        modelo.addColumn("Usuario");
+        modelo.addColumn("Horario");
+        modelo.addColumn("Forma de Pagamento");
+        
+        
+        /*modelo.addColumn("Endereços");
+        modelo.addColumn("Telefones");
+        modelo.addColumn("Emails");
+        */
+        ItemVenda iv;
+        //ItemVendaDAO
+        for(Venda u : lista){
+            Vector v = new Vector();
+            v.add(0,u.getId());
+            v.add(1,u.getCliente().getNome());
+            v.add(2,u.getUsuario().getNome());
+            v.add(3,u.getHorario());
+            v.add(4, u.getFormaPagamento().getNome());
+            
+            //for(Produto p : )
+            
+            
+            modelo.addRow(v);
+            
+        }
+        this.tblListagem.setModel(modelo);
+        this.tblListagem.repaint();
+        
+        
+    }
+    
+    private  List <Venda> carregaDadosDoBanco(){
+        this.dao = new VendaDAO();
+        try{
+            List<Venda> lista = dao.listarTodas();
+          // System.out.print(lista);
+            return lista;
+        }catch(ErroValidacaoException ex){
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+            return null;
+        }catch(Exception ex){
+             JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+             return null;
+        }
+        
+    
+    }
     
     
+    
+    List<Venda> listaDeVendas;    
+    DefaultTableModel modelo;
+    VendaDAO dao;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFiltrar;
     private javax.swing.JComboBox cbxFiltro;

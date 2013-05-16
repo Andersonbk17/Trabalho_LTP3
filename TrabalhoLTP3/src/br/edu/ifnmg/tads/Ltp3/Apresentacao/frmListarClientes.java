@@ -8,13 +8,8 @@ import br.edu.ifnmg.tads.Ltp3.DataAccess.ClienteDAO;
 import br.edu.ifnmg.tads.Ltp3.DataAccess.PessoaDAO;
 import br.edu.ifnmg.tads.Ltp3.Model.Cliente;
 import br.edu.ifnmg.tads.Ltp3.Model.ErroValidacaoException;
-import br.edu.ifnmg.tads.Ltp3.Model.Pessoa;
-import java.sql.SQLException;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 

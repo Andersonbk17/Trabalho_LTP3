@@ -401,6 +401,7 @@ public class frmVenda extends javax.swing.JInternalFrame {
         VendaDAO dao = new VendaDAO();
         venda.setCliente((Cliente)cbxCliente.getSelectedItem());
         venda.setFormaPagamento((FormasPagamento) cbxTipoPagamento.getSelectedItem());
+        //venda.setHorario();
         if(dao.Salvar(venda)){
             JOptionPane.showMessageDialog(rootPane, "Venda Salva com Sucesso!");
         
