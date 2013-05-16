@@ -133,7 +133,8 @@ public class frmLogin extends javax.swing.JDialog {
             
                 }
             } catch (ErroValidacaoException ex) {
-                Logger.getLogger(frmLogin.class.getName()).log(Level.SEVERE, null, ex);
+                //Logger.getLogger(frmLogin.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(rootPane, ex.getMessage());
             }
             
             

@@ -54,8 +54,7 @@ public class ClienteDAO {
                
            
            }else{
-               PreparedStatement comando = conexao.
-                       getConexao().prepareStatement("UPDATE SET pessoas");
+               dao.Salvar(tmp);
            
            }
        
@@ -74,26 +73,37 @@ public class ClienteDAO {
    
    public Cliente Abrir(int id) throws ErroValidacaoException, Exception{
        try{
-           PreparedStatement comando = conexao
-                   .getConexao().prepareStatement("SELECT c.id as idcliente, p.id as "
-                   + "idpessoa,p.nome,p.cpf,p.rg,p.data_nascimento FROM pessoas p INNER "
-                   + "JOIN clientes c on c.id_pessoa = p.id WHERE c.id = ?");
-           comando.setInt(1, id);
            
+           PreparedStatement comando = conexao.
+                   getConexao().prepareStatement("SELECT * FROM clientes WHERE id = ?");
+           comando.setInt(1, id);
            ResultSet consulta = comando.executeQuery();
            comando.getConnection().commit();
-           Cliente tmp = null;
+           
+           
+           Cliente tmpCliente = null;
+           Pessoa tmpPessoa = null;
            if(consulta.first()){
-               tmp = new Cliente();
-               tmp.setCpf(consulta.getString("cpf"));
-                tmp.setDataNascimento(consulta.getDate("data_nascimento"));
-                tmp.setNome(consulta.getString("nome"));
-                tmp.setId(consulta.getInt("idpessoa"));
-                tmp.setRg(consulta.getString("rg"));
-                tmp.setIdCliente(consulta.getInt("idcliente"));
-               
+               PessoaDAO daoPessoa = new PessoaDAO();
+               tmpPessoa = daoPessoa.Abrir(id);
+               tmpCliente = new Cliente();
+               tmpCliente.setIdCliente(consulta.getInt("id"));
            }
-            return tmp;
+           
+           
+          
+           if(tmpPessoa != null){
+                
+                tmpCliente.setCpf(tmpPessoa.getCpf());
+                tmpCliente.setDataNascimento(tmpPessoa.getDataNascimento());
+                tmpCliente.setNome(tmpPessoa.getNome());
+                tmpCliente.setId(tmpPessoa.getId());
+                tmpCliente.setRg(tmpPessoa.getRg());
+                
+           }
+           
+           
+            return tmpCliente;
        }catch(SQLException ex){
            ex.printStackTrace();
            return null;
@@ -104,8 +114,7 @@ public class ClienteDAO {
    
    public boolean Apagar(int id ){
        try{
-           
-           
+                      
           // PessoaDAO pessoaDAO = new PessoaDAO();
            //pessoaDAO.Apagar(id);
            

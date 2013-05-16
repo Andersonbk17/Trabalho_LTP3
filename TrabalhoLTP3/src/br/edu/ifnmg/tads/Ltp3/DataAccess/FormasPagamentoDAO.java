@@ -29,14 +29,14 @@ public class FormasPagamentoDAO {
         try{
             if(obj.getId() == 0){
                 comando = banco.getConexao()
-                        .prepareStatement("INSERT INTO tipo_pagamento (nome) VALUES (?)");
+                        .prepareStatement("INSERT INTO tipos_pagamento (nome) VALUES (?)");
                 comando.setString(1, obj.getNome());
 
                 comando.executeUpdate();
                 comando.getConnection().commit();
             }else if (obj.isAlterado()){
                 comando = banco.getConexao()
-                        .prepareStatement("UPDATE tipo_pagamento SET nome = ? WHERE id = ?");
+                        .prepareStatement("UPDATE tipos_pagamento SET nome = ? WHERE id = ?");
                 comando.setString(1, obj.getNome());
                 comando.setInt(2, obj.getId());
 
@@ -102,7 +102,7 @@ public class FormasPagamentoDAO {
     public List<FormasPagamento> ListarTodos(){
         try{
             PreparedStatement comando = banco.getConexao()
-                    .prepareStatement("SELECT * FROM tipo_pagamento");
+                    .prepareStatement("SELECT * FROM tipos_pagamento");
            ResultSet rs = comando.executeQuery();
            
            List<FormasPagamento> formasPagamento = new LinkedList<>();
