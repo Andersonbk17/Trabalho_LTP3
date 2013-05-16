@@ -98,26 +98,22 @@ public class ProdutoDAO {
     public Produto Abrir(int id) throws ErroValidacaoException, Exception{
         try{
             PreparedStatement comando = bd.getConexao()
-                    .prepareStatement("SELECT p.id as produto,nome,descricao,"
-                    + "valor_uni_Venda,valor_Uni_Compra,quantidade  FROM "
-                    + "produtos p INNER JOIN estoques e on e.id = p.id WHERE id = ?");
+                    .prepareStatement("SELECT * FROM produtos WHERE id = ?");
             comando.setInt(1, id);
             ResultSet consulta = comando.executeQuery();
             comando.getConnection().commit();
             Produto tmp = null;
+            EstoqueDAO daoEstoque = new EstoqueDAO();
             
             if(consulta.first()){
                 tmp = new Produto();
-                Estoque tmpE = new Estoque();
-                tmp.setDescricao(consulta.getString("descicao"));
+                Estoque tmpE = daoEstoque.Abrir(id);
+                tmp.setDescricao(consulta.getString("descricao"));
                 tmp.setId(consulta.getInt("produto"));
                 tmp.setNome(consulta.getString("nome"));
                 tmp.setValorUnidadeCompra(consulta.getDouble("valor_uni_Compra"));
                 tmp.setValorUnidadeVenda(consulta.getDouble("valor_uni_Venda"));
-                
-                tmpE.setId(consulta.getInt("id"));
-                tmpE.setQuantidade(consulta.getInt("quantidade"));
-                
+             
                 tmp.setEstoque(tmpE);
             
             }

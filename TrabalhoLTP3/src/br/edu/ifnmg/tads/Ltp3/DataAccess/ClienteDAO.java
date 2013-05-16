@@ -28,9 +28,8 @@ public class ClienteDAO {
     
    public boolean Salvar(Cliente obj)throws ErroValidacaoException, Exception{
        try{
-           if(obj.getIdCliente() == 0){
-               
-               PessoaDAO dao = new PessoaDAO();
+           
+           PessoaDAO dao = new PessoaDAO();
                Pessoa tmp = new Pessoa();
                
                tmp.setCpf(obj.getCpf());
@@ -40,6 +39,9 @@ public class ClienteDAO {
                tmp.setNome(obj.getNome());
                tmp.setRg(obj.getRg());
                tmp.setTelefones(obj.getTelefones());
+               tmp.setId(obj.getId());
+               
+           if(obj.getIdCliente() == 0){
                
                int idPessoa = dao.Salvar(tmp);
                
@@ -50,6 +52,10 @@ public class ClienteDAO {
                comando.executeUpdate();
                comando.getConnection().commit();
                
+           
+           }else{
+               PreparedStatement comando = conexao.
+                       getConexao().prepareStatement("UPDATE SET pessoas");
            
            }
        

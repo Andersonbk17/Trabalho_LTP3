@@ -69,13 +69,7 @@ public class VendaDAO {
     
     public List<Venda> listarTodas() throws Exception{
         try{
-           /* PreparedStatement comando = conexao
-                    .getConexao().prepareStatement("select v.id,horario,us.id "
-                    + "as usuario,c.id as cliente,tp.id as tipo FROM vendas v "
-                    + "INNER JOIN usuarios_sistema us on us.id = v.id INNER JOIN "
-                    + "clientes c on c.id = v.id_cliente INNER JOIN tipo_pagamento "
-                    + "tp on tp.id = v.id_tipo_pagamento");
-                    * */
+          
             PreparedStatement comando = conexao
                     .getConexao().prepareStatement("SELECT * FROM vendas");
             ResultSet consulta = comando.executeQuery();
