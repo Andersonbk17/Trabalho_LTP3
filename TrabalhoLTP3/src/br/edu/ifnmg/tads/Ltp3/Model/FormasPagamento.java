@@ -81,7 +81,7 @@ public class FormasPagamento {
 
     @Override
     public String toString() {
-        return "FormasPagamento{" + "nome=" + nome + '}';
+        return  nome ;
     }
     
     

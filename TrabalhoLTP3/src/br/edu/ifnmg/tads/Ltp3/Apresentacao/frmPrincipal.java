@@ -5,6 +5,7 @@
 package br.edu.ifnmg.tads.Ltp3.Apresentacao;
 
 
+import br.edu.ifnmg.tads.Ltp3.DataAccess.UsuarioSistemaDAO;
 import br.edu.ifnmg.tads.Ltp3.Model.UsuarioSistema;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
@@ -25,7 +26,13 @@ public class frmPrincipal extends javax.swing.JFrame {
      */
     public frmPrincipal(int idUsuario) {
         initComponents();
-         usuarioAtual = new UsuarioSistema();
+        UsuarioSistemaDAO dao = new UsuarioSistemaDAO();
+        try {
+            usuarioAtual = dao.Abrir(idUsuario);
+        } catch (Exception ex) {
+            Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+        }
          this.setExtendedState(JFrame.MAXIMIZED_BOTH);
          
          //Implementar a busca de usuario
@@ -198,7 +205,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 407, Short.MAX_VALUE)
+            .addGap(0, 423, Short.MAX_VALUE)
         );
 
         pack();
@@ -241,13 +248,13 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_MenuItemClienteActionPerformed
 
     private void MenuItemNovaVandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemNovaVandaActionPerformed
-        frmVenda janela = new frmVenda();
+        frmVenda janela = new frmVenda(usuarioAtual);
         janela.setVisible(true);
-        try {
+        /*try {
             janela.setMaximum(true);
         } catch (PropertyVetoException ex) {
             Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
         add(janela);
     }//GEN-LAST:event_MenuItemNovaVandaActionPerformed
 

@@ -99,18 +99,12 @@ public class ClienteDAO {
    public boolean Apagar(int id ){
        try{
            
-           EmailDAO emailDAO = new EmailDAO();
-           TelefoneDAO telefoneDAO= new TelefoneDAO();
-           EnderecoDAO enderecoDAO = new EnderecoDAO();
-           PessoaDAO pessoaDAO = new PessoaDAO();
            
-           emailDAO.ApagarTodosQuandoExcluiPessoa(id);
-           telefoneDAO.ApagarTodosQuandoExcluiPessoa(id);
-           enderecoDAO.ApagarTodosQuandoExcluiPessoa(id);
-           pessoaDAO.Apagar(id);
+          // PessoaDAO pessoaDAO = new PessoaDAO();
+           //pessoaDAO.Apagar(id);
            
            PreparedStatement comando = conexao
-                   .getConexao().prepareStatement("DELETE FROM clientes WHERE id= ?");
+                   .getConexao().prepareStatement("DELETE FROM clientes WHERE id = ?");
            comando.setInt(1, id);
            comando.execute();
            comando.getConnection().commit();

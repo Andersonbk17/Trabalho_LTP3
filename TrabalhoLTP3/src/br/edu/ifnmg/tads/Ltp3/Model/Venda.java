@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.LinkedList;
 import java.util.Date;
 import java.util.Objects;
-import javax.swing.text.AbstractDocument;
 /**
  *
  * @author anderson
@@ -19,14 +18,16 @@ public class Venda {
     private Date horario;
     private Cliente cliente;
     private UsuarioSistema usuario;
+    private FormasPagamento formaPagamento;
     
     
     /*----- Construtor ----------*/
     public Venda(){
         id = 0;
         valor = 0;
-        itens =  new LinkedList<ItemVenda>();
+        itens =  new LinkedList<>();
         horario = new Date();
+        formaPagamento = new FormasPagamento();
         
         
     
@@ -94,6 +95,15 @@ public class Venda {
     public String toString() {
         return "Venda{" + "valor=" + valor + ", itens=" + itens + ", horario=" + horario + ", cliente=" + cliente + ", usuario=" + usuario + '}';
     }
+
+    public FormasPagamento getFormaPagamento() {
+        return formaPagamento;
+    }
+
+    public void setFormaPagamento(FormasPagamento formaPagamento) {
+        this.formaPagamento = formaPagamento;
+    }
+    
 
     @Override
     public int hashCode() {

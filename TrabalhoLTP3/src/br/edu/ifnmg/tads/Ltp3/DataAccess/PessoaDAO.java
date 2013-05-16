@@ -174,7 +174,7 @@ public class PessoaDAO {
                 
                 //Preenche emails
                 PreparedStatement comando4 = banco.getConexao()
-                        .prepareStatement("SELECT * FROM emails WHERE id_pessoa");
+                        .prepareStatement("SELECT * FROM emails WHERE id_pessoa = ?");
                 comando4.setInt(1, id);
                 
                 ResultSet consulta4 = comando4.executeQuery();
@@ -205,7 +205,16 @@ public class PessoaDAO {
     }
     
     public boolean Apagar(int id){
+       // boolean ok = false;
         try{
+           EmailDAO emailDAO = new EmailDAO();
+           TelefoneDAO telefoneDAO= new TelefoneDAO();
+           EnderecoDAO enderecoDAO = new EnderecoDAO();
+                      
+           emailDAO.ApagarTodosQuandoExcluiPessoa(id);
+           telefoneDAO.ApagarTodosQuandoExcluiPessoa(id);
+           enderecoDAO.ApagarTodosQuandoExcluiPessoa(id);
+            
             PreparedStatement comando = banco.getConexao()
                     .prepareStatement("DELETE FROM pessoas WHERE id = ?");
             comando.setInt(1, id);
@@ -220,6 +229,9 @@ public class PessoaDAO {
     
     
     }
+    
+    
+    
     
     
     

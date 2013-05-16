@@ -9,7 +9,6 @@ import br.edu.ifnmg.tads.Ltp3.Model.Estoque;
 import br.edu.ifnmg.tads.Ltp3.Model.Produto;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLClientInfoException;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
@@ -96,18 +95,69 @@ public class ProdutoDAO {
      
     }
     
-    public boolean Abrir(){
-    
-    return true;
+    public Produto Abrir(int id) throws ErroValidacaoException, Exception{
+        try{
+            PreparedStatement comando = bd.getConexao()
+                    .prepareStatement("SELECT p.id,nome,descricao,"
+                    + "valor_uni_Venda,valor_Uni_Compra,quantidade  FROM "
+                    + "produtos p INNER JOIN estoques e on e.id = p.id WHERE id = ?");
+            comando.setInt(1, id);
+            ResultSet consulta = comando.executeQuery();
+            comando.getConnection().commit();
+            Produto tmp = null;
+            
+            if(consulta.first()){
+                tmp = new Produto();
+                Estoque tmpE = new Estoque();
+                tmp.setDescricao(consulta.getString("descicao"));
+                tmp.setId(consulta.getInt("id"));
+                tmp.setNome(consulta.getString("nome"));
+                tmp.setValorUnidadeCompra(consulta.getDouble("valor_uni_Compra"));
+                tmp.setValorUnidadeVenda(consulta.getDouble("valor_uni_Venda"));
+                
+                tmpE.setId(consulta.getInt("id"));
+                tmpE.setQuantidade(consulta.getInt("quantidade"));
+                
+                tmp.setEstoque(tmpE);
+            
+            }
+            return tmp;
+            
+            
+        }catch(SQLException ex){
+            ex.printStackTrace();
+            return null;
+        
+        }
+  
     }
     
-    public List<Produto> listarTodos() {
+    public boolean Apagar(int idProduto) throws SQLException,Exception{
+        PreparedStatement comando = bd.getConexao()
+                .prepareStatement("DELETE FROM estoques WHERE id = ?");
+        comando.setInt(1, idProduto);
+        comando.executeUpdate();
+        comando.getConnection().commit();
+        
+        PreparedStatement comando2 = bd.getConexao()
+                .prepareStatement("DELETE FROM produtos WHERE id = ?");
+        comando2.setInt(1, idProduto);
+        comando2.executeUpdate();
+        comando2.getConnection().commit();
+        
+        return true;
+    }
+    
+    
+    public List<Produto> listarTodos() throws ErroValidacaoException, Exception{
         List<Produto> produtos = new LinkedList<>();
         try{
             
             
             PreparedStatement comando = bd.getConexao()
-                    .prepareStatement("SELECT p.id,nome,descricao,valor_uni_Venda,valor_Uni_Compra,quantidade  FROM produtos p INNER JOIN estoques e on e.id = p.id");
+                    .prepareStatement("SELECT p.id,nome,descricao,valor_uni_Venda, "
+                    + "valor_Uni_Compra,quantidade  "
+                    + "FROM produtos p INNER JOIN estoques e on e.id = p.id");
             ResultSet consulta = comando.executeQuery();
             
             while(consulta.next()){
@@ -116,17 +166,15 @@ public class ProdutoDAO {
                 
                 
                 novo.setDescricao(consulta.getString("descricao"));
-                try{
-                    novo.setId(consulta.getInt("id"));
-                    novo.setNome(consulta.getString("nome"));
-                    novo.setValorUnidadeCompra(consulta.getDouble("valor_uni_Compra"));
-                    novo.setValorUnidadeVenda(consulta.getDouble("valor_uni_Venda"));
+               
+               novo.setId(consulta.getInt("id"));
+               novo.setNome(consulta.getString("nome"));
+               novo.setValorUnidadeCompra(consulta.getDouble("valor_uni_Compra"));
+               novo.setValorUnidadeVenda(consulta.getDouble("valor_uni_Venda"));
 
-                    novoE.setId(consulta.getInt("id"));
-                    novoE.setQuantidade(consulta.getInt("quantidade"));
-                }catch(ErroValidacaoException ex){
-                    ex.printStackTrace();
-                }
+               novoE.setId(consulta.getInt("id"));
+               novoE.setQuantidade(consulta.getInt("quantidade"));
+               
                 
                 novo.setEstoque(novoE);
                 

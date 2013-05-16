@@ -114,7 +114,9 @@ CREATE TABLE itens_venda(
 	quantidade int not null,
 	id_venda int not null,
 	id_produto int not null,
+	id_tipo_pagamento int not null,
 	foreign key (id_venda) references vendas(id),
-	foreign key (id_produto) references produtos(id)
+	foreign key (id_produto) references produtos(id),
+	foreign key (id_tipo_pagamento) references tipo_pagamento(id)
 )Engine=InnoDB;
 

@@ -56,7 +56,7 @@
               <Component id="jTabbedPane1" min="-2" pref="474" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace pref="25" max="32767" attributes="0"/>
+                      <EmptySpace pref="28" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblValorTotal" alignment="3" min="-2" pref="53" max="-2" attributes="0"/>
                           <Component id="lblR$" alignment="3" min="-2" pref="53" max="-2" attributes="0"/>
@@ -81,6 +81,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Finalizar Compra"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFnalizarCompraActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnCancelar">
       <Properties>
@@ -123,19 +126,22 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <Component id="lblCliente" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                              <Component id="cbxCliente" min="-2" pref="307" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="lblVendedor" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="txtVendedor" min="-2" pref="214" max="-2" attributes="0"/>
                           </Group>
-                      </Group>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="cbxCliente" pref="307" max="32767" attributes="0"/>
-                          <Component id="cbxVendedor" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lblTipoPagamento" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="cbxTipoPagamento" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace min="-2" pref="374" max="-2" attributes="0"/>
                   </Group>
@@ -149,12 +155,17 @@
                           <Component id="lblCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cbxCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblVendedor" min="-2" max="-2" attributes="0"/>
-                          <Component id="cbxVendedor" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtVendedor" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="332" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblTipoPagamento" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbxTipoPagamento" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="277" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -168,18 +179,6 @@
             <Component class="javax.swing.JLabel" name="lblCliente">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cliente:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JComboBox" name="cbxVendedor">
-              <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Selecione"/>
-                    <StringItem index="1" value="Nome1"/>
-                    <StringItem index="2" value="Nome2"/>
-                    <StringItem index="3" value="..."/>
-                  </StringArray>
-                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="cbxCliente">
@@ -196,6 +195,34 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbxClienteActionPerformed"/>
               </Events>
             </Component>
+            <Component class="javax.swing.JTextField" name="txtVendedor">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Cantarell" size="14" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" id="Realce leve do Controle" palette="2" red="ff" type="palette"/>
+                </Property>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblTipoPagamento">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Tipo Pagamento:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="cbxTipoPagamento">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="4">
+                    <StringItem index="0" value="Item 1"/>
+                    <StringItem index="1" value="Item 2"/>
+                    <StringItem index="2" value="Item 3"/>
+                    <StringItem index="3" value="Item 4"/>
+                  </StringArray>
+                </Property>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel2">
@@ -210,13 +237,27 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" pref="684" max="32767" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnAdicionar" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnRemover" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jScrollPane1" pref="684" max="32767" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="btnAdicionar" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnRemover" alignment="1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lblProduto" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="cbxProdutos" min="-2" pref="279" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+                              <Component id="lblQuantidade" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txtQuantidade" min="-2" pref="72" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -233,8 +274,15 @@
                               <Component id="btnRemover" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                              <Component id="jScrollPane1" min="-2" pref="383" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cbxProdutos" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtQuantidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblQuantidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                              <Component id="jScrollPane1" min="-2" pref="339" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="30" max="32767" attributes="0"/>
@@ -250,39 +298,13 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="jTable1">
+                <Component class="javax.swing.JTable" name="tblItens">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="4" rowCount="4">
-                        <Column editable="true" title="ID" type="java.lang.Object"/>
-                        <Column editable="true" title="Nome" type="java.lang.Object"/>
-                        <Column editable="true" title="Quantidade" type="java.lang.Object"/>
-                        <Column editable="true" title="Valor" type="java.lang.Object"/>
-                      </Table>
+                      <Table columnCount="0" rowCount="4"/>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
-                      <TableColumnModel selectionModel="0">
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                      </TableColumnModel>
+                      <TableColumnModel selectionModel="0"/>
                     </Property>
                     <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
@@ -302,6 +324,30 @@
             <Component class="javax.swing.JButton" name="btnRemover">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Remover"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblProduto">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Produto:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="cbxProdutos">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="4">
+                    <StringItem index="0" value="Item 1"/>
+                    <StringItem index="1" value="Item 2"/>
+                    <StringItem index="2" value="Item 3"/>
+                    <StringItem index="3" value="Item 4"/>
+                  </StringArray>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtQuantidade">
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblQuantidade">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Qtd:"/>
               </Properties>
             </Component>
           </SubComponents>

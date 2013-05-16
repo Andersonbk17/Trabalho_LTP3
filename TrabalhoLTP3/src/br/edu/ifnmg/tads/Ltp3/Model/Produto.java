@@ -151,7 +151,7 @@ public class Produto {
 
     @Override
     public String toString() {
-        return "Produto{" + "nome=" + nome + ", valorUnidadeCompra=" + valorUnidadeCompra + ", valorUnidadeVenda=" + valorUnidadeVenda + '}';
+        return this.nome ;
     }
 
     

@@ -4,6 +4,7 @@
  */
 package br.edu.ifnmg.tads.Ltp3.Apresentacao;
 
+import br.edu.ifnmg.tads.Ltp3.DataAccess.PessoaDAO;
 import br.edu.ifnmg.tads.Ltp3.DataAccess.UsuarioSistemaDAO;
 import br.edu.ifnmg.tads.Ltp3.Model.ErroValidacaoException;
 import br.edu.ifnmg.tads.Ltp3.Model.UsuarioSistema;
@@ -49,6 +50,7 @@ public class frmListarUsuariosSistema extends javax.swing.JInternalFrame {
         btnFiltrar = new javax.swing.JButton();
         lblNome = new javax.swing.JLabel();
         lblDataDe = new javax.swing.JLabel();
+        btnRemover = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Listagem dos Usuarios de Sistema");
@@ -66,6 +68,11 @@ public class frmListarUsuariosSistema extends javax.swing.JInternalFrame {
 
             }
         ));
+        tblUsuariosSistema.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblUsuariosSistemaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblUsuariosSistema);
 
         lblFiltro.setText("Filtro:");
@@ -84,6 +91,13 @@ public class frmListarUsuariosSistema extends javax.swing.JInternalFrame {
         lblDataDe.setText("Data de :");
         lblDataDe.setFocusable(false);
 
+        btnRemover.setText("Remover");
+        btnRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -93,6 +107,8 @@ public class frmListarUsuariosSistema extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 813, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnRemover)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblFiltro)
@@ -104,16 +120,22 @@ public class frmListarUsuariosSistema extends javax.swing.JInternalFrame {
                         .addComponent(lblNome)
                         .addGap(34, 34, 34)
                         .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 237, Short.MAX_VALUE)
                         .addComponent(btnFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(52, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(58, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(111, 111, 111)
+                        .addComponent(btnRemover)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblFiltro)
                     .addComponent(cbxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -159,12 +181,41 @@ public class frmListarUsuariosSistema extends javax.swing.JInternalFrame {
         }
         
     }//GEN-LAST:event_cbxFiltroItemStateChanged
+
+    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
+       UsuarioSistema tmp = null;
+        try{
+            tmp = dao.Abrir(this.idUsuarioRemover);
+            
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+        }
+        
+        PessoaDAO tmpPessoa = new PessoaDAO();
+        
+         if(JOptionPane.showConfirmDialog(rootPane, "Você tem certeza que deseja "
+                + "apagar o Usuário selecionado ?","",JOptionPane.OK_CANCEL_OPTION)== 0){
+            if(dao.Apagar(this.idUsuarioRemover) && tmpPessoa.Apagar(tmp.getId())){
+                JOptionPane.showMessageDialog(rootPane, "Usuário apagado com sucesso !");
+                //listaDeUsuarios.clear();
+                preencheTabela(carregaDadosDoBanco());
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "Erro ao apagar !");
+            } 
+        
+         }
+    }//GEN-LAST:event_btnRemoverActionPerformed
+
+    private void tblUsuariosSistemaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUsuariosSistemaMouseClicked
+         Object valueAt = tblUsuariosSistema.getValueAt(tblUsuariosSistema.getSelectedRow(), 0);
+        this.idUsuarioRemover = (Integer) valueAt;
+    }//GEN-LAST:event_tblUsuariosSistemaMouseClicked
     
     private  List <UsuarioSistema> carregaDadosDoBanco(){
         this.dao = new UsuarioSistemaDAO();
         try{
             List<UsuarioSistema> lista = dao.listarTodos();
-            System.out.print(lista);
+            
             return lista;
         }catch(ErroValidacaoException ex){
             JOptionPane.showMessageDialog(rootPane, ex.getMessage());
@@ -191,7 +242,7 @@ public class frmListarUsuariosSistema extends javax.swing.JInternalFrame {
         */
         for(UsuarioSistema u : lista){
             Vector v = new Vector();
-            v.add(0,u.getId());
+            v.add(0,u.getIdUsuario());
             v.add(1,u.getNome());
             v.add(2,u.getCpf());
             v.add(3,u.getRg());
@@ -210,8 +261,10 @@ public class frmListarUsuariosSistema extends javax.swing.JInternalFrame {
     List<UsuarioSistema> listaDeUsuarios;
     UsuarioSistemaDAO dao;
     DefaultTableModel modelo;
+    int idUsuarioRemover;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFiltrar;
+    private javax.swing.JButton btnRemover;
     private javax.swing.JComboBox cbxFiltro;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblDataDe;

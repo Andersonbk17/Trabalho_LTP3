@@ -4,8 +4,11 @@
  */
 package br.edu.ifnmg.tads.Ltp3.DataAccess;
 
+import br.edu.ifnmg.tads.Ltp3.Model.Email;
+import br.edu.ifnmg.tads.Ltp3.Model.Endereco;
 import br.edu.ifnmg.tads.Ltp3.Model.ErroValidacaoException;
 import br.edu.ifnmg.tads.Ltp3.Model.Pessoa;
+import br.edu.ifnmg.tads.Ltp3.Model.Telefone;
 import br.edu.ifnmg.tads.Ltp3.Model.UsuarioSistema;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -55,6 +58,107 @@ public class UsuarioSistemaDAO {
         }
     
     }
+    
+    public UsuarioSistema Abrir(int id) throws Exception{
+        UsuarioSistema usuario_sistema = null;
+        try{
+            
+            PreparedStatement comando = banco.getConexao()
+                    .prepareStatement("select p.id as idpessoa,nome,cpf,rg,"
+                    + "data_nascimento,u.id as idusuario, usuario from pessoas "
+                    + "p inner join usuarios_sistema u on u.id_pessoa = p.id WHERE u.id = ?");
+            comando.setInt(1, id);
+            
+            ResultSet consulta = comando.executeQuery();
+            comando.getConnection().commit();
+            
+            if(consulta.first()){
+                usuario_sistema = new UsuarioSistema();
+                usuario_sistema.setCpf(consulta.getString("cpf"));
+                usuario_sistema.setDataNascimento(consulta.getDate("data_nascimento"));
+                usuario_sistema.setId(id);
+                usuario_sistema.setNome(consulta.getString("nome"));
+                usuario_sistema.setRg(consulta.getString("rg"));
+                usuario_sistema.setIdUsuario(consulta.getInt("idusuario"));
+                
+                
+                //Preencher telefones
+                PreparedStatement comando2 = banco.getConexao()
+                        .prepareStatement("SELECT * from telefones WHERE id_pessoa = ?");
+                comando2.setInt(1, usuario_sistema.getIdUsuario());
+                
+                ResultSet consulta2 = comando2.executeQuery();
+                comando2.getConnection().commit();
+                
+                List<Telefone> listaTelefone = new LinkedList<>();
+                while(consulta2.next()){
+                    Telefone temp = new Telefone();
+                    temp.setId(consulta2.getInt("id"));
+                    temp.setDdd(consulta2.getInt("ddd"));
+                    temp.setNumero(consulta2.getInt("numero"));
+                    listaTelefone.add(temp);
+                    
+                }
+                usuario_sistema.setTelefones(listaTelefone);
+                
+                //Preencher Enderecos
+                PreparedStatement comando3 = banco.getConexao()
+                        .prepareStatement("SELECT * from enderecos WHERE id_pessoa = ?");
+                comando3.setInt(1, usuario_sistema.getIdUsuario());
+                
+                ResultSet consulta3 = comando3.executeQuery();
+                comando3.getConnection().commit();
+                
+                List<Endereco> listaEnderecos = new LinkedList<>();
+                while(consulta3.next()){
+                    Endereco endereco = new Endereco();
+                    endereco.setBairro(consulta3.getString("bairro"));
+                    endereco.setCep(consulta3.getString("cep"));
+                    endereco.setCidade(consulta3.getString("cidade"));
+                    endereco.setEstado(consulta3.getString("estado"));
+                    endereco.setId(consulta3.getInt("id_endereco"));
+                    endereco.setNumero(Integer.parseInt(consulta3.getString("numero")));
+                    endereco.setRua(consulta3.getString("rua"));
+                    listaEnderecos.add(endereco);
+                    
+                    
+                }
+                
+                usuario_sistema.setEnderecos(listaEnderecos);
+                
+                //Preenche emails
+                PreparedStatement comando4 = banco.getConexao()
+                        .prepareStatement("SELECT * FROM emails WHERE id_pessoa = ?");
+                comando4.setInt(1, usuario_sistema.getIdUsuario());
+                
+                ResultSet consulta4 = comando4.executeQuery();
+                comando4.getConnection().commit();
+                List<Email> listaEmails = new LinkedList<>();
+                while(consulta4.next()){
+                    Email temp = new Email();
+                    temp.setEndereco(consulta4.getString("endereco"));
+                    temp.setId(consulta4.getInt("id"));
+                    listaEmails.add(temp);
+                    
+                }
+                usuario_sistema.setEmails(listaEmails);
+                
+                
+            }
+            
+            return usuario_sistema;    
+        
+        
+        }catch(SQLException ex){
+            ex.printStackTrace();
+            return null;
+        }
+    
+    
+    
+    }
+    
+    
     
     
     public boolean Apagar(int id){

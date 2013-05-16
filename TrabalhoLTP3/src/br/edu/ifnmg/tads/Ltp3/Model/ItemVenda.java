@@ -17,7 +17,11 @@ public class ItemVenda {
     
     /*-------------Construtores--------------------*/
     
-    public ItemVenda(){}
+    public ItemVenda(){
+        id = 0;
+        quantidade = 0;
+        produto = new Produto();
+    }
     
      public ItemVenda(int id, int quantidade, Produto produto) {
         this.id = id;
@@ -58,7 +62,7 @@ public class ItemVenda {
 
     @Override
     public String toString() {
-        return "ItemVenda{" + "quantidade=" + quantidade + ", produto=" + produto + '}';
+        return  produto.toString();
     }
 
     @Override
