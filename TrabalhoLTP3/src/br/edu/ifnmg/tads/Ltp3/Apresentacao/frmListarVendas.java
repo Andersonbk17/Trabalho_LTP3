@@ -30,6 +30,18 @@ public class frmListarVendas extends javax.swing.JInternalFrame {
         btnFiltrar.setVisible(false);
         lblDataDe.setVisible(false);
         preencheTabela(carregaDadosDoBanco());
+        
+    }
+    
+ 
+    
+    private double calculaValorVenda(List<ItemVenda> lista){
+        double valor = 0;
+        for(ItemVenda i : lista){
+            valor+= i.getQuantidade() * i.getProduto().getValorUnidadeVenda();
+        }
+    
+        return valor;
     }
 
     /**
@@ -173,12 +185,10 @@ public class frmListarVendas extends javax.swing.JInternalFrame {
         modelo.addColumn("Usuario");
         modelo.addColumn("Horario");
         modelo.addColumn("Forma de Pagamento");
+        modelo.addColumn("Valor Total");
         
         
-        /*modelo.addColumn("Endereços");
-        modelo.addColumn("Telefones");
-        modelo.addColumn("Emails");
-        */
+     
         ItemVenda iv;
         //ItemVendaDAO
         for(Venda u : lista){
@@ -188,10 +198,8 @@ public class frmListarVendas extends javax.swing.JInternalFrame {
             v.add(2,u.getUsuario().getNome());
             v.add(3,u.getHorario());
             v.add(4, u.getFormaPagamento().getNome());
-            
-            //for(Produto p : )
-            
-            
+            v.add(5, u.calCulaValorVenda());
+           
             modelo.addRow(v);
             
         }

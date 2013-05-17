@@ -35,7 +35,7 @@ public class VendaDAO {
             if(obj.getId() == 0){
                 PreparedStatement comando = conexao
                     .getConexao().prepareStatement("INSERT INTO vendas (horario,id_usuario,"
-                        + "id_cliente,id_tipo_pagamento) VALUES (?,?,?,?)");
+                        + "id_cliente,id_tipo_pagamento,ativo) VALUES (?,?,?,?,1)");
                 Date data = new Date(obj.getHorario().getTime());
                 comando.setDate(1, data);
                 comando.setInt(2, obj.getUsuario().getIdUsuario());
@@ -48,7 +48,7 @@ public class VendaDAO {
                 comando.getConnection().commit();//ver a hora de comitar
                 
                 ResultSet cons = comando0.executeQuery("SELECT max(id) FROM "
-                        + "vendas WHERE ativo = 1");
+                        + "vendas");
                 cons.first();
                 int idVenda = cons.getInt("max(id)");
                 
@@ -74,8 +74,7 @@ public class VendaDAO {
         try{
           
             PreparedStatement comando = conexao
-                    .getConexao().prepareStatement("SELECT * FROM vendas WHERE "
-                    + "ativo = 1");
+                    .getConexao().prepareStatement("SELECT * FROM vendas where ativo = 1");
             ResultSet consulta = comando.executeQuery();
             comando.getConnection().commit();
             

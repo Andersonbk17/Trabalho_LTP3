@@ -113,7 +113,7 @@ public class ProdutoDAO {
                 tmp = new Produto();
                 Estoque tmpE = daoEstoque.Abrir(id);
                 tmp.setDescricao(consulta.getString("descricao"));
-                tmp.setId(consulta.getInt("produto"));
+                tmp.setId(consulta.getInt("id"));
                 tmp.setNome(consulta.getString("nome"));
                 tmp.setValorUnidadeCompra(consulta.getDouble("valor_uni_Compra"));
                 tmp.setValorUnidadeVenda(consulta.getDouble("valor_uni_Venda"));

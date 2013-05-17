@@ -89,7 +89,7 @@ public class ClienteDAO {
                PessoaDAO daoPessoa = new PessoaDAO();
                tmpPessoa = daoPessoa.Abrir(consulta.getInt("id_pessoa"));
                tmpCliente = new Cliente();
-               tmpCliente.setIdCliente(consulta.getInt("id"));
+               tmpCliente.setIdCliente(id);
            }
            
            
@@ -101,7 +101,6 @@ public class ClienteDAO {
                 tmpCliente.setNome(tmpPessoa.getNome());
                 tmpCliente.setId(tmpPessoa.getId());
                 tmpCliente.setRg(tmpPessoa.getRg());
-                
            }
            
            

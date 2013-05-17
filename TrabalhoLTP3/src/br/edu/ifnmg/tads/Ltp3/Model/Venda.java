@@ -113,6 +113,15 @@ public class Venda {
     public void setAtivo(int ativo) {
         this.ativo = ativo;
     }
+    
+    public double calCulaValorVenda(){
+        double valorTotal = 0 ;
+        for(ItemVenda i : this.itens){
+            valorTotal += i.getProduto().getValorUnidadeCompra() * i.getQuantidade();
+        }
+        return valorTotal;
+    
+    }
 
     @Override
     public int hashCode() {
