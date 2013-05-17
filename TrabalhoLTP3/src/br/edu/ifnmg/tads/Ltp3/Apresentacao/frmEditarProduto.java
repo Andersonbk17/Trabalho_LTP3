@@ -15,7 +15,7 @@ public class frmEditarProduto extends frmCadastroProduto {
     /**
      * Creates new form frmEditarProduto
      */
-    public frmEditarProduto(Produto obj) {
+    public frmEditarProduto(Produto obj, boolean edicao) {
         initComponents();
         
         txtNome.setText(obj.getNome());

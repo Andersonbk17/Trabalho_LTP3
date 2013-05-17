@@ -191,6 +191,10 @@ public class frmCadastroProduto extends javax.swing.JInternalFrame {
                         txtQuantidade.setText("");
                         txtValorCompra.setText("");
                         txtValorUnitario.setText("");
+                        JOptionPane.showMessageDialog(rootPane, "Salvo com sucesso !");
+                        if(edicao){
+                            this.dispose();
+                        }
                     }
                 }else{
                     JOptionPane.showMessageDialog(rootPane, " não salvo");
@@ -207,6 +211,7 @@ public class frmCadastroProduto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     int idProduto = 0;
+    boolean edicao = false;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected javax.swing.JTextArea TxtAreaDescricao;
     protected javax.swing.JButton btnCancelar;

@@ -95,6 +95,7 @@ public class frmListarProduto extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProdutos = new javax.swing.JTable();
         btnRemover = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -124,6 +125,13 @@ public class frmListarProduto extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton2.setText("Editar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -132,7 +140,9 @@ public class frmListarProduto extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 854, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnRemover)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -144,7 +154,9 @@ public class frmListarProduto extends javax.swing.JInternalFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(118, 118, 118)
-                        .addComponent(btnRemover)))
+                        .addComponent(btnRemover)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
@@ -175,7 +187,7 @@ public class frmListarProduto extends javax.swing.JInternalFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         pack();
@@ -183,7 +195,7 @@ public class frmListarProduto extends javax.swing.JInternalFrame {
 
     private void tblProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProdutosMouseClicked
         Object valueAt = tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 0);
-        this.idDoProdutoPararemover = (Integer) valueAt;
+        this.idDoProdutoSelecionado = (Integer) valueAt;
         
     }//GEN-LAST:event_tblProdutosMouseClicked
 
@@ -195,7 +207,7 @@ public class frmListarProduto extends javax.swing.JInternalFrame {
         if(JOptionPane.showConfirmDialog(rootPane, "Você tem certeza que deseja "
                 + "apagar o produto selecionado ?","",JOptionPane.OK_CANCEL_OPTION)== 0){
             try {
-                if(dao.Apagar(this.idDoProdutoPararemover)){
+                if(dao.Apagar(this.idDoProdutoSelecionado)){
                     JOptionPane.showMessageDialog(rootPane, "Apagado com sucesso!");
                     preencheTabela(carregaDadosDoBanco());
                 }else{
@@ -213,13 +225,32 @@ public class frmListarProduto extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnRemoverActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        ProdutoDAO dao = new ProdutoDAO();
+        Produto editado = null;
+        try {
+            editado = dao.Abrir(this.idDoProdutoSelecionado );
+        } catch (ErroValidacaoException ex) {
+            Logger.getLogger(frmListarProduto.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(frmListarProduto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        frmEditarProduto janela = new frmEditarProduto(editado,true);
+        janela.setVisible(true);
+        this.getParent().add(janela);
+        this.dispose();
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
      ProdutoDAO dao;
      List<Produto> listaDeProdutos;
      DefaultTableModel modelo;
-     int idDoProdutoPararemover;
+     int idDoProdutoSelecionado;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRemover;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblProdutos;
