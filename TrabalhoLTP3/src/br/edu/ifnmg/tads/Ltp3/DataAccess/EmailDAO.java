@@ -104,11 +104,12 @@ public class EmailDAO {
     }
     
     
-    public List<Email> listarTodos(){
+    public List<Email> listarTodos(int idPessoa){
         try{
             PreparedStatement comando = banco.getConexao()
-                    .prepareStatement("SELECT * FROM emails WHERE ativo = ?");
-            comando.setInt(1, 1);
+                    .prepareStatement("SELECT * FROM emails WHERE id_pessoa = ? AND "
+                    + " ativo = 1");
+            comando.setInt(1, idPessoa);
             ResultSet consulta = comando.executeQuery();
             
             List<Email> listaEmails = new LinkedList<>();

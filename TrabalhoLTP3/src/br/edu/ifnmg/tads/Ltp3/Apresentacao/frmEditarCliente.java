@@ -27,6 +27,7 @@ public class frmEditarCliente extends frmCadastroCliente {
         listaTelefones = obj.getTelefones();
         carregaTabelaEmails(listaEmails);
         carregaTabelaEnderecos(listaEnderecos);
+        carregaTabelaTelefones(listaTelefones);
         
         txtNome.setText(obj.getNome());
         txtCpf.setText(obj.getCpf());

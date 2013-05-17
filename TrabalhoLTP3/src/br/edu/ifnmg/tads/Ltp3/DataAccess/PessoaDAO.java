@@ -93,14 +93,13 @@ public class PessoaDAO {
             }else{
                 comando = banco.getConexao()
                         .prepareStatement("UPDADE pessoas SET nome = ?, rg = ?, "
-                        + "cpf = ?,data_nascimento = ?, ativo = ? WHERE id = ?");
+                        + "cpf = ?  WHERE id = ?");
                 comando.setString(1, obj.getNome());
                 comando.setString(2, obj.getRg());
                 comando.setString(3, obj.getCpf());
-                Date dataBd = new Date(obj.getDataNascimento().getTime());
-                comando.setDate(4, dataBd);
-                comando.setInt(5, obj.getAtivo());
-                comando.setInt(6, obj.getId());
+                //Date dataBd = new Date(obj.getDataNascimento().getTime());
+                //comando.setDate(4, dataBd);
+                comando.setInt(4, obj.getId());
                 
                 comando.executeUpdate();
                 comando.getConnection().commit();
@@ -136,66 +135,27 @@ public class PessoaDAO {
                 //asd conferr a data
                 
                 //Preencher telefones
-                PreparedStatement comando2 = banco.getConexao()
-                        .prepareStatement("SELECT * from telefones WHERE id_pessoa = ? AND ativo = 1");
-                comando2.setInt(1, id);
                 
-                ResultSet consulta2 = comando2.executeQuery();
-                comando2.getConnection().commit();
-                
-                List<Telefone> listaTelefone = new LinkedList<>();
-                while(consulta2.next()){
-                    Telefone temp = new Telefone();
-                    temp.setId(consulta2.getInt("id"));
-                    temp.setDdd(consulta2.getInt("ddd"));
-                    temp.setNumero(consulta2.getInt("numero"));
-                    listaTelefone.add(temp);
-                    
-                }
-                pessoa.setTelefones(listaTelefone);
+                List<Telefone> listaTelefones;
+                TelefoneDAO daoTelefone = new TelefoneDAO();
+                listaTelefones =  daoTelefone.listarTodos(pessoa.getId());
+                pessoa.setTelefones(listaTelefones);
+                System.out.print(listaTelefones);
                 
                 //Preencher Enderecos
-                PreparedStatement comando3 = banco.getConexao()
-                        .prepareStatement("SELECT * from enderecos WHERE id_pessoa = ? AND ativo =1");
-                comando3.setInt(1, id);
-                
-                ResultSet consulta3 = comando3.executeQuery();
-                comando3.getConnection().commit();
-                
-                List<Endereco> listaEnderecos = new LinkedList<>();
-                while(consulta3.next()){
-                    Endereco endereco = new Endereco();
-                    endereco.setBairro(consulta3.getString("bairro"));
-                    endereco.setCep(consulta3.getString("cep"));
-                    endereco.setCidade(consulta3.getString("cidade"));
-                    endereco.setEstado(consulta3.getString("estado"));
-                    endereco.setId(consulta3.getInt("id"));
-                    endereco.setNumero(Integer.parseInt(consulta3.getString("numero")));
-                    endereco.setRua(consulta3.getString("rua"));
-                    listaEnderecos.add(endereco);
-                    
-                    
-                }
-                
+                List<Endereco> listaEnderecos;
+                EnderecoDAO daoEndereco = new EnderecoDAO();
+                listaEnderecos = daoEndereco.listarTodos(id);
                 pessoa.setEnderecos(listaEnderecos);
+                System.out.print(listaEnderecos);      
                 
                 //Preenche emails
-                PreparedStatement comando4 = banco.getConexao()
-                        .prepareStatement("SELECT * FROM emails WHERE id_pessoa = ? AND ativo =1");
-                comando4.setInt(1, id);
                 
-                ResultSet consulta4 = comando4.executeQuery();
-                comando4.getConnection().commit();
                 List<Email> listaEmails = new LinkedList<>();
-                while(consulta4.next()){
-                    Email temp = new Email();
-                    temp.setEndereco(consulta4.getString("endereco"));
-                    temp.setId(consulta4.getInt("id"));
-                    listaEmails.add(temp);
-                    
-                }
+                EmailDAO daoEmails = new EmailDAO();
+                listaEmails = daoEmails.listarTodos(id);
                 pessoa.setEmails(listaEmails);
-                
+                System.out.print(listaEmails);
                 
             }
             

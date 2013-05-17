@@ -106,3 +106,6 @@ CREATE TABLE itens_venda(
 	
 )Engine=InnoDB;
 
+
+INSERT INTO usuarios_sistema (usuario,senha) VALUES ("root","root");
+

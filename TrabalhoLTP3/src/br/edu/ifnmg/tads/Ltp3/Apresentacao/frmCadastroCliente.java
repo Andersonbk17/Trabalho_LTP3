@@ -746,13 +746,13 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
     
     
     
-    List<Email> listaEmails = new LinkedList<>();
-    List<Endereco> listaEnderecos = new LinkedList<>();
-    List<Telefone> listaTelefones = new LinkedList<>();
+    protected List<Email> listaEmails = new LinkedList<>();
+    protected List<Endereco> listaEnderecos = new LinkedList<>();
+    protected List<Telefone> listaTelefones = new LinkedList<>();
     
-    DefaultTableModel modeloTabelaEmail;
-    DefaultTableModel modeloTabelaTelefone; 
-    DefaultTableModel modeloTabelaEndereco; 
+    protected DefaultTableModel modeloTabelaEmail;
+    protected DefaultTableModel modeloTabelaTelefone; 
+    protected DefaultTableModel modeloTabelaEndereco; 
  
     
     int telefoneParaRemover;

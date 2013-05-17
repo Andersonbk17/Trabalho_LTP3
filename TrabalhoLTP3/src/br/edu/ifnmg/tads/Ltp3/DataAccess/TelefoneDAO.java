@@ -28,12 +28,11 @@ public class TelefoneDAO {
                 if(obj.getId() == 0 ){
                     PreparedStatement comando = banco
                             .getConexao().prepareStatement("INSERT INTO telefones "
-                            + "(ddd,numero,id_pessoa,ativo) VALUES(?,?,?,?)");
+                            + "(ddd,numero,id_pessoa,ativo) VALUES(?,?,?,1)");
 
                     comando.setInt(1, obj.getDdd());
                     comando.setInt(2, obj.getNumero());
                     comando.setInt(3, idPessoa);
-                    comando.setInt(4, 1);
 
                     comando.executeUpdate();
                     comando.getConnection().commit();
@@ -116,7 +115,9 @@ public class TelefoneDAO {
     public List<Telefone> listarTodos(int idPessoa){
         try{
             PreparedStatement comando = banco.getConexao()
-                    .prepareStatement("SELECT * FROM telefones WHERE ativo = 1");
+                    .prepareStatement("SELECT * FROM telefones WHERE id_pessoa = ? AND"
+                    + " ativo = 1");
+            comando.setInt(1, idPessoa);
             ResultSet consulta = comando.executeQuery();
             comando.getConnection().commit();
             List<Telefone> listaTelefones = new LinkedList<>();

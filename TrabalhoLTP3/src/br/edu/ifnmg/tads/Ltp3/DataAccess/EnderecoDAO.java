@@ -84,7 +84,9 @@ public class EnderecoDAO {
     public List<Endereco> listarTodos(int idPessoa){
         try{
             PreparedStatement comando = banco.getConexao()
-                    .prepareStatement("SELECT * FROM enderecos WHERE ativo = 1");
+                    .prepareStatement("SELECT * FROM enderecos WHERE id_pessoa = ? "
+                    + "AND ativo = 1");
+            comando.setInt(1, idPessoa);
             ResultSet consulta = comando.executeQuery();
             comando.getConnection().commit();
             List<Endereco> listaEnderecos = new LinkedList<>();
