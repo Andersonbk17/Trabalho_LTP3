@@ -94,9 +94,9 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
         setClosable(true);
         setMaximizable(true);
         setResizable(true);
-        setMinimumSize(new java.awt.Dimension(800, 600));
+        setMinimumSize(new java.awt.Dimension(900, 600));
         setName(""); // NOI18N
-        setPreferredSize(new java.awt.Dimension(800, 600));
+        setPreferredSize(new java.awt.Dimension(900, 600));
 
         btnNome.setText("Nome: ");
 
@@ -143,7 +143,7 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
                             .addComponent(lblCpf)
                             .addGap(18, 18, 18)
                             .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(122, Short.MAX_VALUE))
+                .addContainerGap(222, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,6 +194,11 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
 
             }
         ));
+        tblEndereco.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblEnderecoMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblEndereco);
 
         btnAdicionarEndereco.setText("Adicionar");
@@ -249,7 +254,7 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnAdicionarEndereco)
                             .addComponent(btnRemoverEndereco))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -308,6 +313,11 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
 
             }
         ));
+        tblTelefones.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblTelefonesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblTelefones);
 
         btnRemoverTelefone.setText("Remover");
@@ -337,7 +347,7 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
                         .addComponent(btnAdicionarTelefone)
                         .addGap(18, 18, 18)
                         .addComponent(btnRemoverTelefone)))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -384,6 +394,11 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
 
             }
         ));
+        tblEmail.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblEmailMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tblEmail);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -402,7 +417,7 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
                         .addComponent(btnAdicionarEmail)
                         .addGap(38, 38, 38)
                         .addComponent(btnRemoverEmail)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -456,7 +471,7 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(81, 81, 81)
                 .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(219, Short.MAX_VALUE))
+                .addContainerGap(319, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -594,16 +609,31 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnRemoverEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverEmailActionPerformed
-        // TODO add your handling code here:
+        this.listaEmails.remove(this.emailParaRemover);
+        carregaTabelaEmails(listaEmails);
     }//GEN-LAST:event_btnRemoverEmailActionPerformed
 
     private void btnRemoverTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverTelefoneActionPerformed
-        // TODO add your handling code here:
+        this.listaTelefones.remove(this.telefoneParaRemover);
+        carregaTabelaTelefones(listaTelefones);
     }//GEN-LAST:event_btnRemoverTelefoneActionPerformed
 
     private void btnRemoverEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverEnderecoActionPerformed
-        // TODO add your handling code here:
+        this.listaEnderecos.remove(this.enderecoParaRemover);
+        carregaTabelaEnderecos(listaEnderecos);
     }//GEN-LAST:event_btnRemoverEnderecoActionPerformed
+
+    private void tblEnderecoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEnderecoMouseClicked
+        this.enderecoParaRemover = tblEndereco.getSelectedRow();
+    }//GEN-LAST:event_tblEnderecoMouseClicked
+
+    private void tblTelefonesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTelefonesMouseClicked
+      this.telefoneParaRemover = tblTelefones.getSelectedRow();
+    }//GEN-LAST:event_tblTelefonesMouseClicked
+
+    private void tblEmailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmailMouseClicked
+       this.emailParaRemover = tblEmail.getSelectedRow();
+    }//GEN-LAST:event_tblEmailMouseClicked
 
     
     private void carregaTabelaTelefones(List<Telefone> lista){
@@ -721,10 +751,11 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
     DefaultTableModel modeloTabelaEmail;
     DefaultTableModel modeloTabelaTelefone; 
     DefaultTableModel modeloTabelaEndereco; 
+ 
     
-    Endereco enderecoDeletado;
-    Email emailDeletado;
-    Telefone telefoneDeletado;
+    int telefoneParaRemover;
+    int enderecoParaRemover;
+    int emailParaRemover;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionarEmail;
     private javax.swing.JButton btnAdicionarEndereco;
