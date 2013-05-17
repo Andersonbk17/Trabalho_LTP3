@@ -35,7 +35,7 @@ public class ProdutoDAO {
             if(obj.getId() == 0){
                 PreparedStatement comando = bd.getConexao()
                         .prepareStatement("INSERT INTO produtos (nome,descricao,"
-                        + "valor_uni_Compra,valor_uni_Venda) VALUES (?,?,?,?)");
+                        + "valor_uni_Compra,valor_uni_Venda,ativo) VALUES (?,?,?,?,1)");
                 comando.setString(1, obj.getNome());
                 comando.setString(2, obj.getDescricao());
                 comando.setDouble(3, obj.getValorUnidadeCompra());
@@ -45,7 +45,7 @@ public class ProdutoDAO {
                 
                 //busca do id do produto
                 PreparedStatement comando2 = bd.getConexao()
-                        .prepareStatement("Select max(id)  FROM produtos");
+                        .prepareStatement("Select max(id)  FROM produtos WHERE ativo = 1");
                 
                 
                 ResultSet consulta = comando2.executeQuery();
@@ -102,7 +102,7 @@ public class ProdutoDAO {
     public Produto Abrir(int id) throws ErroValidacaoException, Exception{
         try{
             PreparedStatement comando = bd.getConexao()
-                    .prepareStatement("SELECT * FROM produtos WHERE id = ?");
+                    .prepareStatement("SELECT * FROM produtos WHERE id = ? AND ativo = 1");
             comando.setInt(1, id);
             ResultSet consulta = comando.executeQuery();
             comando.getConnection().commit();
@@ -140,7 +140,7 @@ public class ProdutoDAO {
         comando.getConnection().commit();
         
         PreparedStatement comando2 = bd.getConexao()
-                .prepareStatement("DELETE FROM produtos WHERE id = ?");
+                .prepareStatement("UPDATE produtos SET ativo = 0 WHERE id = ?");
         comando2.setInt(1, idProduto);
         comando2.executeUpdate();
         comando2.getConnection().commit();
@@ -157,7 +157,7 @@ public class ProdutoDAO {
             PreparedStatement comando = bd.getConexao()
                     .prepareStatement("SELECT p.id,nome,descricao,valor_uni_Venda, "
                     + "valor_Uni_Compra,quantidade  "
-                    + "FROM produtos p INNER JOIN estoques e on e.id = p.id");
+                    + "FROM produtos p INNER JOIN estoques e on e.id = p.id WHERE p.ativo = 1");
             ResultSet consulta = comando.executeQuery();
             
             while(consulta.next()){

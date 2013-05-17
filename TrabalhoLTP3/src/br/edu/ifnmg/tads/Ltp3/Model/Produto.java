@@ -31,7 +31,8 @@ public class Produto {
     
     }
 
-    public Produto(int id, String descricao, String nome, double valorUnidadeCompra, double valorUnidadeVenda, Estoque estoque) {
+    public Produto(int id, String descricao, String nome, double valorUnidadeCompra, 
+            double valorUnidadeVenda, Estoque estoque) {
         this.id = id;
         this.descricao = descricao;
         this.nome = nome;
