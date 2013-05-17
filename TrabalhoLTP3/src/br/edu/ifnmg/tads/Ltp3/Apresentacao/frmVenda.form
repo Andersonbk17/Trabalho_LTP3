@@ -56,7 +56,7 @@
               <Component id="jTabbedPane1" min="-2" pref="474" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace pref="31" max="32767" attributes="0"/>
+                      <EmptySpace pref="34" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblValorTotal" alignment="3" min="-2" pref="53" max="-2" attributes="0"/>
                           <Component id="lblR$" alignment="3" min="-2" pref="53" max="-2" attributes="0"/>
@@ -135,7 +135,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="lblVendedor" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="txtVendedor" min="-2" pref="214" max="-2" attributes="0"/>
+                              <Component id="txtVendedor" min="-2" pref="247" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="lblTipoPagamento" min="-2" max="-2" attributes="0"/>
@@ -155,17 +155,17 @@
                           <Component id="lblCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cbxCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblVendedor" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtVendedor" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblVendedor" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtVendedor" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblTipoPagamento" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cbxTipoPagamento" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="277" max="32767" attributes="0"/>
+                      <EmptySpace pref="255" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -198,7 +198,7 @@
             <Component class="javax.swing.JTextField" name="txtVendedor">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Cantarell" size="14" style="1"/>
+                  <Font name="Cantarell" size="24" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" id="Realce leve do Controle" palette="2" red="ff" type="palette"/>

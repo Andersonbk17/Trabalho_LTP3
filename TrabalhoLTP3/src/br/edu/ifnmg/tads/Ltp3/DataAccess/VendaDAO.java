@@ -74,7 +74,8 @@ public class VendaDAO {
         try{
           
             PreparedStatement comando = conexao
-                    .getConexao().prepareStatement("SELECT * FROM vendas");
+                    .getConexao().prepareStatement("SELECT * FROM vendas WHERE "
+                    + "ativo = 1");
             ResultSet consulta = comando.executeQuery();
             comando.getConnection().commit();
             

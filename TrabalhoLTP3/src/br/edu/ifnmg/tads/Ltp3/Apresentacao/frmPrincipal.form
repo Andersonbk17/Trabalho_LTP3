@@ -51,6 +51,9 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="MenuItemTipoPagamento">
                   <Properties>
+                    <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                      <KeyStroke key="Ctrl+T"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Tipo de Pagamento"/>
                   </Properties>
                   <Events>
@@ -89,6 +92,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="MenuItemNovaVanda">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+V"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Nova"/>
               </Properties>
               <Events>
@@ -97,6 +103,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="MenuItemHistorico">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="V"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Hist&#xf3;rico"/>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[820, 620]"/>
@@ -118,6 +127,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="U"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Usu&#xe1;rios"/>
               </Properties>
               <Events>
@@ -126,6 +138,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="MenuItemListagemProdutos">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="P"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Produtos"/>
               </Properties>
               <Events>
@@ -134,6 +149,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="C"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Clientes"/>
               </Properties>
               <Events>
@@ -191,7 +209,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="431" max="32767" attributes="0"/>
+          <EmptySpace min="0" pref="439" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>

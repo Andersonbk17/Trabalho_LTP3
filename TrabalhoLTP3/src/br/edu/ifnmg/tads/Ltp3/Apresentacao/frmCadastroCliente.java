@@ -29,13 +29,7 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
      * Creates new form frmCadastroCliente
      */
     
-    public Date DataFormatada(String dataDesformatada) throws ParseException{
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");  
-        
-        Date dataForm = format.parse(dataDesformatada);
-        
-        return dataForm; 
-    }
+   
     public frmCadastroCliente() {
         initComponents();
     }
