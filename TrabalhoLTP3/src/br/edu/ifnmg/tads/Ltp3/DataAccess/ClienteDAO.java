@@ -66,7 +66,10 @@ public class ClienteDAO {
            ex.printStackTrace();
            
            return false;
-       }
+       }finally{
+           conexao.getConexao().close();// fonferir lógica
+   
+   }
    
    
    

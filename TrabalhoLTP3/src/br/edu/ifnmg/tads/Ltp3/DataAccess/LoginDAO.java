@@ -20,9 +20,10 @@ public class LoginDAO {
         this.conexao = new Bd();
     }
     
-    public int autenticar(String usuario,String senha) throws ErroValidacaoException{
+    public int autenticar(String usuario,String senha) throws ErroValidacaoException, SQLException{
+        PreparedStatement comando = null;
         try{
-            PreparedStatement comando = conexao
+            comando = conexao
                     .getConexao().prepareStatement("SELECT id FROM usuarios_sistema WHERE usuario = ? AND senha = ?");
             comando.setString(1, usuario);
             comando.setString(2, senha);
@@ -36,7 +37,9 @@ public class LoginDAO {
         
         }catch(SQLException ex){
             throw new ErroValidacaoException(ex.getMessage());
+       
+        }finally{
+            comando.getConnection().close();
         }
-    
     }
 }

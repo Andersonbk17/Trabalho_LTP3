@@ -7,7 +7,6 @@ package br.edu.ifnmg.tads.Ltp3.Apresentacao;
 import br.edu.ifnmg.tads.Ltp3.DataAccess.VendaDAO;
 import br.edu.ifnmg.tads.Ltp3.Model.ErroValidacaoException;
 import br.edu.ifnmg.tads.Ltp3.Model.ItemVenda;
-import br.edu.ifnmg.tads.Ltp3.Model.Produto;
 import br.edu.ifnmg.tads.Ltp3.Model.Venda;
 import java.util.List;
 import java.util.Vector;
@@ -34,16 +33,6 @@ public class frmListarVendas extends javax.swing.JInternalFrame {
     }
     
  
-    
-    private double calculaValorVenda(List<ItemVenda> lista){
-        double valor = 0;
-        for(ItemVenda i : lista){
-            valor+= i.getQuantidade() * i.getProduto().getValorUnidadeVenda();
-        }
-    
-        return valor;
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -198,8 +187,10 @@ public class frmListarVendas extends javax.swing.JInternalFrame {
             v.add(2,u.getUsuario().getNome());
             v.add(3,u.getHorario());
             v.add(4, u.getFormaPagamento().getNome());
-            v.add(5, u.calCulaValorVenda());
-           
+            
+            //faltou a logica do valorde venda
+            
+            JOptionPane.showMessageDialog(rootPane, u.calCulaValorVenda());
             modelo.addRow(v);
             
         }

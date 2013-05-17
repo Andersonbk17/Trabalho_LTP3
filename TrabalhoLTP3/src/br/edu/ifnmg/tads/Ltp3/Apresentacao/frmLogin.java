@@ -6,6 +6,7 @@ package br.edu.ifnmg.tads.Ltp3.Apresentacao;
 
 import br.edu.ifnmg.tads.Ltp3.DataAccess.LoginDAO;
 import br.edu.ifnmg.tads.Ltp3.Model.ErroValidacaoException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -134,6 +135,8 @@ public class frmLogin extends javax.swing.JDialog {
                 }
             } catch (ErroValidacaoException ex) {
                 //Logger.getLogger(frmLogin.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+            }catch(SQLException ex){
                 JOptionPane.showMessageDialog(rootPane, ex.getMessage());
             }
             

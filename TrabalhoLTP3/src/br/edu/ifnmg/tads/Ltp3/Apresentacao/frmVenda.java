@@ -31,12 +31,7 @@ public class frmVenda extends javax.swing.JInternalFrame {
     /**
      * Creates new form frmVenda
      */
-    List<Cliente> listaClientes;
-    List<Produto> listaProdutos;
-    List<FormasPagamento> listaFromasPagamento;
-    DefaultTableModel modelo;
-    Venda venda;
-    
+  
     public frmVenda(UsuarioSistema usuario) {
         initComponents();
         carregaClientes();
@@ -203,6 +198,7 @@ public class frmVenda extends javax.swing.JInternalFrame {
 
         txtVendedor.setFont(new java.awt.Font("Cantarell", 1, 24)); // NOI18N
         txtVendedor.setForeground(java.awt.SystemColor.controlLtHighlight);
+        txtVendedor.setCaretColor(new java.awt.Color(254, 254, 254));
         txtVendedor.setEnabled(false);
 
         lblTipoPagamento.setText("Tipo Pagamento:");
@@ -352,7 +348,7 @@ public class frmVenda extends javax.swing.JInternalFrame {
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblR$, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -383,14 +379,17 @@ public class frmVenda extends javax.swing.JInternalFrame {
           Produto p = (Produto) cbxProdutos.getSelectedItem();
           int qtd = Integer.parseInt(txtQuantidade.getText());
             ItemVenda item = new ItemVenda();
-            item.setProduto(p);
+            
         try {
             item.setQuantidade(qtd);
+            item.setProduto(p);
+            
         } catch (ErroValidacaoException ex) {
             Logger.getLogger(frmVenda.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
         }
 
-            venda.addItemVenda(item);
+            this.venda.addItemVenda(item);
 
             JOptionPane.showMessageDialog(rootPane, "Item adicionado com sucesso!");
 
@@ -407,6 +406,12 @@ public class frmVenda extends javax.swing.JInternalFrame {
         
         }
     }//GEN-LAST:event_btnFnalizarCompraActionPerformed
+    
+    List<Cliente> listaClientes;
+    List<Produto> listaProdutos;
+    List<FormasPagamento> listaFromasPagamento;
+    DefaultTableModel modelo;
+    Venda venda;
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;

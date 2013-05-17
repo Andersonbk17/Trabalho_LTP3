@@ -95,7 +95,8 @@ public class Venda {
 
     @Override
     public String toString() {
-        return "Venda{" + "valor=" + valor + ", itens=" + itens + ", horario=" + horario + ", cliente=" + cliente + ", usuario=" + usuario + '}';
+        return "Venda{" + "valor=" + valor + ", itens=" + itens + ", horario=" +
+                horario + ", cliente=" + cliente + ", usuario=" + usuario + '}';
     }
 
     public FormasPagamento getFormaPagamento() {
@@ -118,6 +119,8 @@ public class Venda {
         double valorTotal = 0 ;
         for(ItemVenda i : this.itens){
             valorTotal += i.getProduto().getValorUnidadeCompra() * i.getQuantidade();
+            
+            //corrigir
         }
         return valorTotal;
     
