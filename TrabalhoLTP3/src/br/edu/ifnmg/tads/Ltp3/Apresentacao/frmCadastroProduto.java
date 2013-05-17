@@ -8,8 +8,6 @@ import br.edu.ifnmg.tads.Ltp3.DataAccess.ProdutoDAO;
 import br.edu.ifnmg.tads.Ltp3.Model.ErroValidacaoException;
 import br.edu.ifnmg.tads.Ltp3.Model.Estoque;
 import br.edu.ifnmg.tads.Ltp3.Model.Produto;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -32,7 +30,7 @@ public class frmCadastroProduto extends javax.swing.JInternalFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    protected void initComponents() {
 
         lblNome = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
@@ -153,7 +151,7 @@ public class frmCadastroProduto extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+    protected void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         if(JOptionPane.showConfirmDialog(rootPane, "Você tem certeza que deseja Salvar ?")== 0){
             if(txtNome.getText().isEmpty()){
                 JOptionPane.showMessageDialog(rootPane, "O campo nome não pode ser Vazio !");
@@ -165,6 +163,7 @@ public class frmCadastroProduto extends javax.swing.JInternalFrame {
             }else{
                 Produto novo = new Produto();
                 Estoque novoEstoque = new Estoque();
+                
                              
                 novo.setEstoque(novoEstoque);
                 novo.setDescricao(TxtAreaDescricao.getText());
@@ -172,7 +171,10 @@ public class frmCadastroProduto extends javax.swing.JInternalFrame {
                     novo.setNome(txtNome.getText());
                     novo.setValorUnidadeCompra(Double.parseDouble(txtValorCompra.getText()));
                     novo.setValorUnidadeVenda(Double.parseDouble(txtValorUnitario.getText()));
+                    novo.setId(this.idProduto);
                     novoEstoque.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
+                    
+                    novoEstoque.setId(this.idProduto);
                     
                 } catch (ErroValidacaoException | NumberFormatException ex){
                     //Logger.getLogger(frmCadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
@@ -198,25 +200,26 @@ public class frmCadastroProduto extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+    protected void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         if(JOptionPane.showConfirmDialog(rootPane, "Você tem certeza que deseja cancelar?")== 0){
             this.dispose();
         }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    int idProduto = 0;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea TxtAreaDescricao;
-    private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnSalvar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblDescricao;
-    private javax.swing.JLabel lblNome;
-    private javax.swing.JLabel lblValorCompra;
-    private javax.swing.JLabel lblValorUnitario;
-    private javax.swing.JTextField txtNome;
-    private javax.swing.JTextField txtQuantidade;
-    private javax.swing.JTextField txtValorCompra;
-    private javax.swing.JTextField txtValorUnitario;
+    protected javax.swing.JTextArea TxtAreaDescricao;
+    protected javax.swing.JButton btnCancelar;
+    protected javax.swing.JButton btnSalvar;
+    protected javax.swing.JLabel jLabel1;
+    protected javax.swing.JScrollPane jScrollPane1;
+    protected javax.swing.JLabel lblDescricao;
+    protected javax.swing.JLabel lblNome;
+    protected javax.swing.JLabel lblValorCompra;
+    protected javax.swing.JLabel lblValorUnitario;
+    protected javax.swing.JTextField txtNome;
+    protected javax.swing.JTextField txtQuantidade;
+    protected javax.swing.JTextField txtValorCompra;
+    protected javax.swing.JTextField txtValorUnitario;
     // End of variables declaration//GEN-END:variables
 }
