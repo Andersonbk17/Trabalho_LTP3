@@ -28,7 +28,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
     /**
      * Creates new form frmCadastroCliente
      */
-    private Date dataFormatada(String dataDesformatada) throws ParseException{
+    protected Date dataFormatada(String dataDesformatada) throws ParseException{
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");  
         
         Date dataForm = format.parse(dataDesformatada);
@@ -47,7 +47,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    protected void initComponents() {
 
         DadosGerais = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
@@ -156,7 +156,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtRg, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(227, Short.MAX_VALUE))
+                .addContainerGap(228, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,7 +265,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnAdicionarEndereco)
                             .addComponent(btnRemoverEndereco))
-                        .addGap(0, 35, Short.MAX_VALUE))
+                        .addGap(0, 36, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblRua)
@@ -360,7 +360,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                         .addComponent(btnAdicionarEmail)
                         .addGap(18, 18, 18)
                         .addComponent(btnRemoverEmail)))
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -434,7 +434,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                         .addComponent(btnAdicionar)
                         .addGap(18, 18, 18)
                         .addComponent(btnRemoverTelefone)))
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -479,7 +479,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                         .addComponent(txtSenhaNovamente, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(255, Short.MAX_VALUE))
+                .addContainerGap(256, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -523,7 +523,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(DadosGerais, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(DadosGerais, javax.swing.GroupLayout.DEFAULT_SIZE, 865, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(143, 143, 143)
@@ -550,17 +550,17 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtDataNascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataNascimentoActionPerformed
+    protected void txtDataNascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataNascimentoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDataNascimentoActionPerformed
 
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+    protected void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         if(JOptionPane.showConfirmDialog(rootPane, "Você tem certeza que deseja cancelar?")== 0){
             dispose();
         }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+    protected void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         if(JOptionPane.showConfirmDialog(rootPane, "Você tem certeza que deseja Salvar ?","",JOptionPane.OK_CANCEL_OPTION) == 0){
             if(validaCampos()){
                 UsuarioSistema usuario = null;
@@ -575,6 +575,9 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                     usuario.setSenha(txtSenha.getText());
                     usuario.setEnderecos(this.listaEnderecos);
                     usuario.setTelefones(this.listaTelefone);
+                    usuario.setId(this.idPessoa);
+                    usuario.setIdUsuario(this.idUsuario);
+                            
                     
                     
                     }catch(ErroValidacaoException ex ){
@@ -618,7 +621,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
    
-    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
+    protected void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
         Telefone temp = new Telefone();
         try{
             temp.setDdd(Integer.parseInt(txtDdd.getText()));
@@ -633,7 +636,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     
-    private void btnAdicionarEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarEnderecoActionPerformed
+    protected void btnAdicionarEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarEnderecoActionPerformed
         Endereco temp = new Endereco();
         
         temp.setBairro(txtBairro.getText());
@@ -652,11 +655,11 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
         carregaTabelaEnderecos(this.listaEnderecos);
     }//GEN-LAST:event_btnAdicionarEnderecoActionPerformed
 
-    private void tblEnderecosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEnderecosMouseClicked
+    protected void tblEnderecosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEnderecosMouseClicked
       this.enderecoParaRemover = tblEnderecos.getSelectedRow();
     }//GEN-LAST:event_tblEnderecosMouseClicked
 
-    private void btnRemoverEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverEmailActionPerformed
+    protected void btnRemoverEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverEmailActionPerformed
        if(JOptionPane.showConfirmDialog(rootPane, "Você tem certeza que deseja"
                 + " Remover o item ? ","",JOptionPane.OK_CANCEL_OPTION) == 0){
            this.listaEmail.remove(this.emailParaRemover);
@@ -666,7 +669,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
        
     }//GEN-LAST:event_btnRemoverEmailActionPerformed
 
-    private void btnRemoverEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverEnderecoActionPerformed
+    protected void btnRemoverEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverEnderecoActionPerformed
         if(JOptionPane.showConfirmDialog(rootPane, "Você tem certeza que deseja"
                 + " Remover o item ? ","",JOptionPane.OK_CANCEL_OPTION) == 0){
             listaEnderecos.remove(this.enderecoParaRemover);
@@ -675,7 +678,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_btnRemoverEnderecoActionPerformed
 
-    private void btnAdicionarEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarEmailActionPerformed
+    protected void btnAdicionarEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarEmailActionPerformed
         Email tmp = new Email();
         tmp.setEndereco(txtEnderecoEmail.getText());
         this.listaEmail.add(tmp);
@@ -683,7 +686,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_btnAdicionarEmailActionPerformed
 
-    private void btnRemoverTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverTelefoneActionPerformed
+    protected void btnRemoverTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverTelefoneActionPerformed
         if(JOptionPane.showConfirmDialog(rootPane, "Você tem certeza que deseja"
                 + " Remover o item ? ","",JOptionPane.OK_CANCEL_OPTION) == 0){
             listaTelefone.remove(this.telefoneParaRemover);
@@ -691,15 +694,15 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnRemoverTelefoneActionPerformed
 
-    private void tblTelefonesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTelefonesMouseClicked
+    protected void tblTelefonesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTelefonesMouseClicked
          this.telefoneParaRemover = tblTelefones.getSelectedRow();
     }//GEN-LAST:event_tblTelefonesMouseClicked
 
-    private void tblEmailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmailsMouseClicked
+    protected void tblEmailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmailsMouseClicked
         this.emailParaRemover = tblEmails.getSelectedRow();
     }//GEN-LAST:event_tblEmailsMouseClicked
 
-    private boolean validaCampos(){
+    protected boolean validaCampos(){
         boolean valida = true;
         if( txtCpf.getText().isEmpty() || txtDataNascimento.getText().isEmpty() || 
              txtNome.getText().isEmpty() || txtUsuario.getText().isEmpty() 
@@ -715,7 +718,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
     
     }
     
-    private void limpaCampos(){
+    protected void limpaCampos(){
         this.txtBairro.setText("");
         this.txtCep.setText("");
         this.txtCidade.setText("");
@@ -734,7 +737,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
     
     }
     
-    private void carregaTabelaTelefones(List<Telefone> lista){
+    protected void carregaTabelaTelefones(List<Telefone> lista){
         this.modeloTabelaTelefone = new DefaultTableModel();
         this.modeloTabelaTelefone.addColumn("DDD");
         this.modeloTabelaTelefone.addColumn("Numero");
@@ -753,7 +756,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
     
     }
     
-    private void carregaTabelaEnderecos(List<Endereco> lista){
+    protected void carregaTabelaEnderecos(List<Endereco> lista){
         this.modeloTabelaEndereco = new DefaultTableModel();
         this.modeloTabelaEndereco.addColumn("Rua");
         this.modeloTabelaEndereco.addColumn("Bairro");
@@ -781,7 +784,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
     }
     
     
-    private void carregaTabelaEmails(List<Email> listaEmails){
+    protected void carregaTabelaEmails(List<Email> listaEmails){
         this.modeloTabelaEmail = new DefaultTableModel();
         modeloTabelaEmail.addColumn("Endereco");
         
@@ -807,60 +810,62 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
     DefaultTableModel modeloTabelaEmail;
     DefaultTableModel modeloTabelaTelefone; 
     DefaultTableModel modeloTabelaEndereco; 
+    int idPessoa = 0;
+    int idUsuario = 0;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTabbedPane DadosGerais;
-    private javax.swing.JButton btnAdicionar;
-    private javax.swing.JButton btnAdicionarEmail;
-    private javax.swing.JButton btnAdicionarEndereco;
-    private javax.swing.JButton btnCancelar;
-    private javax.swing.JLabel btnNome;
-    private javax.swing.JButton btnRemoverEmail;
-    private javax.swing.JButton btnRemoverEndereco;
-    private javax.swing.JButton btnRemoverTelefone;
-    private javax.swing.JButton btnSalvar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel lblBairro;
-    private javax.swing.JLabel lblCep;
-    private javax.swing.JLabel lblCidade;
-    private javax.swing.JLabel lblCpf;
-    private javax.swing.JLabel lblData;
-    private javax.swing.JLabel lblDdd;
-    private javax.swing.JLabel lblEndereco;
-    private javax.swing.JLabel lblEstado;
-    private javax.swing.JLabel lblNumero;
-    private javax.swing.JLabel lblRg;
-    private javax.swing.JLabel lblRua;
-    private javax.swing.JLabel lblnumero;
-    private javax.swing.JTable tblEmails;
-    private javax.swing.JTable tblEnderecos;
-    private javax.swing.JTable tblTelefones;
-    private javax.swing.JTextField txtBairro;
-    private javax.swing.JTextField txtCep;
-    private javax.swing.JTextField txtCidade;
-    private javax.swing.JTextField txtCpf;
-    private javax.swing.JFormattedTextField txtDataNascimento;
-    private javax.swing.JTextField txtDdd;
-    private javax.swing.JTextField txtEnderecoEmail;
-    private javax.swing.JTextField txtEstado;
-    private javax.swing.JTextField txtNome;
-    private javax.swing.JTextField txtNumero;
-    private javax.swing.JTextField txtNumeroEndereco;
-    private javax.swing.JTextField txtRg;
-    private javax.swing.JTextField txtRua;
-    private javax.swing.JPasswordField txtSenha;
-    private javax.swing.JPasswordField txtSenhaNovamente;
-    private javax.swing.JTextField txtUsuario;
+    protected javax.swing.JTabbedPane DadosGerais;
+    protected javax.swing.JButton btnAdicionar;
+    protected javax.swing.JButton btnAdicionarEmail;
+    protected javax.swing.JButton btnAdicionarEndereco;
+    protected javax.swing.JButton btnCancelar;
+    protected javax.swing.JLabel btnNome;
+    protected javax.swing.JButton btnRemoverEmail;
+    protected javax.swing.JButton btnRemoverEndereco;
+    protected javax.swing.JButton btnRemoverTelefone;
+    protected javax.swing.JButton btnSalvar;
+    protected javax.swing.JButton jButton1;
+    protected javax.swing.JLabel jLabel1;
+    protected javax.swing.JLabel jLabel3;
+    protected javax.swing.JLabel jLabel4;
+    protected javax.swing.JLabel jLabel5;
+    protected javax.swing.JPanel jPanel1;
+    protected javax.swing.JPanel jPanel2;
+    protected javax.swing.JPanel jPanel3;
+    protected javax.swing.JPanel jPanel4;
+    protected javax.swing.JPanel jPanel5;
+    protected javax.swing.JScrollPane jScrollPane1;
+    protected javax.swing.JScrollPane jScrollPane2;
+    protected javax.swing.JScrollPane jScrollPane3;
+    protected javax.swing.JLabel lblBairro;
+    protected javax.swing.JLabel lblCep;
+    protected javax.swing.JLabel lblCidade;
+    protected javax.swing.JLabel lblCpf;
+    protected javax.swing.JLabel lblData;
+    protected javax.swing.JLabel lblDdd;
+    protected javax.swing.JLabel lblEndereco;
+    protected javax.swing.JLabel lblEstado;
+    protected javax.swing.JLabel lblNumero;
+    protected javax.swing.JLabel lblRg;
+    protected javax.swing.JLabel lblRua;
+    protected javax.swing.JLabel lblnumero;
+    protected javax.swing.JTable tblEmails;
+    protected javax.swing.JTable tblEnderecos;
+    protected javax.swing.JTable tblTelefones;
+    protected javax.swing.JTextField txtBairro;
+    protected javax.swing.JTextField txtCep;
+    protected javax.swing.JTextField txtCidade;
+    protected javax.swing.JTextField txtCpf;
+    protected javax.swing.JFormattedTextField txtDataNascimento;
+    protected javax.swing.JTextField txtDdd;
+    protected javax.swing.JTextField txtEnderecoEmail;
+    protected javax.swing.JTextField txtEstado;
+    protected javax.swing.JTextField txtNome;
+    protected javax.swing.JTextField txtNumero;
+    protected javax.swing.JTextField txtNumeroEndereco;
+    protected javax.swing.JTextField txtRg;
+    protected javax.swing.JTextField txtRua;
+    protected javax.swing.JPasswordField txtSenha;
+    protected javax.swing.JPasswordField txtSenhaNovamente;
+    protected javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

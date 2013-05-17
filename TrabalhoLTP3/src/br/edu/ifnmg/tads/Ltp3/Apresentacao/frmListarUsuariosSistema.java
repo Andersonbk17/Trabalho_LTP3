@@ -11,6 +11,8 @@ import br.edu.ifnmg.tads.Ltp3.Model.UsuarioSistema;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -51,6 +53,7 @@ public class frmListarUsuariosSistema extends javax.swing.JInternalFrame {
         lblNome = new javax.swing.JLabel();
         lblDataDe = new javax.swing.JLabel();
         btnRemover = new javax.swing.JButton();
+        btnAlterar = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Listagem dos Usuarios de Sistema");
@@ -98,6 +101,13 @@ public class frmListarUsuariosSistema extends javax.swing.JInternalFrame {
             }
         });
 
+        btnAlterar.setText("Alterar");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -108,7 +118,9 @@ public class frmListarUsuariosSistema extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 813, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnRemover)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblFiltro)
@@ -129,12 +141,14 @@ public class frmListarUsuariosSistema extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(58, Short.MAX_VALUE)
+                        .addContainerGap(61, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(46, 46, 46))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(111, 111, 111)
                         .addComponent(btnRemover)
+                        .addGap(34, 34, 34)
+                        .addComponent(btnAlterar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblFiltro)
@@ -210,6 +224,22 @@ public class frmListarUsuariosSistema extends javax.swing.JInternalFrame {
          Object valueAt = tblUsuariosSistema.getValueAt(tblUsuariosSistema.getSelectedRow(), 0);
         this.idUsuarioRemover = (Integer) valueAt;
     }//GEN-LAST:event_tblUsuariosSistemaMouseClicked
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+       UsuarioSistema usuario = null;
+       UsuarioSistemaDAO daoUsuario = new UsuarioSistemaDAO();
+        try {
+            usuario = dao.Abrir(this.idUsuarioRemover);
+        } catch (Exception ex) {
+            Logger.getLogger(frmListarUsuariosSistema.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        frmEditarUsuarioSistema janela = new frmEditarUsuarioSistema(usuario);
+        janela.setVisible(true);
+        this.getParent().add(janela);
+        this.dispose();
+        
+    }//GEN-LAST:event_btnAlterarActionPerformed
     
     private  List <UsuarioSistema> carregaDadosDoBanco(){
         this.dao = new UsuarioSistemaDAO();
@@ -263,6 +293,7 @@ public class frmListarUsuariosSistema extends javax.swing.JInternalFrame {
     DefaultTableModel modelo;
     int idUsuarioRemover;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnFiltrar;
     private javax.swing.JButton btnRemover;
     private javax.swing.JComboBox cbxFiltro;
