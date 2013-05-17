@@ -107,9 +107,9 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
         setClosable(true);
         setMaximizable(true);
         setResizable(true);
-        setMinimumSize(new java.awt.Dimension(800, 600));
+        setMinimumSize(new java.awt.Dimension(900, 600));
         setName(""); // NOI18N
-        setPreferredSize(new java.awt.Dimension(800, 600));
+        setPreferredSize(new java.awt.Dimension(900, 600));
 
         btnNome.setText("Nome: ");
 
@@ -143,20 +143,20 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                         .addComponent(txtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnNome)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(lblRg)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtRg))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lblCpf)
-                            .addGap(18, 18, 18)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblCpf))
+                            .addComponent(lblRg))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtRg, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(221, Short.MAX_VALUE))
+                .addContainerGap(227, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -246,7 +246,7 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(lblnumero)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtNumeroEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtNumeroEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -330,6 +330,11 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
 
             }
         ));
+        tblEmails.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblEmailsMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tblEmails);
 
         btnRemoverEmail.setText("Remover");
@@ -395,9 +400,19 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
 
             }
         ));
+        tblTelefones.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblTelefonesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblTelefones);
 
         btnRemoverTelefone.setText("Remover");
+        btnRemoverTelefone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverTelefoneActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -450,17 +465,21 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(84, 84, 84)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtUsuario)
-                    .addComponent(txtSenha)
-                    .addComponent(txtSenhaNovamente, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE))
-                .addContainerGap(339, Short.MAX_VALUE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addComponent(txtSenhaNovamente, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(255, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -634,20 +653,24 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnAdicionarEnderecoActionPerformed
 
     private void tblEnderecosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEnderecosMouseClicked
-       Object valor = tblEnderecos.getValueAt(tblEnderecos.getSelectedRow(), 1);
-       
-       this.enderecoDeletado = (Endereco) valor;//conferisr
-       JOptionPane.showMessageDialog(rootPane, "");
+      this.enderecoParaRemover = tblEnderecos.getSelectedRow();
     }//GEN-LAST:event_tblEnderecosMouseClicked
 
     private void btnRemoverEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverEmailActionPerformed
-        // TODO add your handling code here:
+       if(JOptionPane.showConfirmDialog(rootPane, "Você tem certeza que deseja"
+                + " Remover o item ? ","",JOptionPane.OK_CANCEL_OPTION) == 0){
+           this.listaEmail.remove(this.emailParaRemover);
+           carregaTabelaEmails(listaEmail);
+       
+       }
+       
     }//GEN-LAST:event_btnRemoverEmailActionPerformed
 
     private void btnRemoverEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverEnderecoActionPerformed
         if(JOptionPane.showConfirmDialog(rootPane, "Você tem certeza que deseja"
                 + " Remover o item ? ","",JOptionPane.OK_CANCEL_OPTION) == 0){
-            listaEnderecos.remove(this.enderecoDeletado);
+            listaEnderecos.remove(this.enderecoParaRemover);
+            carregaTabelaEnderecos(this.listaEnderecos);
         }
         
     }//GEN-LAST:event_btnRemoverEnderecoActionPerformed
@@ -659,6 +682,22 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
         carregaTabelaEmails(this.listaEmail);
         
     }//GEN-LAST:event_btnAdicionarEmailActionPerformed
+
+    private void btnRemoverTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverTelefoneActionPerformed
+        if(JOptionPane.showConfirmDialog(rootPane, "Você tem certeza que deseja"
+                + " Remover o item ? ","",JOptionPane.OK_CANCEL_OPTION) == 0){
+            listaTelefone.remove(this.telefoneParaRemover);
+            carregaTabelaTelefones(this.listaTelefone);
+        }
+    }//GEN-LAST:event_btnRemoverTelefoneActionPerformed
+
+    private void tblTelefonesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTelefonesMouseClicked
+         this.telefoneParaRemover = tblTelefones.getSelectedRow();
+    }//GEN-LAST:event_tblTelefonesMouseClicked
+
+    private void tblEmailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmailsMouseClicked
+        this.emailParaRemover = tblEmails.getSelectedRow();
+    }//GEN-LAST:event_tblEmailsMouseClicked
 
     private boolean validaCampos(){
         boolean valida = true;
@@ -758,8 +797,10 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
         tblEmails.repaint();
     }
     
+    int telefoneParaRemover;
+    int enderecoParaRemover;
+    int emailParaRemover;
     
-    Endereco enderecoDeletado;
     List<Endereco> listaEnderecos = new LinkedList<>();
     List<Telefone> listaTelefone = new LinkedList<>();
     List<Email> listaEmail = new LinkedList<>();

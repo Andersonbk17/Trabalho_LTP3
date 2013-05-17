@@ -672,9 +672,8 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
     
     private boolean validaCampos(){
         boolean valida = true;
-        if(txtBairro.getText().isEmpty() || txtCep.getText().isEmpty() || txtCidade.getText().isEmpty() 
-            || txtCpf.getText().isEmpty() || txtDataNascimento.getText().isEmpty() || 
-            txtEstado.getText().isEmpty() || txtNome.getText().isEmpty()){
+        if(txtCpf.getText().isEmpty() || txtDataNascimento.getText().isEmpty() || 
+            txtNome.getText().isEmpty()){
             
                 valida = false;
             

@@ -174,19 +174,22 @@ public class frmCadastroProduto extends javax.swing.JInternalFrame {
                     novo.setValorUnidadeVenda(Double.parseDouble(txtValorUnitario.getText()));
                     novoEstoque.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
                     
-                } catch (ErroValidacaoException ex) {
-                    Logger.getLogger(frmCadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ErroValidacaoException | NumberFormatException ex){
+                    //Logger.getLogger(frmCadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(rootPane, ex);
+                    novo = null;
                 }
                 
-                ProdutoDAO dao = new ProdutoDAO();
-                if(dao.Salvar(novo)){
-                    JOptionPane.showMessageDialog(rootPane, "salvo");
-                    TxtAreaDescricao.setText("");
-                    txtNome.setText("");
-                    txtQuantidade.setText("");
-                    txtValorCompra.setText("");
-                    txtValorUnitario.setText("");
-                    
+                if(novo != null){
+                    ProdutoDAO dao = new ProdutoDAO();
+                    if(dao.Salvar(novo)){
+                        JOptionPane.showMessageDialog(rootPane, "salvo");
+                        TxtAreaDescricao.setText("");
+                        txtNome.setText("");
+                        txtQuantidade.setText("");
+                        txtValorCompra.setText("");
+                        txtValorUnitario.setText("");
+                    }
                 }else{
                     JOptionPane.showMessageDialog(rootPane, " não salvo");
                 }
