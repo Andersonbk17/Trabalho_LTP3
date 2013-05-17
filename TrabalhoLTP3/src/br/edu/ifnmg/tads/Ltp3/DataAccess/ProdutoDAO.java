@@ -34,7 +34,8 @@ public class ProdutoDAO {
         try{
             if(obj.getId() == 0){
                 PreparedStatement comando = bd.getConexao()
-                        .prepareStatement("INSERT INTO produtos (nome,descricao,valor_uni_Compra,valor_uni_Venda) VALUES (?,?,?,?)");
+                        .prepareStatement("INSERT INTO produtos (nome,descricao,"
+                        + "valor_uni_Compra,valor_uni_Venda) VALUES (?,?,?,?)");
                 comando.setString(1, obj.getNome());
                 comando.setString(2, obj.getDescricao());
                 comando.setDouble(3, obj.getValorUnidadeCompra());
@@ -52,7 +53,8 @@ public class ProdutoDAO {
                 
                 //setando o estoque com o novo id
                 PreparedStatement comando3 = bd.getConexao()
-                        .prepareStatement("INSERT INTO estoques (id,quantidade) VALUES (?,?)");
+                        .prepareStatement("INSERT INTO estoques (id,quantidade) "
+                        + "VALUES (?,?)");
                 comando3.setInt(1,consulta.getInt("max(id)"));
                 comando3.setInt(2, obj.getEstoque().getQuantidade());
                 
@@ -65,7 +67,8 @@ public class ProdutoDAO {
             }else{
             
                 PreparedStatement comando = bd.getConexao()
-                        .prepareStatement("UPDATE produtos SET nome = ?,descricao = ?,valor_uni_Compra = ?,valor_uni_Venda =? WHERE id =?");
+                        .prepareStatement("UPDATE produtos SET nome = ?,descricao "
+                        + "= ?,valor_uni_Compra = ?,valor_uni_Venda =? WHERE id =?");
                 comando.setString(1, obj.getNome());
                 comando.setString(2, obj.getDescricao());
                 comando.setDouble(3, obj.getValorUnidadeCompra());
@@ -75,7 +78,8 @@ public class ProdutoDAO {
                 comando.executeUpdate();
             
                 PreparedStatement comando2 = bd.getConexao()
-                        .prepareStatement("UPDATE estoques SET quantidade = ? WHERE id = ?");
+                        .prepareStatement("UPDATE estoques SET quantidade = ? "
+                        + "WHERE id = ?");
                 comando2.setInt(1, obj.getEstoque().getQuantidade());
                 comando2.setInt(2, obj.getEstoque().getId());
                 

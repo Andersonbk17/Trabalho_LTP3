@@ -29,7 +29,8 @@ public class FormasPagamentoDAO {
         try{
             if(obj.getId() == 0){
                 comando = banco.getConexao()
-                        .prepareStatement("INSERT INTO tipos_pagamento (nome,ativo) VALUES (?,?)");
+                        .prepareStatement("INSERT INTO tipos_pagamento "
+                        + "(nome,ativo) VALUES (?,?)");
                 comando.setString(1, obj.getNome());
                 comando.setInt(2, obj.getAtivo());
 
@@ -37,7 +38,8 @@ public class FormasPagamentoDAO {
                 comando.getConnection().commit();
             }else {
                 comando = banco.getConexao()
-                        .prepareStatement("UPDATE tipos_pagamento SET nome = ?, ativo = ? WHERE id = ?");
+                        .prepareStatement("UPDATE tipos_pagamento SET nome = ?, "
+                        + "ativo = ? WHERE id = ?");
                 comando.setString(1, obj.getNome());
                 comando.setInt(2, obj.getAtivo());
                 comando.setInt(3, obj.getId());
@@ -62,7 +64,8 @@ public class FormasPagamentoDAO {
         try{
             FormasPagamento fp = new FormasPagamento();
             PreparedStatement comando = banco.getConexao()
-                    .prepareStatement("SELECT * FROM tipo_pagamento WHERE id = ? AND ativo = 1");
+                    .prepareStatement("SELECT * FROM tipo_pagamento WHERE id = ? "
+                    + "AND ativo = 1");
             comando.setInt(1, id);
             
             ResultSet rs = comando.executeQuery();
@@ -83,9 +86,9 @@ public class FormasPagamentoDAO {
     public boolean Apagar(FormasPagamento obj) {
         try{
             PreparedStatement comando = banco.getConexao()
-                    .prepareStatement("UPDATE tipo_pagamento SET ativo = 0 WHERE id = ?");
+                    .prepareStatement("UPDATE tipos_pagamento SET ativo = 0 "
+                    + "WHERE id = ?");
             comando.setInt(1, obj.getId());
-            
             comando.executeUpdate();
             comando.getConnection().commit();
                 
@@ -101,7 +104,8 @@ public class FormasPagamentoDAO {
     public List<FormasPagamento> ListarTodos(){
         try{
             PreparedStatement comando = banco.getConexao()
-                    .prepareStatement("SELECT * FROM tipos_pagamento WHERE ativo = 1");
+                    .prepareStatement("SELECT * FROM tipos_pagamento WHERE ativo "
+                    + "= 1");
            ResultSet rs = comando.executeQuery();
            
            List<FormasPagamento> formasPagamento = new LinkedList<>();
@@ -128,20 +132,4 @@ public class FormasPagamentoDAO {
     
     
 }
-
-
-
-
-/*
- 
- 
- 
- * conferir todas as entradas de dados
- 
- 
- 
- 
- 
- */
-
 

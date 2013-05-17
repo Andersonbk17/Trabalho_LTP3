@@ -19,6 +19,7 @@ public class frmCadastroFormasPagamento extends javax.swing.JInternalFrame {
     FormasPagamentoDAO dao;
      List<FormasPagamento> listaLocal;
      DefaultTableModel modelo;
+     int idFormaPagamentoParaRemover;
     /**
      * Creates new form frmCadastroFormasPagamento
      */
@@ -205,14 +206,14 @@ public class frmCadastroFormasPagamento extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-       if(JOptionPane.showConfirmDialog(rootPane, "Você tem certeza que deseja salvar ?",
+       if(JOptionPane.showConfirmDialog(rootPane, "Você tem certeza que deseja "
+               + "salvar ?",
                "",JOptionPane.OK_CANCEL_OPTION) == 0){
 
            FormasPagamento nova = new FormasPagamento();
            nova.setNome(txtTipoPagamento.getText());
            nova.setAtivo(1);
            dao.Salvar(nova);
-         //  listaLocal.clear();
            preenceTabela(carregaDadosDoBanco());
         
        }
@@ -221,29 +222,43 @@ public class frmCadastroFormasPagamento extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-        FormasPagamento novaFormaPagamento = new FormasPagamento();
-        novaFormaPagamento.setNome(txtTipoPagamento.getText());
-        novaFormaPagamento.setAtivo(1);
+        if(JOptionPane.showConfirmDialog(rootPane, "Você tem certeza que deseja"
+                + "adicionar o item ?","",JOptionPane.OK_CANCEL_OPTION) == 0){
         
-        this.listaLocal.add(novaFormaPagamento);
-        preenceTabela(listaLocal);
+            FormasPagamento novaFormaPagamento = new FormasPagamento();
+            novaFormaPagamento.setNome(txtTipoPagamento.getText());
+            novaFormaPagamento.setAtivo(1);
+            FormasPagamentoDAO dao = new FormasPagamentoDAO();
+            dao.Salvar(novaFormaPagamento);
+            
+            preenceTabela(carregaDadosDoBanco());
+        }
         
+    
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
-        if(JOptionPane.showConfirmDialog(rootPane, "Você tem certeza que deseja sair ?","",JOptionPane.OK_CANCEL_OPTION) == 0){
+        if(JOptionPane.showConfirmDialog(rootPane, "Você tem certeza que deseja "
+                + "sair ?","",JOptionPane.OK_CANCEL_OPTION) == 0){
             this.dispose();
         }
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void tblListagemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblListagemMouseClicked
-        JOptionPane.showMessageDialog(rootPane, tblListagem.getSelectedRow());
+        Object valor = tblListagem.getValueAt(tblListagem.getSelectedRow(), 0);
+        this.idFormaPagamentoParaRemover = (Integer) valor;
+        
       
     }//GEN-LAST:event_tblListagemMouseClicked
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-       if(JOptionPane.showConfirmDialog(rootPane,"Você tem certeza que deseja remover o item","",JOptionPane.OK_CANCEL_OPTION) == 0){
-                 
+       if(JOptionPane.showConfirmDialog(rootPane,"Você tem certeza que deseja "
+               + "remover o item","",JOptionPane.OK_CANCEL_OPTION) == 0){
+                 FormasPagamentoDAO dao = new FormasPagamentoDAO();
+                 FormasPagamento tmp = new FormasPagamento();
+                 tmp.setId(this.idFormaPagamentoParaRemover);
+                 dao.Apagar(tmp);
+                 preenceTabela(carregaDadosDoBanco());
             
        }
     }//GEN-LAST:event_btnRemoverActionPerformed
