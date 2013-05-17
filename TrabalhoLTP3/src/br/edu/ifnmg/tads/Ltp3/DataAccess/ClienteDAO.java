@@ -104,6 +104,10 @@ public class ClienteDAO {
                 tmpCliente.setNome(tmpPessoa.getNome());
                 tmpCliente.setId(tmpPessoa.getId());
                 tmpCliente.setRg(tmpPessoa.getRg());
+                
+                EnderecoDAO daoEndereco = new EnderecoDAO();
+               // tmpCliente.setEnderecos(daoEndereco.listarTodos(id));
+                
            }
            
            

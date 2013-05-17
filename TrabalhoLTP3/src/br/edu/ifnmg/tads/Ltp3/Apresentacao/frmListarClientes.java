@@ -10,6 +10,8 @@ import br.edu.ifnmg.tads.Ltp3.Model.Cliente;
 import br.edu.ifnmg.tads.Ltp3.Model.ErroValidacaoException;
 import java.util.List;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -41,6 +43,7 @@ public class  frmListarClientes extends frmPadrao{
         tblClientes = new javax.swing.JTable();
         btnSair = new javax.swing.JButton();
         btnRemover = new javax.swing.JButton();
+        btnAlterar = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Listagem de Clientes");
@@ -79,6 +82,13 @@ public class  frmListarClientes extends frmPadrao{
             }
         });
 
+        btnAlterar.setText("Alterar");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -89,7 +99,9 @@ public class  frmListarClientes extends frmPadrao{
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 826, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnRemover))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(234, 234, 234)
                         .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -104,10 +116,12 @@ public class  frmListarClientes extends frmPadrao{
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(176, 176, 176)
-                        .addComponent(btnRemover)))
+                        .addComponent(btnRemover)
+                        .addGap(33, 33, 33)
+                        .addComponent(btnAlterar)))
                 .addGap(18, 18, 18)
                 .addComponent(btnSair)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
@@ -120,21 +134,19 @@ public class  frmListarClientes extends frmPadrao{
 
     private void tblClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClientesMouseClicked
        Object valueAt = tblClientes.getValueAt(tblClientes.getSelectedRow(), 0);
-        this.idDoClienteParaRemover = (Integer) valueAt;
-       
-        
-       /* 
-        Object valueAt2 = tblClientes.getValueAt(tblClientes.getSelectedRow(), 2);
-        this.cpfDapessoaDeletada = (String) valueAt2;
-        //JOptionPane.showMessageDialog(rootPane, this.cpfDapessoaDeletada);
-        * 
-        * */
+        this.idDoClienteSelecionado = (Integer) valueAt;
+    
+        qtdCliques = evt.getClickCount();
+        if(qtdCliques == 2){
+            JOptionPane.showMessageDialog(rootPane, qtdCliques);
+            qtdCliques =0;
+        }
     }//GEN-LAST:event_tblClientesMouseClicked
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
        Cliente tmp = null;
         try{
-            tmp = dao.Abrir(this.idDoClienteParaRemover);
+            tmp = dao.Abrir(this.idDoClienteSelecionado);
             
         }catch(Exception ex){
             JOptionPane.showMessageDialog(rootPane, ex.getMessage());
@@ -142,11 +154,11 @@ public class  frmListarClientes extends frmPadrao{
         //JOptionPane.showMessageDialog(rootPane, tmp.getId());
       
         
-        //dao.Apagar(this.idDoClienteParaRemover);
+        //dao.Apagar(this.idDoClienteSelecionado);
         PessoaDAO daop = new PessoaDAO();
          if(JOptionPane.showConfirmDialog(rootPane, "Você tem certeza que deseja "
                 + "apagar o cliente selecionado ?","",JOptionPane.OK_CANCEL_OPTION)== 0){
-            if(dao.Apagar(this.idDoClienteParaRemover) && daop.Apagar(tmp.getId())){
+            if(dao.Apagar(this.idDoClienteSelecionado) && daop.Apagar(tmp.getId())){
 
                 JOptionPane.showMessageDialog(rootPane, "Apagado com sucesso !");
                 //this.listaDeClientes.clear();
@@ -158,6 +170,10 @@ public class  frmListarClientes extends frmPadrao{
             }
              }
     }//GEN-LAST:event_btnRemoverActionPerformed
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+      
+    }//GEN-LAST:event_btnAlterarActionPerformed
 
     
     private  List <Cliente> carregaDadosDoBanco(){
@@ -198,12 +214,16 @@ public class  frmListarClientes extends frmPadrao{
             v.add(2,u.getCpf());
             v.add(3,u.getRg());
             v.add(4,u.getDataNascimento());
-            
+        
             modelo.addRow(v);
             
         }
         this.tblClientes.setModel(modelo);
+        //private boolean mo
+        
+        
         this.tblClientes.repaint();
+        
         
         
     }
@@ -211,9 +231,12 @@ public class  frmListarClientes extends frmPadrao{
     List<Cliente> listaDeClientes;
     DefaultTableModel modelo;
     ClienteDAO dao;
-    int idDoClienteParaRemover;
+    int idDoClienteSelecionado;
     String cpfDapessoaDeletada;
+    int qtdCliques; 
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnRemover;
     private javax.swing.JButton btnSair;
     private javax.swing.JScrollPane jScrollPane1;
