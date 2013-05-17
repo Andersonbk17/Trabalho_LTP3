@@ -93,10 +93,12 @@ public class PessoaDAO {
             }else{
                 comando = banco.getConexao()
                         .prepareStatement("UPDADE pessoas SET nome = ?, rg = ?, "
-                        + "cpf = ?,data_nascimento = ? ativo = ? WHERE id = ?");
+                        + "cpf = ?,data_nascimento = ?, ativo = ? WHERE id = ?");
                 comando.setString(1, obj.getNome());
                 comando.setString(2, obj.getRg());
                 comando.setString(3, obj.getCpf());
+                Date dataBd = new Date(obj.getDataNascimento().getTime());
+                comando.setDate(4, dataBd);
                 comando.setInt(5, obj.getAtivo());
                 comando.setInt(6, obj.getId());
                 

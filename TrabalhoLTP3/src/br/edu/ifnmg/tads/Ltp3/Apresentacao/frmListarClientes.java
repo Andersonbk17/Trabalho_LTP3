@@ -172,7 +172,22 @@ public class  frmListarClientes extends frmPadrao{
     }//GEN-LAST:event_btnRemoverActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-      
+        Cliente editar = null;
+        ClienteDAO dao = new ClienteDAO();
+        try {
+            editar = dao.Abrir(this.idDoClienteSelecionado);
+            
+        } catch (ErroValidacaoException ex) {
+            
+            Logger.getLogger(frmListarClientes.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            
+            Logger.getLogger(frmListarClientes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        frmEditarCliente janela = new frmEditarCliente(editar);
+        janela.setVisible(true);
+        this.getParent().add(janela);
+        this.dispose();
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     

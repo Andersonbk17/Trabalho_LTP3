@@ -41,7 +41,7 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    protected void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
@@ -489,17 +489,17 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtDataNascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataNascimentoActionPerformed
+    protected void txtDataNascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataNascimentoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDataNascimentoActionPerformed
 
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+    protected void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         if(JOptionPane.showConfirmDialog(rootPane, "Você tem certeza que deseja cancelar?")== 0){
             this.dispose();
         }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+    protected void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         if(JOptionPane.showConfirmDialog(rootPane,"Deseja Salvar os dados?") == 0){
             /*if(txtNome.getText().isEmpty()){
                 JOptionPane.showMessageDialog(rootPane, "O campo nome não pode ser vazio");
@@ -521,6 +521,8 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
                         cliente.setNome(txtNome.getText());
                         cliente.setRg(txtRg.getText());
                         cliente.setTelefones(this.listaTelefones);
+                        cliente.setIdCliente(this.idCliente);
+                        cliente.setId(this.idPessoa);
 
                     } catch (ErroValidacaoException ex) {
                         //Logger.getLogger(frmCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
@@ -561,7 +563,7 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_btnSalvarActionPerformed
 
-    private void btnAdicionarEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarEmailActionPerformed
+    protected void btnAdicionarEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarEmailActionPerformed
        Email tmp = new Email();
        
        tmp.setEndereco(txtEnderecoEmail.getText());
@@ -571,7 +573,7 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
        
     }//GEN-LAST:event_btnAdicionarEmailActionPerformed
 
-    private void btnAdicionarTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarTelefoneActionPerformed
+    protected void btnAdicionarTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarTelefoneActionPerformed
         Telefone tmp = new Telefone();
         try{
             tmp.setDdd(Integer.parseInt(txtDdd.getText()));
@@ -584,7 +586,7 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
         carregaTabelaTelefones(this.listaTelefones);
     }//GEN-LAST:event_btnAdicionarTelefoneActionPerformed
 
-    private void btnAdicionarEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarEnderecoActionPerformed
+    protected void btnAdicionarEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarEnderecoActionPerformed
         Endereco tmp = new Endereco();
         
         try{
@@ -602,41 +604,41 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_btnAdicionarEnderecoActionPerformed
 
-    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+    protected void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
        if(JOptionPane.showConfirmDialog(rootPane, "Você tem certeza que deseja sair ?","",JOptionPane.OK_CANCEL_OPTION) == 0){
            this.dispose();
        }
     }//GEN-LAST:event_btnSairActionPerformed
 
-    private void btnRemoverEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverEmailActionPerformed
+    protected void btnRemoverEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverEmailActionPerformed
         this.listaEmails.remove(this.emailParaRemover);
         carregaTabelaEmails(listaEmails);
     }//GEN-LAST:event_btnRemoverEmailActionPerformed
 
-    private void btnRemoverTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverTelefoneActionPerformed
+    protected void btnRemoverTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverTelefoneActionPerformed
         this.listaTelefones.remove(this.telefoneParaRemover);
         carregaTabelaTelefones(listaTelefones);
     }//GEN-LAST:event_btnRemoverTelefoneActionPerformed
 
-    private void btnRemoverEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverEnderecoActionPerformed
+    protected void btnRemoverEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverEnderecoActionPerformed
         this.listaEnderecos.remove(this.enderecoParaRemover);
         carregaTabelaEnderecos(listaEnderecos);
     }//GEN-LAST:event_btnRemoverEnderecoActionPerformed
 
-    private void tblEnderecoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEnderecoMouseClicked
+    protected void tblEnderecoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEnderecoMouseClicked
         this.enderecoParaRemover = tblEndereco.getSelectedRow();
     }//GEN-LAST:event_tblEnderecoMouseClicked
 
-    private void tblTelefonesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTelefonesMouseClicked
+    protected void tblTelefonesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTelefonesMouseClicked
       this.telefoneParaRemover = tblTelefones.getSelectedRow();
     }//GEN-LAST:event_tblTelefonesMouseClicked
 
-    private void tblEmailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmailMouseClicked
+    protected void tblEmailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmailMouseClicked
        this.emailParaRemover = tblEmail.getSelectedRow();
     }//GEN-LAST:event_tblEmailMouseClicked
 
     
-    private void carregaTabelaTelefones(List<Telefone> lista){
+    protected void carregaTabelaTelefones(List<Telefone> lista){
         this.modeloTabelaTelefone = new DefaultTableModel();
         this.modeloTabelaTelefone.addColumn("DDD");
         this.modeloTabelaTelefone.addColumn("Numero");
@@ -655,7 +657,7 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
     
     }
     
-    private void carregaTabelaEnderecos(List<Endereco> lista){
+    protected void carregaTabelaEnderecos(List<Endereco> lista){
         this.modeloTabelaEndereco = new DefaultTableModel();
         this.modeloTabelaEndereco.addColumn("Rua");
         this.modeloTabelaEndereco.addColumn("Bairro");
@@ -683,7 +685,7 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
     }
     
     
-    private void carregaTabelaEmails(List<Email> listaEmails){
+    protected void carregaTabelaEmails(List<Email> listaEmails){
         this.modeloTabelaEmail = new DefaultTableModel();
         modeloTabelaEmail.addColumn("Endereco");
         
@@ -700,7 +702,7 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
     }
     
     
-    private boolean validaCampos(){
+    protected boolean validaCampos(){
         boolean valida = true;
         if(txtCpf.getText().isEmpty() || txtDataNascimento.getText().isEmpty() || 
             txtNome.getText().isEmpty()){
@@ -716,7 +718,7 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
     }
     
     
-    private Date dataFormatada(String dataDesformatada) throws ParseException{
+    protected Date dataFormatada(String dataDesformatada) throws ParseException{
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");  
         
         Date dataForm = format.parse(dataDesformatada);
@@ -725,7 +727,7 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
     }
     
     
-    private void limpaCampos(){
+    protected void limpaCampos(){
         this.txtBairro.setText("");
         this.txtCep.setText("");
         this.txtCidade.setText("");
@@ -756,53 +758,55 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
     int telefoneParaRemover;
     int enderecoParaRemover;
     int emailParaRemover;
+    protected int idCliente = 0;
+    protected int idPessoa = 0;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdicionarEmail;
-    private javax.swing.JButton btnAdicionarEndereco;
-    private javax.swing.JButton btnAdicionarTelefone;
-    private javax.swing.JButton btnCancelar;
-    private javax.swing.JLabel btnNome;
-    private javax.swing.JButton btnRemoverEmail;
-    private javax.swing.JButton btnRemoverEndereco;
-    private javax.swing.JButton btnRemoverTelefone;
-    private javax.swing.JButton btnSair;
-    private javax.swing.JButton btnSalvar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JLabel lblBairro;
-    private javax.swing.JLabel lblCep;
-    private javax.swing.JLabel lblCidade;
-    private javax.swing.JLabel lblCpf;
-    private javax.swing.JLabel lblData;
-    private javax.swing.JLabel lblDdd;
-    private javax.swing.JLabel lblEnderecoEmail;
-    private javax.swing.JLabel lblEstado;
-    private javax.swing.JLabel lblNumero;
-    private javax.swing.JLabel lblNumeroEndereco;
-    private javax.swing.JLabel lblRg;
-    private javax.swing.JLabel lblRua;
-    private javax.swing.JTable tblEmail;
-    private javax.swing.JTable tblEndereco;
-    private javax.swing.JTable tblTelefones;
-    private javax.swing.JTextField txtBairro;
-    private javax.swing.JTextField txtCep;
-    private javax.swing.JTextField txtCidade;
-    private javax.swing.JTextField txtCpf;
-    private javax.swing.JFormattedTextField txtDataNascimento;
-    private javax.swing.JTextField txtDdd;
-    private javax.swing.JTextField txtEnderecoEmail;
-    private javax.swing.JTextField txtEstado;
-    private javax.swing.JTextField txtNome;
-    private javax.swing.JTextField txtNumeroEndereco;
-    private javax.swing.JTextField txtNumeroTelefone;
-    private javax.swing.JTextField txtRg;
-    private javax.swing.JTextField txtRua;
+    protected javax.swing.JButton btnAdicionarEmail;
+    protected javax.swing.JButton btnAdicionarEndereco;
+    protected javax.swing.JButton btnAdicionarTelefone;
+    protected javax.swing.JButton btnCancelar;
+    protected javax.swing.JLabel btnNome;
+    protected javax.swing.JButton btnRemoverEmail;
+    protected javax.swing.JButton btnRemoverEndereco;
+    protected javax.swing.JButton btnRemoverTelefone;
+    protected javax.swing.JButton btnSair;
+    protected javax.swing.JButton btnSalvar;
+    protected javax.swing.JLabel jLabel1;
+    protected javax.swing.JPanel jPanel1;
+    protected javax.swing.JPanel jPanel2;
+    protected javax.swing.JPanel jPanel3;
+    protected javax.swing.JPanel jPanel4;
+    protected javax.swing.JScrollPane jScrollPane1;
+    protected javax.swing.JScrollPane jScrollPane2;
+    protected javax.swing.JScrollPane jScrollPane3;
+    protected javax.swing.JTabbedPane jTabbedPane1;
+    protected javax.swing.JLabel lblBairro;
+    protected javax.swing.JLabel lblCep;
+    protected javax.swing.JLabel lblCidade;
+    protected javax.swing.JLabel lblCpf;
+    protected javax.swing.JLabel lblData;
+    protected javax.swing.JLabel lblDdd;
+    protected javax.swing.JLabel lblEnderecoEmail;
+    protected javax.swing.JLabel lblEstado;
+    protected javax.swing.JLabel lblNumero;
+    protected javax.swing.JLabel lblNumeroEndereco;
+    protected javax.swing.JLabel lblRg;
+    protected javax.swing.JLabel lblRua;
+    protected javax.swing.JTable tblEmail;
+    protected javax.swing.JTable tblEndereco;
+    protected javax.swing.JTable tblTelefones;
+    protected javax.swing.JTextField txtBairro;
+    protected javax.swing.JTextField txtCep;
+    protected javax.swing.JTextField txtCidade;
+    protected javax.swing.JTextField txtCpf;
+    protected javax.swing.JFormattedTextField txtDataNascimento;
+    protected javax.swing.JTextField txtDdd;
+    protected javax.swing.JTextField txtEnderecoEmail;
+    protected javax.swing.JTextField txtEstado;
+    protected javax.swing.JTextField txtNome;
+    protected javax.swing.JTextField txtNumeroEndereco;
+    protected javax.swing.JTextField txtNumeroTelefone;
+    protected javax.swing.JTextField txtRg;
+    protected javax.swing.JTextField txtRua;
     // End of variables declaration//GEN-END:variables
 }
