@@ -14,7 +14,7 @@ public class FormasPagamento {
     private int id;
     private String nome;
     private boolean alterado;
-    private short ativo;
+    private int ativo;
     
     public FormasPagamento(){
         this.id = 0;
@@ -56,11 +56,11 @@ public class FormasPagamento {
         this.alterado = alterado;
     }
 
-    public short getAtivo() {
+    public int getAtivo() {
         return ativo;
     }
 
-    public void setAtivo(short ativo) {
+    public void setAtivo(int ativo) {
         this.ativo = ativo;
     }
 

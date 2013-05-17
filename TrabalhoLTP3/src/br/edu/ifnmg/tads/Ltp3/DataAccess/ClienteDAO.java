@@ -13,7 +13,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -29,7 +28,7 @@ public class ClienteDAO {
    public boolean Salvar(Cliente obj)throws ErroValidacaoException, Exception{
        try{
            
-           PessoaDAO dao = new PessoaDAO();
+               PessoaDAO dao = new PessoaDAO();
                Pessoa tmp = new Pessoa();
                
                tmp.setCpf(obj.getCpf());
@@ -46,8 +45,10 @@ public class ClienteDAO {
                int idPessoa = dao.Salvar(tmp);
                
                PreparedStatement comando = conexao.getConexao()
-                       .prepareStatement("INSERT INTO clientes (id_pessoa) VALUES(?)");
+                       .prepareStatement("INSERT INTO clientes (id_pessoa,ativo) "
+                       + "VALUES(?,?)");
                comando.setInt(1, idPessoa);
+               comando.setInt(2, obj.getAtivo());
                
                comando.executeUpdate();
                comando.getConnection().commit();
@@ -62,7 +63,7 @@ public class ClienteDAO {
            
        }catch(SQLException ex){
            
-           JOptionPane.showMessageDialog(null,ex);
+           ex.printStackTrace();
            
            return false;
        }
@@ -75,7 +76,8 @@ public class ClienteDAO {
        try{
            
            PreparedStatement comando = conexao.
-                   getConexao().prepareStatement("SELECT * FROM clientes WHERE id = ?");
+                   getConexao().prepareStatement("SELECT * FROM clientes WHERE "
+                   + "id = ? AND ativo = 1");
            comando.setInt(1, id);
            ResultSet consulta = comando.executeQuery();
            comando.getConnection().commit();
@@ -85,7 +87,7 @@ public class ClienteDAO {
            Pessoa tmpPessoa = null;
            if(consulta.first()){
                PessoaDAO daoPessoa = new PessoaDAO();
-               tmpPessoa = daoPessoa.Abrir(id);
+               tmpPessoa = daoPessoa.Abrir(consulta.getInt("id_pessoa"));
                tmpCliente = new Cliente();
                tmpCliente.setIdCliente(consulta.getInt("id"));
            }
@@ -103,6 +105,9 @@ public class ClienteDAO {
            }
            
            
+           
+           
+           
             return tmpCliente;
        }catch(SQLException ex){
            ex.printStackTrace();
@@ -114,22 +119,17 @@ public class ClienteDAO {
    
    public boolean Apagar(int id ){
        try{
-                      
-          // PessoaDAO pessoaDAO = new PessoaDAO();
-           //pessoaDAO.Apagar(id);
-           
+          
            PreparedStatement comando = conexao
-                   .getConexao().prepareStatement("DELETE FROM clientes WHERE id = ?");
+                   .getConexao().prepareStatement("UPDATE clientes SET "
+                   + "ativo = 0 WHERE id = ?");
            comando.setInt(1, id);
            comando.execute();
            comando.getConnection().commit();
            
            
-           
            return true;
            
-           
-       
        }catch(SQLException ex){
            ex.printStackTrace();
            return false;
@@ -143,7 +143,7 @@ public class ClienteDAO {
            PreparedStatement comando = conexao
                    .getConexao().prepareStatement("SELECT c.id as idcliente, p.id as "
                    + "idpessoa,p.nome,p.cpf,p.rg,p.data_nascimento FROM pessoas p INNER "
-                   + "JOIN clientes c on c.id_pessoa = p.id");
+                   + "JOIN clientes c on c.id_pessoa = p.id WHERE c.ativo = 1");
            
            ResultSet consulta = comando.executeQuery();
            comando.getConnection().commit();

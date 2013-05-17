@@ -14,7 +14,7 @@ public class UsuarioSistema  extends Pessoa{
     private int idUsuario;
     private String usuario;
     private String senha;
-    private short ativo;
+    private int ativo;
     
     /*--------Construtores ---------*/
     public UsuarioSistema(){
@@ -56,6 +56,15 @@ public class UsuarioSistema  extends Pessoa{
         this.senha = senha;
     }
 
+    public int getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(int ativo) {
+        this.ativo = ativo;
+    }
+
+    
     @Override
     public int hashCode() {
         int hash = 7;

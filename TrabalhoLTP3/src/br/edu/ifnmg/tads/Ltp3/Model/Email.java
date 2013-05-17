@@ -13,7 +13,7 @@ import java.util.Objects;
 public class Email {
     private int id;
     private String endereco;
-    private short ativo;
+    private int ativo;
     
     /*--------- Construtores ---------*/
     public Email(){
@@ -51,11 +51,11 @@ public class Email {
         this.endereco = endereco;
     }
 
-    public short getAtivo() {
+    public int getAtivo() {
         return ativo;
     }
 
-    public void setAtivo(short ativo) {
+    public void setAtivo(int ativo) {
         this.ativo = ativo;
     }
 

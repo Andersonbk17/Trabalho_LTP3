@@ -21,7 +21,7 @@ public class Pessoa {
     private List<Endereco> Enderecos;
     private List<Email> Emails;
     private List<Telefone> Telefones;
-    private short ativo;
+    private int ativo;
     
 
     /*-------- Construtores -----------*/
@@ -176,11 +176,11 @@ public class Pessoa {
     
     }
 
-    public short getAtivo() {
+    public int getAtivo() {
         return ativo;
     }
 
-    public void setAtivo(short ativo) {
+    public void setAtivo(int ativo) {
         this.ativo = ativo;
     }
 

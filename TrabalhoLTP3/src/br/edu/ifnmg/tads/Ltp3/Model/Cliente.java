@@ -10,7 +10,7 @@ package br.edu.ifnmg.tads.Ltp3.Model;
  */
 public class Cliente extends Pessoa{
     private int idCliente;
-    private short ativo;
+    private int ativo;
 
     /*-----------Contrutores ------------------------*/
     public Cliente(int idCliente) {
@@ -36,11 +36,11 @@ public class Cliente extends Pessoa{
         }
     }
 
-    public short getAtivo() {
+    public int getAtivo() {
         return ativo;
     }
 
-    public void setAtivo(short ativo) {
+    public void setAtivo(int ativo) {
         this.ativo = ativo;
     }
 

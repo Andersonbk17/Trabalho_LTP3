@@ -29,21 +29,23 @@ public class FormasPagamentoDAO {
         try{
             if(obj.getId() == 0){
                 comando = banco.getConexao()
-                        .prepareStatement("INSERT INTO tipos_pagamento (nome) VALUES (?)");
+                        .prepareStatement("INSERT INTO tipos_pagamento (nome,ativo) VALUES (?,?)");
                 comando.setString(1, obj.getNome());
+                comando.setInt(2, obj.getAtivo());
 
                 comando.executeUpdate();
                 comando.getConnection().commit();
-            }else if (obj.isAlterado()){
+            }else {
                 comando = banco.getConexao()
-                        .prepareStatement("UPDATE tipos_pagamento SET nome = ? WHERE id = ?");
+                        .prepareStatement("UPDATE tipos_pagamento SET nome = ?, ativo = ? WHERE id = ?");
                 comando.setString(1, obj.getNome());
-                comando.setInt(2, obj.getId());
+                comando.setInt(2, obj.getAtivo());
+                comando.setInt(3, obj.getId());
 
                 comando.executeUpdate();
                 comando.getConnection().commit();
-                        
-            }
+            }     
+            
             return true;
         
         }catch(SQLException ex){
@@ -60,7 +62,7 @@ public class FormasPagamentoDAO {
         try{
             FormasPagamento fp = new FormasPagamento();
             PreparedStatement comando = banco.getConexao()
-                    .prepareStatement("SELECT * FROM tipo_pagamento WHERE id = ?");
+                    .prepareStatement("SELECT * FROM tipo_pagamento WHERE id = ? AND ativo = 1");
             comando.setInt(1, id);
             
             ResultSet rs = comando.executeQuery();
@@ -78,31 +80,28 @@ public class FormasPagamentoDAO {
     
     }
     
-    public boolean Apagar(FormasPagamento obj){
+    public boolean Apagar(FormasPagamento obj) {
         try{
             PreparedStatement comando = banco.getConexao()
-                    .prepareStatement("DELETE FROM tipo_pagamento WHERE id = ?");
+                    .prepareStatement("UPDATE tipo_pagamento SET ativo = 0 WHERE id = ?");
             comando.setInt(1, obj.getId());
-            if(comando.executeUpdate() == 1) {
-                comando.getConnection().commit();
-                return true;
-            }
-            else {
-                comando.getConnection().rollback();
-                return false;
-            }
+            
+            comando.executeUpdate();
+            comando.getConnection().commit();
+                
+           
+            return true;
         }catch(SQLException ex){
             ex.printStackTrace();
             return false;
         }
-    
     
     }
     
     public List<FormasPagamento> ListarTodos(){
         try{
             PreparedStatement comando = banco.getConexao()
-                    .prepareStatement("SELECT * FROM tipos_pagamento");
+                    .prepareStatement("SELECT * FROM tipos_pagamento WHERE ativo = 1");
            ResultSet rs = comando.executeQuery();
            
            List<FormasPagamento> formasPagamento = new LinkedList<>();
@@ -111,6 +110,7 @@ public class FormasPagamentoDAO {
                FormasPagamento temp = new FormasPagamento();
                temp.setId(rs.getInt("id"));
                temp.setNome(rs.getString("nome"));
+               temp.setAtivo(rs.getInt("ativo"));
                
                formasPagamento.add(temp);
            
@@ -128,3 +128,20 @@ public class FormasPagamentoDAO {
     
     
 }
+
+
+
+
+/*
+ 
+ 
+ 
+ * conferir todas as entradas de dados
+ 
+ 
+ 
+ 
+ 
+ */
+
+

@@ -14,11 +14,11 @@ public class Endereco {
     private int id;
     private String rua;
     private String bairro;
-    private short ativo;
     private String cidade;
     private String estado;
     private int numero;
     private String cep;
+    private int ativo;
 
     
     /*----------- Construtores -------------*/
@@ -72,11 +72,11 @@ public class Endereco {
         this.bairro = bairro;
     }
 
-    public short getAtivo() {
+    public int getAtivo() {
         return ativo;
     }
 
-    public void setAtivo(short ativo) {
+    public void setAtivo(int ativo) {
         this.ativo = ativo;
     }
 

@@ -23,15 +23,29 @@ public class EmailDAO {
         banco = new Bd();
     }
     
-    public boolean Salvar(Email obj, int idPessoa){
+    public boolean Salvar(Email obj, int idPessoa) {
         try{
-            PreparedStatement comando = banco.getConexao()
-                    .prepareStatement("INSERT INTO emails (endereco,id_pessoa) VALUES (?,?)");
-            comando.setString(1, obj.getEndereco());
-            comando.setInt(2, idPessoa);
-            comando.executeUpdate();
-            comando.getConnection().commit();
             
+            if(obj.getId() == 0){
+                PreparedStatement comando = banco.getConexao()
+                        .prepareStatement("INSERT INTO emails (endereco,"
+                        + "id_pessoa,ativo) VALUES (?,?,?)");
+                comando.setString(1, obj.getEndereco());
+                comando.setInt(2, idPessoa);
+                comando.setInt(3, obj.getAtivo());
+                comando.executeUpdate();
+                comando.getConnection().commit();
+            }else{
+                PreparedStatement comando = banco.getConexao()
+                        .prepareStatement("UPDATE emails SET endereco = ?,id_pessoa = ?,ativo = ? WHERE id = ?");
+                comando.setString(1, obj.getEndereco());
+                comando.setInt(2, idPessoa);
+                comando.setInt(3, obj.getAtivo());
+                comando.setInt(4, idPessoa);
+                comando.executeUpdate();
+                comando.getConnection().commit();
+            
+            }
             return true;
         }catch(SQLException ex){
             ex.printStackTrace();
@@ -47,7 +61,7 @@ public class EmailDAO {
     public Email Abrir(int id){
         try{
             PreparedStatement comando = banco.getConexao()
-                    .prepareStatement("SELECT * FROM emails WHERE id = ?");
+                    .prepareStatement("SELECT * FROM emails WHERE id = ? AND ativo = 1");
             comando.setInt(1, id);
             ResultSet consulta = comando.executeQuery();
             comando.getConnection().commit();
@@ -75,8 +89,9 @@ public class EmailDAO {
     public boolean Apagar(Email obj){
         try{
             PreparedStatement comando = banco.getConexao()
-                    .prepareStatement("DELETE FROM emails WHERE id = ?");
-            comando.setInt(1, obj.getId());
+                    .prepareStatement("UPDATE emails SET ativo = ? WHERE id = ?");
+            comando.setInt(1, 0);
+            comando.setInt(2, obj.getId());
             comando.executeUpdate();
             comando.getConnection().commit();
             return true;
@@ -92,7 +107,8 @@ public class EmailDAO {
     public List<Email> listarTodos(){
         try{
             PreparedStatement comando = banco.getConexao()
-                    .prepareStatement("SELECT * FROM emails");
+                    .prepareStatement("SELECT * FROM emails WHERE ativo = ?");
+            comando.setInt(1, 1);
             ResultSet consulta = comando.executeQuery();
             
             List<Email> listaEmails = new LinkedList<>();
@@ -118,8 +134,9 @@ public class EmailDAO {
     public boolean ApagarTodosQuandoExcluiPessoa(int idPessoa){
         try{
             PreparedStatement comando = banco.getConexao()
-                    .prepareStatement("DELETE FROM emails WHERE id_pessoa= ?");
-            comando.setInt(1, idPessoa);
+                    .prepareStatement("UPDATE emails SET ativo = ? WHERE id = ?");
+            comando.setInt(1, 0);
+            comando.setInt(2, idPessoa);
             comando.executeUpdate();
             comando.getConnection().commit();
             return true;

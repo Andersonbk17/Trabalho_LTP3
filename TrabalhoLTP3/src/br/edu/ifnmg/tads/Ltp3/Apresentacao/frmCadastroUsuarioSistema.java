@@ -662,9 +662,8 @@ public class frmCadastroUsuarioSistema extends javax.swing.JInternalFrame {
 
     private boolean validaCampos(){
         boolean valida = true;
-        if(txtBairro.getText().isEmpty() || txtCep.getText().isEmpty() || txtCidade.getText().isEmpty() 
-            || txtCpf.getText().isEmpty() || txtDataNascimento.getText().isEmpty() || 
-            txtEstado.getText().isEmpty() || txtNome.getText().isEmpty() || txtUsuario.getText().isEmpty() 
+        if( txtCpf.getText().isEmpty() || txtDataNascimento.getText().isEmpty() || 
+             txtNome.getText().isEmpty() || txtUsuario.getText().isEmpty() 
             && !txtSenha.getText().equals(txtSenhaNovamente.getText())){
             
                 valida = false;

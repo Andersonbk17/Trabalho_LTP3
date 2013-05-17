@@ -32,15 +32,18 @@ public class PessoaDAO {
         try{
             if(obj.getId() == 0){
                comando = banco.getConexao()
-                        .prepareStatement("INSERT INTO pessoas (nome,rg,cpf,data_nascimento) VALUES (?,?,?,?)");
+                        .prepareStatement("INSERT INTO pessoas (nome,rg,cpf,"
+                       + "data_nascimento,ativo) VALUES (?,?,?,?,?)");
                 comando.setString(1, obj.getNome());
                 comando.setString(2, obj.getRg());
                 comando.setString(3, obj.getCpf());
                 Date dataBd = new Date(obj.getDataNascimento().getTime());
                 comando.setDate(4, dataBd);
+                comando.setInt(5, obj.getAtivo());
                               
                 comando.executeUpdate();
-                PreparedStatement comando2 = banco.getConexao().prepareStatement("SELECT MAX(id) FROM pessoas");
+                PreparedStatement comando2 = banco.getConexao()
+                        .prepareStatement("SELECT MAX(id) FROM pessoas WHERE ativo = 1");
                 ResultSet consulta = comando2.executeQuery();
                 consulta.first();
                 id = consulta.getInt("MAX(id)");
@@ -89,11 +92,13 @@ public class PessoaDAO {
             
             }else{
                 comando = banco.getConexao()
-                        .prepareStatement("UPDADE pessoas SET nome = ?, rg = ?, cpf = ?,data_nascimento = ? WHERE id = ?");
+                        .prepareStatement("UPDADE pessoas SET nome = ?, rg = ?, "
+                        + "cpf = ?,data_nascimento = ? ativo = ? WHERE id = ?");
                 comando.setString(1, obj.getNome());
                 comando.setString(2, obj.getRg());
                 comando.setString(3, obj.getCpf());
-                comando.setInt(5, obj.getId());
+                comando.setInt(5, obj.getAtivo());
+                comando.setInt(6, obj.getId());
                 
                 comando.executeUpdate();
                 comando.getConnection().commit();
@@ -113,7 +118,7 @@ public class PessoaDAO {
         try{
             
             PreparedStatement comando = banco.getConexao()
-                    .prepareStatement("SELECT * FROM pessoas WHERE id = ?");
+                    .prepareStatement("SELECT * FROM pessoas WHERE id = ? AND ativo = 1");
             comando.setInt(1, id);
             
             ResultSet consulta = comando.executeQuery();
@@ -130,7 +135,7 @@ public class PessoaDAO {
                 
                 //Preencher telefones
                 PreparedStatement comando2 = banco.getConexao()
-                        .prepareStatement("SELECT * from telefones WHERE id_pessoa = ?");
+                        .prepareStatement("SELECT * from telefones WHERE id_pessoa = ? AND ativo = 1");
                 comando2.setInt(1, id);
                 
                 ResultSet consulta2 = comando2.executeQuery();
@@ -149,7 +154,7 @@ public class PessoaDAO {
                 
                 //Preencher Enderecos
                 PreparedStatement comando3 = banco.getConexao()
-                        .prepareStatement("SELECT * from enderecos WHERE id_pessoa = ?");
+                        .prepareStatement("SELECT * from enderecos WHERE id_pessoa = ? AND ativo =1");
                 comando3.setInt(1, id);
                 
                 ResultSet consulta3 = comando3.executeQuery();
@@ -174,7 +179,7 @@ public class PessoaDAO {
                 
                 //Preenche emails
                 PreparedStatement comando4 = banco.getConexao()
-                        .prepareStatement("SELECT * FROM emails WHERE id_pessoa = ?");
+                        .prepareStatement("SELECT * FROM emails WHERE id_pessoa = ? AND ativo =1");
                 comando4.setInt(1, id);
                 
                 ResultSet consulta4 = comando4.executeQuery();
@@ -216,7 +221,7 @@ public class PessoaDAO {
            enderecoDAO.ApagarTodosQuandoExcluiPessoa(id);
             
             PreparedStatement comando = banco.getConexao()
-                    .prepareStatement("DELETE FROM pessoas WHERE id = ?");
+                    .prepareStatement("UPDATE pessoas SET ativo = 0 WHERE id = ?");
             comando.setInt(1, id);
             comando.executeUpdate();
             comando.getConnection().commit();
@@ -229,10 +234,5 @@ public class PessoaDAO {
     
     
     }
-    
-    
-    
-    
-    
-    
+     
 }

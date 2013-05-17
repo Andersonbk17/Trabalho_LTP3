@@ -12,7 +12,7 @@ public class Telefone {
     private int id;
     private int ddd;
     private int numero;
-    private short ativo;
+    private int ativo;
     
     /*-------- Construtores ----*/
     public Telefone(){
@@ -59,11 +59,11 @@ public class Telefone {
         this.numero = numero;
     }
 
-    public short getAtivo() {
+    public int getAtivo() {
         return ativo;
     }
 
-    public void setAtivo(short ativo) {
+    public void setAtivo(int ativo) {
         this.ativo = ativo;
     }
 

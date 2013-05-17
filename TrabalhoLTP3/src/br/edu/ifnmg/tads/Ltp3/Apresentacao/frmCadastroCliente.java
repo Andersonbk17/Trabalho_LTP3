@@ -16,8 +16,6 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -151,7 +149,7 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
                             .addComponent(lblCpf)
                             .addGap(18, 18, 18)
                             .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(170, Short.MAX_VALUE))
+                .addContainerGap(122, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,6 +210,11 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
         });
 
         btnRemoverEndereco.setText("Remover");
+        btnRemoverEndereco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverEnderecoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -252,7 +255,7 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnAdicionarEndereco)
                             .addComponent(btnRemoverEndereco))))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -314,6 +317,11 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(tblTelefones);
 
         btnRemoverTelefone.setText("Remover");
+        btnRemoverTelefone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverTelefoneActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -335,7 +343,7 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
                         .addComponent(btnAdicionarTelefone)
                         .addGap(18, 18, 18)
                         .addComponent(btnRemoverTelefone)))
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -365,6 +373,11 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
         });
 
         btnRemoverEmail.setText("Remover");
+        btnRemoverEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverEmailActionPerformed(evt);
+            }
+        });
 
         tblEmail.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -395,7 +408,7 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
                         .addComponent(btnAdicionarEmail)
                         .addGap(38, 38, 38)
                         .addComponent(btnRemoverEmail)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -449,7 +462,7 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(81, 81, 81)
                 .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(219, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -543,6 +556,7 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
        Email tmp = new Email();
        
        tmp.setEndereco(txtEnderecoEmail.getText());
+       //tmp.setAtivo(1);
        this.listaEmails.add(tmp);
        carregaTabelaEmails(this.listaEmails);
        
@@ -584,6 +598,18 @@ public class frmCadastroCliente extends javax.swing.JInternalFrame {
            this.dispose();
        }
     }//GEN-LAST:event_btnSairActionPerformed
+
+    private void btnRemoverEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRemoverEmailActionPerformed
+
+    private void btnRemoverTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverTelefoneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRemoverTelefoneActionPerformed
+
+    private void btnRemoverEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverEnderecoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRemoverEnderecoActionPerformed
 
     
     private void carregaTabelaTelefones(List<Telefone> lista){

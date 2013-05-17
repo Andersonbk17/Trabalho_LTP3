@@ -19,7 +19,7 @@ public class Venda {
     private Cliente cliente;
     private UsuarioSistema usuario;
     private FormasPagamento formaPagamento;
-    private short ativo;
+    private int ativo;
     
     
     /*----- Construtor ----------*/
@@ -106,11 +106,11 @@ public class Venda {
         this.formaPagamento = formaPagamento;
     }
 
-    public short getAtivo() {
+    public int getAtivo() {
         return ativo;
     }
 
-    public void setAtivo(short ativo) {
+    public void setAtivo(int ativo) {
         this.ativo = ativo;
     }
 

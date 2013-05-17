@@ -17,7 +17,7 @@ public class Produto {
     private double valorUnidadeCompra;
     private double valorUnidadeVenda;
     private Estoque estoque;
-    private short ativo;
+    private int ativo;
     
     /*----- Construtores ---------------*/
     public Produto(){
@@ -115,11 +115,11 @@ public class Produto {
         this.estoque = estoque;
     }
 
-    public short getAtivo() {
+    public int getAtivo() {
         return ativo;
     }
 
-    public void setAtivo(short ativo) {
+    public void setAtivo(int ativo) {
         this.ativo = ativo;
     }
 

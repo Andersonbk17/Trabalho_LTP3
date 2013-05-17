@@ -26,15 +26,32 @@ public class TelefoneDAO {
     public boolean Salvar(Telefone obj, int idPessoa){
         try{
                 if(obj.getId() == 0 ){
+                    PreparedStatement comando = banco
+                            .getConexao().prepareStatement("INSERT INTO telefones "
+                            + "(ddd,numero,id_pessoa,ativo) VALUES(?,?,?,?)");
+
+                    comando.setInt(1, obj.getDdd());
+                    comando.setInt(2, obj.getNumero());
+                    comando.setInt(3, idPessoa);
+                    comando.setInt(4, 1);
+
+                    comando.executeUpdate();
+                    comando.getConnection().commit();
+                
+            }else{
                 PreparedStatement comando = banco
-                        .getConexao().prepareStatement("INSERT INTO telefones (ddd,numero,id_pessoa) VALUES(?,?,?)");
+                            .getConexao().prepareStatement("UPDATE telefones "
+                        + "SET ddd = ?,numero = ?"
+                        + ",id_pessoa = ?,ativo = ? WHERE id =?");
 
-                comando.setInt(1, obj.getDdd());
-                comando.setInt(2, obj.getNumero());
-                comando.setInt(3, idPessoa);
+                    comando.setInt(1, obj.getDdd());
+                    comando.setInt(2, obj.getNumero());
+                    comando.setInt(3, idPessoa);
+                    comando.setInt(4, obj.getAtivo());
+                    comando.setInt(5, obj.getId());
 
-                comando.executeUpdate();
-                comando.getConnection().commit();
+                    comando.executeUpdate();
+                    comando.getConnection().commit();
                 
             }
             return true;
@@ -46,28 +63,29 @@ public class TelefoneDAO {
     
     public Telefone Abrir(int id) {
         Telefone tmp = null;
-        try{
-            if(id != 0){
-                PreparedStatement comando = banco.getConexao()
-                        .prepareStatement("SELECT * FROM telefones WHERE id = ?");
-                comando.setInt(1, id);
-                ResultSet consulta = comando.executeQuery();
-                comando.getConnection().commit();
-                
-                
-                if(consulta.first()){
-                    tmp = new Telefone();
-                    tmp.setDdd(consulta.getInt("ddd"));
-                    
-                    tmp.setId(consulta.getInt("id"));
-                    
-                    tmp.setNumero(consulta.getInt("numero"));
-                    
-                }
+        try {
+
+            PreparedStatement comando = banco.getConexao()
+                    .prepareStatement("SELECT * FROM telefones WHERE id = ? "
+                    + "AND ativo = 1");
+            comando.setInt(1, id);
+            ResultSet consulta = comando.executeQuery();
+            comando.getConnection().commit();
+
+
+            if (consulta.first()) {
+                tmp = new Telefone();
+                tmp.setDdd(consulta.getInt("ddd"));
+
+                tmp.setId(consulta.getInt("id"));
+
+                tmp.setNumero(consulta.getInt("numero"));
 
             }
+
+
             return tmp;
-        }catch(SQLException ex ){
+        } catch (SQLException ex) {
             ex.printStackTrace();
             return null;
         }
@@ -82,7 +100,7 @@ public class TelefoneDAO {
     public boolean Apagar(Telefone obj){
         try{
             PreparedStatement comando = banco
-                    .getConexao().prepareStatement("DELETE FROM telefones WHERE id = ?");
+                    .getConexao().prepareStatement("UPDATE telefones SET ativo = 0 WHERE id = ?");
             comando.setInt(1, obj.getId());
             comando.executeUpdate();
             comando.getConnection().commit();
@@ -98,7 +116,7 @@ public class TelefoneDAO {
     public List<Telefone> listarTodos(int idPessoa){
         try{
             PreparedStatement comando = banco.getConexao()
-                    .prepareStatement("SELECT * FROM telefones");
+                    .prepareStatement("SELECT * FROM telefones WHERE ativo = 1");
             ResultSet consulta = comando.executeQuery();
             comando.getConnection().commit();
             List<Telefone> listaTelefones = new LinkedList<>();
@@ -126,7 +144,7 @@ public class TelefoneDAO {
     public boolean ApagarTodosQuandoExcluiPessoa(int idPessoa){
         try{
             PreparedStatement comando = banco.getConexao()
-                    .prepareStatement("DELETE FROM telefones WHERE id_pessoa= ?");
+                    .prepareStatement("UPDATE  telefones SET ativo = 0 WHERE id_pessoa= ?");
             comando.setInt(1, idPessoa);
             comando.executeUpdate();
             comando.getConnection().commit();

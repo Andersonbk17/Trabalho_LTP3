@@ -24,8 +24,7 @@ public class frmCadastroFormasPagamento extends javax.swing.JInternalFrame {
      */
     public frmCadastroFormasPagamento() {
         initComponents();
-        //this.formasPagamento = new LinkedList<>();
-       this.listaLocal = carregaDadosDoBanco(); 
+       //this.listaLocal = carregaDadosDoBanco(); 
        preenceTabela(carregaDadosDoBanco());
     }
     
@@ -47,7 +46,6 @@ public class frmCadastroFormasPagamento extends javax.swing.JInternalFrame {
             
             valores.add(0,f.getId());
             valores.add(1,f.getNome());
-            
             modelo.addRow(valores);
         
         }
@@ -207,27 +205,16 @@ public class frmCadastroFormasPagamento extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-       if(JOptionPane.showConfirmDialog(rootPane, "Você tem certeza que deseja salvar ?","",JOptionPane.OK_CANCEL_OPTION) == 0){
+       if(JOptionPane.showConfirmDialog(rootPane, "Você tem certeza que deseja salvar ?",
+               "",JOptionPane.OK_CANCEL_OPTION) == 0){
 
            FormasPagamento nova = new FormasPagamento();
            nova.setNome(txtTipoPagamento.getText());
+           nova.setAtivo(1);
            dao.Salvar(nova);
-           preenceTabela(listaLocal);
-           
-           JOptionPane.showMessageDialog(rootPane,"linha= "+ tblListagem.getEditingRow());
-           
-           
-           
-         //  modelo.getValueAt(tblListagem.getEditingRow(), 1);
-          JOptionPane.showMessageDialog(rootPane, "valor= "+modelo.getValueAt(tblListagem.getEditingRow(), 1));
-          int qtd = 0;
-          /*for(FormasPagamento nova : this.listaLocal){
-               if(dao.Salvar(nova)){
-                   qtd++;
-               }
-           }
-           
-           JOptionPane.showMessageDialog(rootPane, "Foram salvos/Alterados "+qtd+" Itens");*/
+         //  listaLocal.clear();
+           preenceTabela(carregaDadosDoBanco());
+        
        }
        
         
@@ -236,7 +223,8 @@ public class frmCadastroFormasPagamento extends javax.swing.JInternalFrame {
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
         FormasPagamento novaFormaPagamento = new FormasPagamento();
         novaFormaPagamento.setNome(txtTipoPagamento.getText());
-        //novaFormaPagamento.setAlterado(true);
+        novaFormaPagamento.setAtivo(1);
+        
         this.listaLocal.add(novaFormaPagamento);
         preenceTabela(listaLocal);
         
@@ -255,11 +243,7 @@ public class frmCadastroFormasPagamento extends javax.swing.JInternalFrame {
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
        if(JOptionPane.showConfirmDialog(rootPane,"Você tem certeza que deseja remover o item","",JOptionPane.OK_CANCEL_OPTION) == 0){
-            //ver cod
-            //JOptionPane.showMessageDialog(rootPane, tblListagem.getSelectedRow());
-            //JOptionPane.showMessageDialog(rootPane, tblListagem.getValueAt(tblListagem.getEditingRow(),tblListagem.getEditingColumn()));
-            
-           
+                 
             
        }
     }//GEN-LAST:event_btnRemoverActionPerformed

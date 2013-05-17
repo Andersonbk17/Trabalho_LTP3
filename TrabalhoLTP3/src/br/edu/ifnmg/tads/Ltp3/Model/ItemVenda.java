@@ -14,7 +14,7 @@ public class ItemVenda {
     private int id;
     private int quantidade;
     private Produto produto;
-    private short ativo;
+    private int ativo;
     
     /*-------------Construtores--------------------*/
     
@@ -71,11 +71,11 @@ public class ItemVenda {
         return  produto.toString();
     }
 
-    public short getAtivo() {
+    public int getAtivo() {
         return ativo;
     }
 
-    public void setAtivo(short ativo) {
+    public void setAtivo(int ativo) {
         this.ativo = ativo;
     }
 
