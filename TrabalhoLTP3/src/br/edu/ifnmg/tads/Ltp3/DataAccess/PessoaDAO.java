@@ -141,7 +141,7 @@ public class PessoaDAO {
                 TelefoneDAO daoTelefone = new TelefoneDAO();
                 listaTelefones =  daoTelefone.listarTodos(idPessoa);
                 pessoa.setTelefones(listaTelefones);
-                System.out.print(listaTelefones);
+               // System.out.print(listaTelefones);
                 
                 //Preencher Enderecos
                 
@@ -149,7 +149,7 @@ public class PessoaDAO {
                 EnderecoDAO daoEndereco = new EnderecoDAO();
                 listaEnderecos = daoEndereco.listarTodos(idPessoa);
                 pessoa.setEnderecos(listaEnderecos);
-                System.out.print(listaEnderecos);      
+               // System.out.print(listaEnderecos);      
                 
                 //Preenche emails
                 
@@ -158,7 +158,7 @@ public class PessoaDAO {
                 EmailDAO daoEmails = new EmailDAO();
                 listaEmails = daoEmails.listarTodos(idPessoa);
                 pessoa.setEmails(listaEmails);
-                System.out.print(listaEmails);
+               // System.out.print(listaEmails);
                 
             }
             
