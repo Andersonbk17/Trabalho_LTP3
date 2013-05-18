@@ -1,9 +1,4 @@
-CREATE TABLE estoques(
-	id int primary key auto_increment,
-	quantidade int not null,
-	ativo int
 
-)Engine=InnoDB;
 
 CREATE TABLE tipos_pagamento(
 	id int primary key auto_increment,
@@ -88,6 +83,7 @@ CREATE TABLE vendas(
 	id_usuario int not null,
 	id_cliente int not null,
 	id_tipo_pagamento int not null,
+	valor_total float,
 	ativo int,
 	foreign key (id_usuario) references usuarios_sistema(id),
 	foreign key (id_cliente) references clientes(id),
@@ -104,6 +100,13 @@ CREATE TABLE itens_venda(
 	foreign key (id_venda) references vendas(id),
 	foreign key (id_produto) references produtos(id)
 	
+)Engine=InnoDB;
+CREATE TABLE estoques(
+	id int primary key ,
+	quantidade int not null,
+	ativo int,
+	FOREIGN KEY (id) REFERENCES produtos(id)
+
 )Engine=InnoDB;
 
 

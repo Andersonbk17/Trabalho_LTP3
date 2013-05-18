@@ -36,7 +36,15 @@ public class ItemVendaDAO {
                         comando1.setInt(3, iv.getQuantidade());
                         comando1.executeUpdate();
                         comando1.getConnection().commit();
-                    
+                       /* PreparedStatement comando2 = conexao.
+                                getConexao().prepareStatement("UPDATE estoques SET quantidade = ? WHERE id = ?");
+                        
+                        comando1.setInt(1,iv.getProduto().getEstoque().getQuantidade() - iv.getQuantidade() );
+                        comando1.setInt(2, iv.getProduto().getId());
+                        comando1.executeUpdate();
+                        comando1.getConnection().commit();
+                        * 
+                        * */
                     }
             }
         return true;

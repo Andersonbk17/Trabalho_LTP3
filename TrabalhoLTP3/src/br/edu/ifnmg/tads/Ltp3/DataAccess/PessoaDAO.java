@@ -99,7 +99,7 @@ public class PessoaDAO {
                 comando.setString(3, obj.getCpf());
                 Date dataBd = new Date(obj.getDataNascimento().getTime());
                 comando.setDate(4, dataBd);
-                comando.setInt(4, obj.getId());
+                comando.setInt(5, obj.getId());
                 
                 comando.executeUpdate();
                 comando.getConnection().commit();
@@ -119,7 +119,7 @@ public class PessoaDAO {
         try{
             
             PreparedStatement comando = banco.getConexao()
-                    .prepareStatement("SELECT * FROM pessoas WHERE id = ? AND ativo = 1");
+                    .prepareStatement("SELECT * FROM pessoas WHERE id = ? ");
             comando.setInt(1, idPessoa);
             
             ResultSet consulta = comando.executeQuery();

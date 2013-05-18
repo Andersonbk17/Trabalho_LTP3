@@ -64,8 +64,7 @@ public class FormasPagamentoDAO {
         try{
             FormasPagamento fp = new FormasPagamento();
             PreparedStatement comando = banco.getConexao()
-                    .prepareStatement("SELECT * FROM tipos_pagamento WHERE id = ? "
-                    + "AND ativo = 1");
+                    .prepareStatement("SELECT * FROM tipos_pagamento WHERE id = ? ");
             comando.setInt(1, id);
             
             ResultSet rs = comando.executeQuery();

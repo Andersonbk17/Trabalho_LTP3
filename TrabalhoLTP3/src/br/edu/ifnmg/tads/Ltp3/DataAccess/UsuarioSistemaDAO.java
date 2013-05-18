@@ -83,7 +83,7 @@ public class UsuarioSistemaDAO {
                        
             PreparedStatement comando = banco
                     .getConexao().prepareStatement("SELECT * FROM usuarios_sistema "
-                    + "WHERE id = ? AND ativo = 1");
+                    + "WHERE id = ? ");
             comando.setInt(1, id);
                     
             ResultSet consulta = comando.executeQuery();

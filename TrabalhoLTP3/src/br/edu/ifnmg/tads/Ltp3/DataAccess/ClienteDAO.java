@@ -80,7 +80,7 @@ public class ClienteDAO {
            
            PreparedStatement comando = conexao.
                    getConexao().prepareStatement("SELECT * FROM clientes WHERE "
-                   + "id = ? AND ativo = 1");
+                   + "id = ? ");
            comando.setInt(1, id);
            ResultSet consulta = comando.executeQuery();
            comando.getConnection().commit();

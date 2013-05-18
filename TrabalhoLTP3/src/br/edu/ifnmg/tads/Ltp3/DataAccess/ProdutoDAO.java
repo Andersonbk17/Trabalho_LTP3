@@ -102,7 +102,7 @@ public class ProdutoDAO {
     public Produto Abrir(int id) throws ErroValidacaoException, Exception{
         try{
             PreparedStatement comando = bd.getConexao()
-                    .prepareStatement("SELECT * FROM produtos WHERE id = ? AND ativo = 1");
+                    .prepareStatement("SELECT * FROM produtos WHERE id = ? ");
             comando.setInt(1, id);
             ResultSet consulta = comando.executeQuery();
             comando.getConnection().commit();
