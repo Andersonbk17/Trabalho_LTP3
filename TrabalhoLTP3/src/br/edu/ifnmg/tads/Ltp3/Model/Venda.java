@@ -13,13 +13,14 @@ import java.util.Objects;
  */
 public class Venda {
     private int id;
-    private double valor;
+    private float valor;
     private List<ItemVenda> itens;
     private Date horario;
     private Cliente cliente;
     private UsuarioSistema usuario;
     private FormasPagamento formaPagamento;
     private int ativo;
+    
     
     
     /*----- Construtor ----------*/
@@ -35,7 +36,7 @@ public class Venda {
     
     }
     
-    public Venda(int id, double valor, List<ItemVenda> itens, Date horario, Cliente cliente, UsuarioSistema usuario) {
+    public Venda(int id, float valor, List<ItemVenda> itens, Date horario, Cliente cliente, UsuarioSistema usuario) {
         this.id = id;
         this.valor = valor;
         this.itens = itens;
@@ -53,11 +54,11 @@ public class Venda {
         this.id = id;
     }
 
-    public double getValor() {
+    public float getValor() {
         return valor;
     }
 
-    public void setValor(double valor) {
+    public void setValor(float valor) {
         this.valor = valor;
     }
 

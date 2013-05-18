@@ -48,10 +48,11 @@ public class ItemVendaDAO {
    }
     
     
-    public List<ItemVenda> listarTodos() throws ErroValidacaoException, Exception{
+    public List<ItemVenda> listarTodos(int idVenda) throws ErroValidacaoException, Exception{
         try{
             PreparedStatement comando = conexao
-                    .getConexao().prepareStatement("SELECT * FROM itens_venda");
+                    .getConexao().prepareStatement("SELECT * FROM itens_venda WHERE id_venda = ?");
+            comando.setInt(1, idVenda);
             ResultSet consulta = comando.executeQuery();
             comando.getConnection().commit();
             

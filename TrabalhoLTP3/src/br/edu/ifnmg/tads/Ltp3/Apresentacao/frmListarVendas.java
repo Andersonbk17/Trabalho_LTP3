@@ -176,8 +176,6 @@ public class frmListarVendas extends javax.swing.JInternalFrame {
         modelo.addColumn("Forma de Pagamento");
         modelo.addColumn("Valor Total");
         
-        
-     
         ItemVenda iv;
         //ItemVendaDAO
         for(Venda u : lista){
@@ -186,11 +184,9 @@ public class frmListarVendas extends javax.swing.JInternalFrame {
             v.add(1,u.getCliente().getNome());
             v.add(2,u.getUsuario().getNome());
             v.add(3,u.getHorario());
-            v.add(4, u.getFormaPagamento().getNome());
+            v.add(4,u.getFormaPagamento().getNome());
+            v.add(5, u.getValor());
             
-            //faltou a logica do valorde venda
-            
-            JOptionPane.showMessageDialog(rootPane, u.calCulaValorVenda());
             modelo.addRow(v);
             
         }

@@ -39,14 +39,13 @@ public class frmVenda extends javax.swing.JInternalFrame {
         carregaFormasPagamento();
         venda = new Venda();
         venda.setUsuario(usuario);
-        
         txtVendedor.setText(usuario.getNome());
         txtQuantidade.setText("1");
         
     }
     
     private void atualizaCamposFormulario(){
-        lblValorTotal.setText(Double.toString(venda.getValor()));
+        lblValorTotal.setText(Float.toString(venda.getValor()));
         modelo = new DefaultTableModel();
         modelo.addColumn("Id");
         modelo.addColumn("Produto");
@@ -64,8 +63,6 @@ public class frmVenda extends javax.swing.JInternalFrame {
 
         tblItens.setModel(modelo);
         tblItens.repaint();
-
-        
     
     }
     
@@ -122,15 +119,6 @@ public class frmVenda extends javax.swing.JInternalFrame {
     }
     
     
-    
-    /*private void maximizar(){
-        try {
-            this.setMaximum(true);
-        } catch (PropertyVetoException ex) {
-            Logger.getLogger(frmVenda.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    * */
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -257,6 +245,11 @@ public class frmVenda extends javax.swing.JInternalFrame {
 
             }
         ));
+        tblItens.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblItensMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblItens);
 
         btnAdicionar.setText("Adicionar");
@@ -353,7 +346,7 @@ public class frmVenda extends javax.swing.JInternalFrame {
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblR$, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -370,7 +363,8 @@ public class frmVenda extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        if(JOptionPane.showConfirmDialog(rootPane, "Você tem certeza que deseja cancelar a compra ?","",JOptionPane.OK_CANCEL_OPTION) == 0){
+        if(JOptionPane.showConfirmDialog(rootPane, "Você tem certeza que deseja cancelar a"
+                + " compra ?","",JOptionPane.OK_CANCEL_OPTION) == 0){
             this.dispose();
         }
         
@@ -413,9 +407,18 @@ public class frmVenda extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnFnalizarCompraActionPerformed
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-        // TODO add your handling code here:
+        if(JOptionPane.showConfirmDialog(rootPane, "Você tem certeza que deseja "
+                + "remover o item? ", "",JOptionPane.OK_CANCEL_OPTION) == 0){
+            
+            this.venda.getItens().remove(this.linhaRemover);
+        }
     }//GEN-LAST:event_btnRemoverActionPerformed
+
+    private void tblItensMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblItensMouseClicked
+        this.linhaRemover = tblItens.getSelectedRow();
+    }//GEN-LAST:event_tblItensMouseClicked
     
+    int linhaRemover;
     List<Cliente> listaClientes;
     List<Produto> listaProdutos;
     List<FormasPagamento> listaFromasPagamento;

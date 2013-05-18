@@ -67,7 +67,7 @@ public class ClienteDAO {
            
            return false;
        }finally{
-           conexao.getConexao().close();// fonferir lógica
+           conexao.getConexao().close();
    
    }
    
@@ -91,8 +91,10 @@ public class ClienteDAO {
            if(consulta.first()){
                PessoaDAO daoPessoa = new PessoaDAO();
                tmpPessoa = daoPessoa.Abrir(consulta.getInt("id_pessoa"));
+               System.out.print("dentro de 1"+tmpPessoa);
                tmpCliente = new Cliente();
                tmpCliente.setIdCliente(id);
+               tmpCliente.setId(consulta.getInt("Id_pessoa"));
            }
            
            
@@ -106,7 +108,13 @@ public class ClienteDAO {
                 tmpCliente.setRg(tmpPessoa.getRg());
                 
                 EnderecoDAO daoEndereco = new EnderecoDAO();
-               // tmpCliente.setEnderecos(daoEndereco.listarTodos(id));
+                TelefoneDAO daoTelefone = new TelefoneDAO();
+                EmailDAO daoEmail = new EmailDAO();
+                
+                tmpCliente.setEnderecos(daoEndereco.listarTodos(tmpPessoa.getId()));
+                tmpCliente.setEmails(daoEmail.listarTodos(tmpPessoa.getId()));
+                tmpCliente.setTelefones(daoTelefone.listarTodos(tmpPessoa.getId()));
+              
                 
            }
            

@@ -92,13 +92,13 @@ public class PessoaDAO {
             
             }else{
                 comando = banco.getConexao()
-                        .prepareStatement("UPDADE pessoas SET nome = ?, rg = ?, "
-                        + "cpf = ?  WHERE id = ?");
+                        .prepareStatement("UPDATE pessoas SET nome = ?, rg = ?, cpf = ?, "
+                        + "data_nascimento = ? WHERE id = ? ");
                 comando.setString(1, obj.getNome());
                 comando.setString(2, obj.getRg());
                 comando.setString(3, obj.getCpf());
-                //Date dataBd = new Date(obj.getDataNascimento().getTime());
-                //comando.setDate(4, dataBd);
+                Date dataBd = new Date(obj.getDataNascimento().getTime());
+                comando.setDate(4, dataBd);
                 comando.setInt(4, obj.getId());
                 
                 comando.executeUpdate();
@@ -114,13 +114,13 @@ public class PessoaDAO {
         
     }
     
-    public Pessoa Abrir(int id) throws Exception{
+    public Pessoa Abrir(int idPessoa) throws Exception{
         Pessoa pessoa = null;
         try{
             
             PreparedStatement comando = banco.getConexao()
                     .prepareStatement("SELECT * FROM pessoas WHERE id = ? AND ativo = 1");
-            comando.setInt(1, id);
+            comando.setInt(1, idPessoa);
             
             ResultSet consulta = comando.executeQuery();
             comando.getConnection().commit();
@@ -129,7 +129,7 @@ public class PessoaDAO {
                 pessoa = new Pessoa();
                 pessoa.setCpf(consulta.getString("cpf"));
                 pessoa.setDataNascimento(consulta.getDate("data_nascimento"));
-                pessoa.setId(id);
+                pessoa.setId(idPessoa);
                 pessoa.setNome(consulta.getString("nome"));
                 pessoa.setRg(consulta.getString("rg"));
                 //asd conferr a data
@@ -137,23 +137,26 @@ public class PessoaDAO {
                 //Preencher telefones
                 
                 List<Telefone> listaTelefones;
+                
                 TelefoneDAO daoTelefone = new TelefoneDAO();
-                listaTelefones =  daoTelefone.listarTodos(pessoa.getId());
+                listaTelefones =  daoTelefone.listarTodos(idPessoa);
                 pessoa.setTelefones(listaTelefones);
                 System.out.print(listaTelefones);
                 
                 //Preencher Enderecos
+                
                 List<Endereco> listaEnderecos;
                 EnderecoDAO daoEndereco = new EnderecoDAO();
-                listaEnderecos = daoEndereco.listarTodos(id);
+                listaEnderecos = daoEndereco.listarTodos(idPessoa);
                 pessoa.setEnderecos(listaEnderecos);
                 System.out.print(listaEnderecos);      
                 
                 //Preenche emails
                 
                 List<Email> listaEmails = new LinkedList<>();
+                
                 EmailDAO daoEmails = new EmailDAO();
-                listaEmails = daoEmails.listarTodos(id);
+                listaEmails = daoEmails.listarTodos(idPessoa);
                 pessoa.setEmails(listaEmails);
                 System.out.print(listaEmails);
                 

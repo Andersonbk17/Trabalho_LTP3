@@ -35,12 +35,14 @@ public class VendaDAO {
             if(obj.getId() == 0){
                 PreparedStatement comando = conexao
                     .getConexao().prepareStatement("INSERT INTO vendas (horario,id_usuario,"
-                        + "id_cliente,id_tipo_pagamento,ativo) VALUES (?,?,?,?,1)");
+                        + "id_cliente,id_tipo_pagamento,ativo,valor_total) VALUES "
+                        + "(?,?,?,?,1,?)");
                 Date data = new Date(obj.getHorario().getTime());
                 comando.setDate(1, data);
                 comando.setInt(2, obj.getUsuario().getIdUsuario());
                 comando.setInt(3, obj.getCliente().getIdCliente());
                 comando.setInt(4, obj.getFormaPagamento().getId());
+                comando.setDouble(5, obj.getValor());
                 //comando.setInt(5, obj.getAtivo());
                 comando.executeUpdate();
                 Statement comando0 = conexao.getConexao().createStatement();
@@ -55,6 +57,8 @@ public class VendaDAO {
                 ItemVendaDAO daoItemVenda = new ItemVendaDAO();
                 
                 daoItemVenda.Salvar(obj.getItens(), idVenda);
+                
+                
             
                 
                 ok = true;
@@ -74,38 +78,42 @@ public class VendaDAO {
         try{
           
             PreparedStatement comando = conexao
-                    .getConexao().prepareStatement("SELECT * FROM vendas where ativo = 1");
+                    .getConexao().prepareStatement("SELECT * FROM vendas WHERE ativo = 1");
             ResultSet consulta = comando.executeQuery();
             comando.getConnection().commit();
             
             List<Venda> listaVendas = new LinkedList<>();
             while(consulta.next()){
-                Venda tmp = new Venda();
-                Cliente tmpc;
-                FormasPagamento tmpf;
+                Venda tmpVenda = new Venda();
+                Cliente tmpCliente;
+                FormasPagamento tmpFormaPagamento;
                 UsuarioSistema tmpusuario;
                 List<ItemVenda> listaDeItens;
                  
+                
                 
                 UsuarioSistemaDAO daoUsuario = new UsuarioSistemaDAO();
                 ClienteDAO daoCliente = new ClienteDAO();
                 FormasPagamentoDAO daoFormasPagamento = new FormasPagamentoDAO();
                 ItemVendaDAO daoItemVenda = new ItemVendaDAO();
                 
+                // Listando os usuarios da venda
                 tmpusuario = daoUsuario.Abrir(consulta.getInt("id_usuario"));
-                tmpf = daoFormasPagamento.Abrir(consulta.getInt("id_tipo_pagamento"));
-                tmpc = daoCliente.Abrir(consulta.getInt("id_cliente"));
-                listaDeItens = daoItemVenda.listarTodos();
+                tmpFormaPagamento = daoFormasPagamento.Abrir(consulta.getInt("id_tipo_pagamento"));
+                tmpCliente = daoCliente.Abrir(consulta.getInt("id_cliente"));
+                listaDeItens = daoItemVenda.listarTodos(consulta.getInt("id"));
+                //System.out.print(tmpCliente);
                 
                 
-                tmp.setId(consulta.getInt("id"));
-                tmp.setHorario(consulta.getDate("horario"));
-                tmp.setCliente(tmpc);
-                tmp.setFormaPagamento(tmpf);
-                tmp.setUsuario(tmpusuario);
-                tmp.setItens(listaDeItens);
+                tmpVenda.setId(consulta.getInt("id"));
+                tmpVenda.setHorario(consulta.getDate("horario"));
+                tmpVenda.setValor(consulta.getFloat("valor_total"));
+                tmpVenda.setCliente(tmpCliente);
+                tmpVenda.setFormaPagamento(tmpFormaPagamento);
+                tmpVenda.setUsuario(tmpusuario);
+                tmpVenda.setItens(listaDeItens);
                 
-                listaVendas.add(tmp);
+                listaVendas.add(tmpVenda);
                 
                 
             
