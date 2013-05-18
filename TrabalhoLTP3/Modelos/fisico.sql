@@ -1,12 +1,9 @@
-CREATE TABLE estoques(
-	id int primary key auto_increment,
-	quantidade int not null
 
-)Engine=InnoDB;
 
-CREATE TABLE tipos_pagamentos(
+CREATE TABLE tipos_pagamento(
 	id int primary key auto_increment,
-	nome varchar(100) not null	
+	nome varchar(100) not null,
+	ativo int	
 )Engine=InnoDB;
 
 CREATE TABLE produtos(
@@ -14,15 +11,27 @@ CREATE TABLE produtos(
 	nome varchar(100) not null,
 	descricao varchar(500),
 	valor_uni_venda float,
-	valor_uni_compra float
+	valor_uni_compra float,
+	ativo int
 )Engine=InnoDB;
+
+CREATE TABLE pessoas(
+	id int primary key auto_increment,
+	nome varchar(100) not null,
+	cpf varchar(100) not null,
+	rg varchar(100) not null,
+	data_nascimento Date,
+	ativo int
+
+)Engine=InnoDB;
+
 
 CREATE TABLE emails(
 	id int primary key auto_increment,
 	endereco varchar(100),
 	id_pessoa int,
+	ativo int,
 	foreign key (id_pessoa)references pessoas(id)
-
 )Engine=InnoDB;
 
 CREATE TABLE telefones(
@@ -30,24 +39,9 @@ CREATE TABLE telefones(
 	ddd int,
 	numero int,
 	id_pessoa int,
+	ativo int ,
 	foreign key (id_pessoa)references pessoas(id)
-)Enginne=InnoDB;
-
-CREATE TABLE `tb_cidades` (
-  `id` int(4) unsigned zerofill NOT NULL auto_increment,
-  `estado` int(2) unsigned zerofill NOT NULL default '00',
-  `uf` varchar(4) NOT NULL default '',
-  `nome` varchar(50) NOT NULL default '',
-  UNIQUE KEY `id` (`id`),
-  KEY `id_2` (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9715 DEFAULT CHARSET=latin1 AUTO_INCREMENT=9715 ;
-
-CREATE TABLE `tb_estados` (
-  `id` int(2) unsigned zerofill NOT NULL auto_increment,
-  `uf` varchar(10) NOT NULL default '',
-  `nome` varchar(20) NOT NULL default '',
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
+)Engine=InnoDB;
 
 
 
@@ -58,30 +52,19 @@ CREATE TABLE enderecos(
 	bairro varchar(100),
 	numero varchar(30),
 	id_pessoa int,
-	id_cidade int,
-	id_estado int,
-	foreign key (id_pessoa)references pessoas(id),
-	foreign key (id_cidade)references tb_cidades(id),
-	foreign key (id_estado)references tb_estados(id)
-
-
+	cidade varchar(100),
+	estado varchar(100),
+	ativo int ,
+	foreign key (id_pessoa)references pessoas(id)
 )Engine=InnoDB;
 
-CREATE TABLE Pessoas(
-	id int primary key auto_increment,
-	nome varchar(100) not null,
-	cpf varchar(100) not null,
-	rg varchar(100) not null,
-	data_nascimento Date 
-
-)Engine=InnoDB;
 
 
 CREATE TABLE clientes(
 	id int primary key auto_increment,
 	id_pessoa int,
+	ativo int,
 	foreign key (id_pessoa)references pessoas(id)
-
 )Engine=InnoDB;
 
 CREATE TABLE usuarios_sistema(
@@ -89,25 +72,22 @@ CREATE TABLE usuarios_sistema(
 	usuario varchar(100) not null,	
 	senha varchar(120) not null,	
 	id_pessoa int,
+	ativo int,
 	foreign key (id_pessoa)references pessoas(id)
-
-
 )Engine=InnoDB;
 
-CREATE TABLE tipo_pagamento(
-	id int primary key auto_increment,
-	nome varchar(100)
-)Engine=InnoDB;
 
 CREATE TABLE vendas(
 	id int primary key auto_increment,
 	horario datetime not null,
 	id_usuario int not null,
 	id_cliente int not null,
-	id_tipo_pagamento not null,
+	id_tipo_pagamento int not null,
+	valor_total float,
+	ativo int,
 	foreign key (id_usuario) references usuarios_sistema(id),
 	foreign key (id_cliente) references clientes(id),
-	foreign key (id_tipo_pagamento) references tipo_pagamento(id)
+	foreign key (id_tipo_pagamento) references tipos_pagamento(id)
 )Engine=InnoDB;
 
 
@@ -116,7 +96,19 @@ CREATE TABLE itens_venda(
 	quantidade int not null,
 	id_venda int not null,
 	id_produto int not null,
+	ativo int,
 	foreign key (id_venda) references vendas(id),
 	foreign key (id_produto) references produtos(id)
+	
 )Engine=InnoDB;
+CREATE TABLE estoques(
+	id int primary key ,
+	quantidade int not null,
+	ativo int,
+	FOREIGN KEY (id) REFERENCES produtos(id)
+
+)Engine=InnoDB;
+
+
+INSERT INTO usuarios_sistema (usuario,senha) VALUES ("root","root");
 
