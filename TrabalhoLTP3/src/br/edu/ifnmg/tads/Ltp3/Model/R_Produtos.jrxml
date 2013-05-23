@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cc3a9d5f-39f1-4c5a-aa5a-1d306b25458c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     produtos.`id` AS produtos_id,
+     produtos.`nome` AS produtos_nome,
+     produtos.`descricao` AS produtos_descricao,
+     produtos.`valor_uni_venda` AS produtos_valor_uni_venda,
+     produtos.`valor_uni_compra` AS produtos_valor_uni_compra,
+     produtos.`ativo` AS produtos_ativo
+FROM
+     `produtos` produtos]]>
+	</queryString>
+	<field name="produtos_id" class="java.lang.Integer"/>
+	<field name="produtos_nome" class="java.lang.String"/>
+	<field name="produtos_descricao" class="java.lang.String"/>
+	<field name="produtos_valor_uni_venda" class="java.lang.Float"/>
+	<field name="produtos_valor_uni_compra" class="java.lang.Float"/>
+	<field name="produtos_ativo" class="java.lang.Integer"/>
+	<variable name="Somatorio_vendas" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{produtos_valor_uni_venda}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="96" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="e08f8b4c-2645-4b52-a7be-1221655f2ca4" x="148" y="12" width="251" height="50"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[Relatório de Produtos]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="43" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="49" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="94cef628-f2c3-4c35-b393-5a8ef10715ef" x="58" y="0" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="31fd59f0-043e-420b-be3a-256a21fd1af0" x="187" y="0" width="80" height="20"/>
+				<textElement/>
+				<text><![CDATA[Valor de Venda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="13275a09-16ae-4141-ae1a-2ad4fa9020b8" x="0" y="0" width="36" height="20"/>
+				<textElement/>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4b51dc69-3879-45ce-b1c5-79531af1472b" x="299" y="0" width="88" height="20"/>
+				<textElement/>
+				<text><![CDATA[Valor de Compra]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d661e353-8c80-4e36-95af-2aea07c8c56e" x="435" y="0" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Descrição]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="27" splitType="Stretch">
+			<textField>
+				<reportElement uuid="916d4af7-c4cb-4071-bb18-7fcbc9d858b1" x="58" y="0" width="100" height="20"/>
+				<textElement>
+					<font pdfEncoding="Cp1252"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{produtos_nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="866a0532-8629-4617-a5ae-734e70ef4f72" x="187" y="0" width="80" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{produtos_valor_uni_venda}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="12b723c2-17ef-43b0-ba1c-b9ad782a83ad" x="0" y="0" width="36" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{produtos_id}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="d050efec-9c4c-427d-b479-d3b0b9bf09fa" x="299" y="0" width="88" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{produtos_valor_uni_compra}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="c348391a-8131-4a24-ba5e-9c7bf5cb01c0" x="435" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{produtos_descricao}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="29" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="89" splitType="Stretch">
+			<textField>
+				<reportElement uuid="3568e73d-52e6-49b3-9b0b-6bf6be160d3e" x="287" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{Somatorio_vendas}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="b9c841be-419e-4791-85be-d26641527f9a" x="148" y="0" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Valor Total]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="87" splitType="Stretch"/>
+	</summary>
+</jasperReport>
